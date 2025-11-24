@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Elevated AI Works | AI-Powered Creative & Digital Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandDark text-slate-100">
+  <!-- NAVBAR -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="index.html" class="text-brandRed font-semibold">Home</a>
+        <a href="services.html" class="hover:text-brandRed">Services</a>
+        <a href="portfolio.html" class="hover:text-brandRed">Portfolio</a>
+        <a href="about.html" class="hover:text-brandRed">About</a>
+        <a href="contact.html" class="hover:text-brandRed">Contact</a>
+        <!-- NEW LEGAL TAB -->
+        <a href="legal/index.html" class="hover:text-brandRed">Legal</a>
+      </div>
+      <a href="contact.html" class="hidden md:inline-flex px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+        Get a Quote
+      </a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-5">
+          AI-Powered Design & Digital Solutions,
+          <span class="text-brandRed">Elevated.</span>
+        </h1>
+        <p class="text-slate-300 mb-6">
+          Elevated AI Works blends creative design with artificial intelligence to craft logos, brands, websites,
+          and systems that look professional and actually work for small businesses, creators, and everyday people.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-6">
+          <a href="services.html" class="px-5 py-3 rounded-md bg-brandRed font-semibold text-sm hover:bg-red-600 transition">
+            View Services
+          </a>
+          <a href="portfolio.html" class="px-5 py-3 rounded-md border border-slate-600 text-sm hover:border-brandRed hover:text-brandRed transition">
+            View Portfolio
+          </a>
+        </div>
+        <p class="text-xs text-slate-500">
+          Logos • Brand Kits • Websites • Fillable PDFs • Business Systems • Travel & Budget Planning
+        </p>
+      </div>
+      <div class="relative">
+        <div class="absolute -inset-4 bg-brandRed/20 blur-3xl rounded-full"></div>
+        <div class="relative bg-brandGray border border-slate-800 rounded-2xl p-6 shadow-xl">
+          <img src="img/logo.png" alt="Elevated AI Works logo" class="w-24 h-24 mb-4" />
+          <h2 class="text-xl font-semibold mb-2">Bringing Your Ideas to Altitude</h2>
+          <p class="text-sm text-slate-300 mb-4">
+            Whether you’re launching a business, refreshing your brand, or organizing your life,
+            we use AI to help you move faster without sacrificing quality.
+          </p>
+          <ul class="space-y-2 text-sm text-slate-200">
+            <li>• Modern, minimalist branding with a Colorado twist</li>
+            <li>• Clean, responsive websites ready to go live</li>
+            <li>• Smart documents, invoices & templates tailored to you</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK SERVICES -->
+    <section class="bg-brandGray/40 border-y border-slate-800 py-10">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl font-semibold mb-6">What We Do</h2>
+        <div class="grid md:grid-cols-4 gap-6 text-sm">
+          <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+            <h3 class="font-semibold mb-2 text-brandRed">Branding & Logos</h3>
+            <p class="text-slate-300">Logos, brand kits, business cards, and social assets that look legit everywhere.</p>
+          </div>
+          <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+            <h3 class="font-semibold mb-2 text-brandRed">Websites</h3>
+            <p class="text-slate-300">Modern, mobile-ready sites with clean layouts and clear messaging.</p>
+          </div>
+          <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+            <h3 class="font-semibold mb-2 text-brandRed">Systems & Docs</h3>
+            <p class="text-slate-300">Fillable PDFs, invoices, forms, and workflow tools built around how you actually work.</p>
+          </div>
+          <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+            <h3 class="font-semibold mb-2 text-brandRed">Planning & Tools</h3>
+            <p class="text-slate-300">Custom itineraries, budgeting tools, and planning systems powered by AI.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-6xl mx-auto px-4 py-12 text-center">
+      <h2 class="text-2xl md:text-3xl font-semibold mb-4">Ready to elevate your next project?</h2>
+      <p class="text-slate-300 mb-6">
+        Tell us what you’re working on, and we’ll help you turn it into something sharp, usable, and ready to ship.
+      </p>
+      <a href="contact.html" class="inline-flex px-6 py-3 rounded-md bg-brandRed font-semibold text-sm hover:bg-red-600 transition">
+        Start a Project
+      </a>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+</body>
+</html>

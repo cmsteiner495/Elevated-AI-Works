@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact | Elevated AI Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandDark text-slate-100">
+  <!-- NAV (updated with Legal) -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="index.html" class="hover:text-brandRed">Home</a>
+        <a href="services.html" class="hover:text-brandRed">Services</a>
+        <a href="portfolio.html" class="hover:text-brandRed">Portfolio</a>
+        <a href="about.html" class="hover:text-brandRed">About</a>
+        <a href="contact.html" class="text-brandRed font-semibold">Contact</a>
+        <a href="legal/index.html" class="hover:text-brandRed">Legal</a>
+      </div>
+      <a href="contact.html" class="hidden md:inline-flex px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+        Get a Quote
+      </a>
+    </nav>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold mb-2">Contact</h1>
+    <p class="text-slate-300 mb-6">
+      Share a bit about what you’re working on, and we’ll follow up with ideas, options, and a simple next step.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="text-sm text-slate-300">
+        <h2 class="text-xl font-semibold mb-3 text-brandRed">Tell us about your project</h2>
+        <p class="mb-3">
+          The more detail you share, the better we can recommend the right package or create a custom solution.
+        </p>
+        <ul class="space-y-2 text-slate-300">
+          <li>• What type of service do you need?</li>
+          <li>• Do you have any examples or inspiration?</li>
+          <li>• What’s your ideal timeline?</li>
+          <li>• What’s most important: speed, budget, or depth?</li>
+        </ul>
+        <p class="mt-4 text-xs text-slate-500">
+        </p>
+      </div>
+
+      <form
+        id="intakeForm"
+        action="https://formspree.io/f/mzzwdybg"
+        method="POST"
+        class="bg-brandGray border border-slate-800 rounded-xl p-5 space-y-4 text-sm"
+      >
+        <input type="hidden" name="_redirect" value="thank-you.html">
+
+        <!-- Formspree settings -->
+        <input type="hidden" name="_subject" value="New Elevated AI Works project inquiry">
+        <input type="hidden" name="_template" value="table">
+
+        <!-- CONTACT INFO -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label for="name" class="block mb-1 text-slate-200">Name</label>
+            <input id="name" name="name" type="text" required
+                   class="w-full px-3 py-2 rounded-md bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-brandRed" />
+          </div>
+          <div>
+            <label for="email" class="block mb-1 text-slate-200">Email</label>
+            <input id="email" name="email" type="email" required
+                   class="w-full px-3 py-2 rounded-md bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-brandRed" />
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label for="phone" class="block mb-1 text-slate-200">Phone (optional)</label>
+            <input id="phone" name="phone" type="tel"
+                   class="w-full px-3 py-2 rounded-md bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-brandRed" />
+          </div>
+          <div>
+            <label for="referral" class="block mb-1 text-slate-200">How did you hear about Elevated AI Works?</label>
+            <input id="referral" name="referral" type="text"
+                   class="w-full px-3 py-2 rounded-md bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-brandRed"
+                   placeholder="Friend, Facebook group, etc." />
+          </div>
+        </div>
+
+        <!-- SERVICE TYPE -->
+        <div>
+          <p class="block mb-1 text-slate-200">What are you interested in?</p>
+          <div class="grid md:grid-cols-2 gap-2 text-slate-200">
+            <label class="inline-flex items-center gap-2">
+              <input type="checkbox" name="service_interest" value="Branding / Logo"
+                     class="rounded bg-slate-900 border-slate-700 text-brandRed focus:ring-brandRed">
+              <span>Branding / Logo</span>
+            </label>
+            <label class="inline-flex items-center gap-2">
+              <input type="checkbox" name="service_interest" value="Website"
+                     class="rounded bg-slate-900 border-slate-700 text-brandRed focus:ring-brandRed">
+              <span>Website</span>
+            </label>
+            <label class="inline-flex items-center gap-2">
+              <input type="checkbox" name="service_interest" value="Docs & Templates"
+                     class="rounded bg-slate-900 border-slate-700 text-brandRed focus:ring-brandRed">
+              <span>Docs & Templates (PDFs, invoices, forms)</span>
+            </label>
+            <label class="inline-flex items-center gap-2">
+              <input type="checkbox" name="service_interest" value="Travel / Itinerary Planning"
+                     class="rounded bg-slate-900 border-slate-700 text-brandRed focus:ring-brandRed">
+              <span>Travel / Itinerary Planning</span>
+            </label>
+            <label class="inline-flex items-center gap-2">
+              <input type="checkbox" name="service_interest" value="Budget / Financial Tools"
+                     class="rounded bg-slate-900 border-slate-700 text-brandRed focus:ring-brandRed">
+              <span>Budget / Financial Tools</span>
+            </label>
+            <label class="inline-flex items-center gap-2">
+              <input type="checkbox" name="service_interest" value="Other / Not Sure"
+                     class="rounded bg-slate-900 border-slate-700 text-brandRed focus:ring-brandRed">
+              <span>Other / Not Sure (tell me below)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- BRANDING STATUS -->
+        <div>
+          <p class="block mb-1 text-slate-200">Do you already have branding?</p>
+          <div class="space-y-1 text-slate-200">
+            <label class="inline-flex items-center gap-2">
+              <input type="radio" name="branding_status" value="Have existing logo/brand" class="text-brandRed">
+              <span>I already have a logo/brand and want to build on it.</span>
+            </label><br>
+            <label class="inline-flex items-center gap-2">
+              <input type="radio" name="branding_status" value="Need branding from scratch" class="text-brandRed">
+              <span>I need branding from scratch.</span>
+            </label><br>
+            <label class="inline-flex items-center gap-2">
+              <input type="radio" name="branding_status" value="Not sure / mixed" class="text-brandRed">
+              <span>I’m not sure / a mix of both.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- PROJECT SUMMARY -->
+        <div>
+          <label for="project_summary" class="block mb-1 text-slate-200">Project summary</label>
+          <textarea id="project_summary" name="project_summary" rows="4" required
+                    class="w-full px-3 py-2 rounded-md bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-brandRed"
+                    placeholder="Tell me what you’re trying to create, who it’s for, and what you’d like it to achieve."></textarea>
+        </div>
+
+        <!-- LINKS / INSPIRATION -->
+        <div>
+          <label for="links" class="block mb-1 text-slate-200">Any links, inspiration, or examples?</label>
+          <textarea id="links" name="links" rows="3"
+                    class="w-full px-3 py-2 rounded-md bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-brandRed"
+                    placeholder="Paste any websites, logos, colors, Pinterest boards, etc. that you like."></textarea>
+        </div>
+
+        <!-- BUDGET & TIMELINE -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label for="budget" class="block mb-1 text-slate-200">Estimated budget</label>
+            <select id="budget" name="budget"
+                    class="w-full px-3 py-2 rounded-md bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-brandRed">
+              <option value="">Select a range</option>
+              <option value="Under $150">Under $150</option>
+              <option value="$150–$300">$150–$300</option>
+              <option value="$300–$600">$300–$600</option>
+              <option value="$600–$1,000">$600–$1,000</option>
+              <option value="Over $1,000">Over $1,000</option>
+              <option value="Not sure">Not sure / depends on options</option>
+            </select>
+          </div>
+          <div>
+            <label for="timeline" class="block mb-1 text-slate-200">Timeline</label>
+            <select id="timeline" name="timeline"
+                    class="w-full px-3 py-2 rounded-md bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-brandRed">
+              <option value="">How soon do you need this?</option>
+              <option value="ASAP">ASAP</option>
+              <option value="1–2 weeks">1–2 weeks</option>
+              <option value="3–4 weeks">3–4 weeks</option>
+              <option value="1–2 months">1–2 months</option>
+              <option value="Flexible">Flexible</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- EXTRA DETAILS -->
+        <div>
+          <label for="extra" class="block mb-1 text-slate-200">Anything else I should know?</label>
+          <textarea id="extra" name="extra" rows="3"
+                    class="w-full px-3 py-2 rounded-md bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-brandRed"
+                    placeholder="Deadlines, must-haves, nice-to-haves, or questions."></textarea>
+        </div>
+
+        <!-- SIMPLE BOT CHECK (HONEYPOT) -->
+        <div class="hidden">
+          <label for="company" class="block mb-1">Leave this field empty</label>
+          <input id="company" name="company" type="text" class="w-full px-3 py-2" />
+        </div>
+
+        <button type="submit"
+                class="w-full py-2.5 rounded-md bg-brandRed font-semibold hover:bg-red-600 transition">
+          Send Project Details
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('intakeForm');
+
+      if (!form) return;
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault(); // stop the normal POST + Formspree redirect
+
+        const endpoint = form.action;
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            // On success, send them to your local thank-you page
+            window.location.href = 'thank-you.html';
+            form.reset();
+          } else {
+            alert('There was a problem submitting the form. Please try again.');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('Network error. Please check your connection and try again.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

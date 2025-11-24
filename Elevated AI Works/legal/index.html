@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Legal Center | Elevated AI Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandDark text-slate-100">
+  <!-- NAVBAR -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-3">
+        <img src="../img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="../index.html" class="hover:text-brandRed">Home</a>
+        <a href="../services.html" class="hover:text-brandRed">Services</a>
+        <a href="../portfolio.html" class="hover:text-brandRed">Portfolio</a>
+        <a href="../about.html" class="hover:text-brandRed">About</a>
+        <a href="../contact.html" class="hover:text-brandRed">Contact</a>
+        <a href="index.html" class="text-brandRed font-semibold">Legal</a>
+      </div>
+      <a href="../contact.html" class="hidden md:inline-flex px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+        Get a Quote
+      </a>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10">
+    <!-- Header -->
+    <section class="mb-10">
+      <p class="text-xs tracking-[0.25em] uppercase text-slate-400 mb-2">
+        Legal &amp; Compliance
+      </p>
+      <h1 class="text-3xl md:text-4xl font-bold text-brandRed mb-3">
+        Legal Center
+      </h1>
+      <p class="text-slate-300 max-w-2xl text-sm md:text-base">
+        Here you’ll find all of the policies, terms, and disclaimers that govern how Elevated AI Works
+        operates online and works with clients.
+      </p>
+    </section>
+
+    <!-- Cards -->
+    <section class="grid gap-6 md:grid-cols-2">
+      <article class="bg-brandGray border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <h2 class="text-lg font-semibold mb-1">Terms of Service</h2>
+        <p class="text-sm text-slate-300 mb-4">
+          Rules, expectations, and conditions for using Elevated AI Works’ services and deliverables.
+        </p>
+        <a href="terms-of-service.html"
+           class="inline-flex items-center px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+          Read Terms
+        </a>
+      </article>
+
+      <article class="bg-brandGray border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <h2 class="text-lg font-semibold mb-1">Privacy Policy</h2>
+        <p class="text-sm text-slate-300 mb-4">
+          How we collect, use, protect, and store data when you visit the site or work with us.
+        </p>
+        <a href="privacy-policy.html"
+           class="inline-flex items-center px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+          View Policy
+        </a>
+      </article>
+
+      <article class="bg-brandGray border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <h2 class="text-lg font-semibold mb-1">Refund &amp; Cancellation Policy</h2>
+        <p class="text-sm text-slate-300 mb-4">
+          How deposits, cancellations, and refunds are handled for custom service projects.
+        </p>
+        <a href="refund-policy.html"
+           class="inline-flex items-center px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+          Read Policy
+        </a>
+      </article>
+
+      <article class="bg-brandGray border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <h2 class="text-lg font-semibold mb-1">Website &amp; AI Disclaimer</h2>
+        <p class="text-sm text-slate-300 mb-4">
+          Important notes about AI-generated content, limitations, and professional disclaimers.
+        </p>
+        <a href="disclaimer.html"
+           class="inline-flex items-center px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+          Read Disclaimer
+        </a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+</body>
+</html>
