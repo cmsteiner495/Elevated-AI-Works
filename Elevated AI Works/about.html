@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About | Elevated AI Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandDark text-slate-100">
+  <!-- NAV -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+      <div class="flex flex-wrap items-center justify-end gap-3 text-xs sm:text-sm">
+        <a href="index.html" class="hover:text-brandRed">Home</a>
+        <a href="services.html" class="hover:text-brandRed">Services</a>
+        <a href="portfolio.html" class="hover:text-brandRed">Portfolio</a>
+        <a href="about.html" class="text-brandRed font-semibold">About</a>
+        <a href="contact.html" class="hover:text-brandRed">Contact</a>
+        <a href="legal/index.html" class="hover:text-brandRed">Legal</a>
+      </div>
+      <a href="contact.html" class="inline-flex px-4 py-2 rounded-md bg-brandRed text-xs sm:text-sm font-semibold hover:bg-red-600 transition">
+        Get a Quote
+      </a>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+    <section class="grid md:grid-cols-2 gap-10 items-start">
+      <div>
+        <p class="text-xs tracking-[0.25em] uppercase text-slate-400 mb-2">About</p>
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">
+          The human behind <span class="text-brandRed">Elevated AI Works.</span>
+        </h1>
+        <p class="text-slate-300 text-sm md:text-base mb-4">
+          Elevated AI Works grew from helping friends, family, and local businesses look more professional without
+          drowning in tech tools or agency costs. The goal is to keep things practical, honest, and easy to work with.
+        </p>
+        <p class="text-slate-300 text-sm md:text-base mb-4">
+          Instead of chasing trends, the focus stays on clear design, organized systems, and AI tools that actually make your
+          life easier instead of more complicated.
+        </p>
+        <p class="text-slate-400 text-xs md:text-sm">
+          Logos, websites, documents, and planning tools are all designed around a simple question:
+          <span class="text-slate-200">“Will this help you feel more in control?”</span>
+        </p>
+      </div>
+
+      <div class="bg-brandGray border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4 text-sm">
+        <h2 class="text-xl font-semibold mb-2">What you can expect working together</h2>
+        <ul class="space-y-2 text-slate-200">
+          <li>• Clear, straightforward communication.</li>
+          <li>• Realistic timelines and expectations.</li>
+          <li>• AI as a power tool, not a gimmick.</li>
+          <li>• Deliverables you can actually use on day one.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-3 gap-6 text-sm">
+      <div class="bg-brandGray border border-slate-800 rounded-xl p-5">
+        <h3 class="font-semibold text-brandRed mb-2">Colorado-built perspective</h3>
+        <p class="text-slate-300">
+          Rooted in Colorado, with a bias toward grounded, real-world solutions over buzzwords and fluff.
+        </p>
+      </div>
+      <div class="bg-brandGray border border-slate-800 rounded-xl p-5">
+        <h3 class="font-semibold text-brandRed mb-2">AI as a helper</h3>
+        <p class="text-slate-300">
+          AI speeds up drafts, options, and variations. Human judgment finishes the work and keeps everything aligned to your goals.
+        </p>
+      </div>
+      <div class="bg-brandGray border border-slate-800 rounded-xl p-5">
+        <h3 class="font-semibold text-brandRed mb-2">Friendly, not corporate</h3>
+        <p class="text-slate-300">
+          No jargon, no pushy upsells. Just a collaborative process to get you from “idea” to “shipped.”
+        </p>
+      </div>
+    </section>
+
+    <section class="border-t border-slate-800 pt-8 text-center">
+      <h2 class="text-2xl font-semibold mb-3">Ready to work together?</h2>
+      <p class="text-slate-300 text-sm md:text-base mb-5 max-w-xl mx-auto">
+        Whether you’re starting from scratch or refreshing something old, we can map out a simple,
+        realistic plan for your project.
+      </p>
+      <a href="contact.html" class="inline-flex px-6 py-3 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+        Say Hello &amp; Start a Project
+      </a>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+</body>
+</html>
