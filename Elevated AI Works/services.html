@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Services | Elevated AI Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandDark text-slate-100">
+
+  <!-- NAV -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-4 text-xs sm:text-sm">
+        <a href="index.html" class="hover:text-brandRed">Home</a>
+        <a href="services.html" class="text-brandRed font-semibold">Services</a>
+        <a href="portfolio.html" class="hover:text-brandRed">Portfolio</a>
+        <a href="about.html" class="hover:text-brandRed">About</a>
+        <a href="contact.html" class="hover:text-brandRed">Contact</a>
+        <a href="legal/index.html" class="hover:text-brandRed">Legal</a>
+      </div>
+
+      <!-- Right: mobile hamburger + CTA -->
+      <div class="flex items-center gap-2">
+
+        <!-- Mobile hamburger -->
+        <button
+          id="mobileMenuBtn"
+          type="button"
+          class="md:hidden inline-flex items-center justify-center rounded-md border border-slate-700 px-2.5 py-1.5 text-xs text-slate-200 hover:border-brandRed hover:text-brandRed transition"
+          aria-label="Toggle navigation"
+        >
+          <span class="sr-only">Open menu</span>
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M3 6h18M3 12h18M3 18h18"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+
+        <!-- CTA -->
+        <a href="contact.html"
+           class="inline-flex px-3 md:px-4 py-1.5 md:py-2 rounded-md bg-brandRed text-xs sm:text-sm font-semibold hover:bg-red-600 transition">
+          Get a Quote
+        </a>
+      </div>
+
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden border-t border-slate-800 bg-brandDark/95 hidden">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="index.html" class="py-1 hover:text-brandRed">Home</a>
+        <a href="services.html" class="py-1 text-brandRed font-semibold">Services</a>
+        <a href="portfolio.html" class="py-1 hover:text-brandRed">Portfolio</a>
+        <a href="about.html" class="py-1 hover:text-brandRed">About</a>
+        <a href="contact.html" class="py-1 hover:text-brandRed">Contact</a>
+        <a href="legal/index.html" class="py-1 hover:text-brandRed">Legal</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="max-w-6xl mx-auto px-4 py-10 space-y-12">
+
+    <header class="mb-6">
+      <p class="text-xs tracking-[0.25em] uppercase text-slate-400">Services</p>
+      <h1 class="text-3xl md:text-4xl font-bold mb-3">Services & Packages</h1>
+      <p class="text-slate-300 text-sm md:text-base">
+        Clear, simple offerings designed for small businesses, creators, and everyday people.
+      </p>
+    </header>
+
+    <!-- Branding -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-brandRed">Branding & Design</h2>
+      <div class="grid md:grid-cols-3 gap-6 text-sm">
+
+        <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">Starter Branding</h3>
+          <ul class="space-y-1 text-slate-300 mb-3">
+            <li>• Primary logo</li>
+            <li>• 2 variations</li>
+            <li>• Basic color palette</li>
+          </ul>
+          <p class="font-semibold text-brandRed">$75</p>
+        </div>
+
+        <div class="bg-brandGray border border-brandRed/60 rounded-xl p-4 shadow-md">
+          <h3 class="font-semibold mb-2">Full Branding Kit</h3>
+          <ul class="space-y-1 text-slate-300 mb-3">
+            <li>• Logo + alternates</li>
+            <li>• Colors & typography</li>
+            <li>• Business card design</li>
+            <li>• Social media assets</li>
+          </ul>
+          <p class="font-semibold text-brandRed">$200</p>
+        </div>
+
+        <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">Design Add-Ons</h3>
+          <p class="text-slate-300 mb-3">Extra concepts or templates.</p>
+          <p class="text-slate-400 text-xs">Typically $25–$75 each.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Websites -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-brandRed">Website Creation</h2>
+      <div class="grid md:grid-cols-2 gap-6 text-sm">
+
+        <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">Website Essentials</h3>
+          <ul class="space-y-1 text-slate-300 mb-3">
+            <li>• Up to 4 pages</li>
+            <li>• Mobile-friendly layout</li>
+            <li>• Contact form integration</li>
+            <li>• Basic SEO</li>
+          </ul>
+          <p class="font-semibold text-brandRed">$300</p>
+        </div>
+
+        <div class="bg-brandGray border border-brandRed/60 rounded-xl p-4 shadow-md">
+          <h3 class="font-semibold mb-2">Premium Website Package</h3>
+          <ul class="space-y-1 text-slate-300 mb-3">
+            <li>• Up to 8 pages</li>
+            <li>• Enhanced layouts</li>
+            <li>• SEO best practices</li>
+            <li>• Launch support</li>
+          </ul>
+          <p class="font-semibold text-brandRed">$600</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Docs / Templates -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-brandRed">Business Docs & Tools</h2>
+      <div class="grid md:grid-cols-3 gap-6 text-sm">
+
+        <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">Fillable PDF Forms</h3>
+          <p class="text-slate-300 mb-3">Digital forms clients can fill in.</p>
+          <p class="font-semibold text-brandRed">$50 each</p>
+        </div>
+
+        <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">Auto-Calculating Invoices</h3>
+          <p class="text-slate-300 mb-3">Smart invoices tailored to your business.</p>
+          <p class="font-semibold text-brandRed">$75</p>
+        </div>
+
+        <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">Custom Templates</h3>
+          <p class="text-slate-300 mb-3">Budgets, planners, trackers.</p>
+          <p class="text-slate-400 text-xs">Typically $50–$150.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bundles -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-brandRed">Bundles</h2>
+      <div class="grid md:grid-cols-2 gap-6 text-sm">
+
+        <div class="bg-brandGray border border-brandRed/60 rounded-xl p-4 shadow-md">
+          <h3 class="font-semibold mb-2">Brand + Website Bundle</h3>
+          <ul class="space-y-1 text-slate-300 mb-3">
+            <li>• Full branding kit</li>
+            <li>• Website essentials</li>
+          </ul>
+          <p class="font-semibold text-brandRed">$450</p>
+        </div>
+
+        <div class="bg-brandGray border border-slate-800 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">Ultimate Launch Bundle</h3>
+          <ul class="space-y-1 text-slate-300 mb-3">
+            <li>• Premium branding</li>
+            <li>• Premium website</li>
+            <li>• 2 custom tools</li>
+          </ul>
+          <p class="font-semibold text-brandRed">$850</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="border-t border-slate-800 pt-8 text-center">
+      <h2 class="text-2xl font-semibold mb-3">Not sure what you need?</h2>
+      <p class="text-slate-300 text-sm md:text-base mb-5 max-w-xl mx-auto">
+        Reach out and we’ll help match you to the right package or build something custom.
+      </p>
+      <a href="contact.html" class="inline-flex px-6 py-3 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+        Talk About Your Project
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      if (btn && menu) {
+        btn.addEventListener('click', () => {
+          menu.classList.toggle('hidden');
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
