@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Terms of Service | Elevated AI Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- EAW Chatbot Styles -->
+  <style>
+    /* Chat toggle button */
+    #eaw-chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+      background: #E63926; /* brandRed */
+      color: #F9FAFB;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    #eaw-chat-toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+      background: #c52f1f; /* slightly darker red */
+    }
+
+    /* Chat window container */
+    #eaw-chatbot {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      max-height: 480px;
+      background: #0F172A; /* brandGray */
+      color: #F9FAFB;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .eaw-chat-header {
+      padding: 10px 12px;
+      background: #050816; /* brandDark */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .eaw-chat-header span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .eaw-chat-header span::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e; /* online indicator */
+    }
+
+    .eaw-chat-header button {
+      background: transparent;
+      border: none;
+      color: #9CA3AF;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .eaw-chat-header button:hover {
+      color: #E5E7EB;
+    }
+
+    #eaw-chat-messages {
+      padding: 10px;
+      overflow-y: auto;
+      flex: 1;
+      font-size: 14px;
+      background: radial-gradient(circle at top left, rgba(230,57,38,0.12), transparent 55%), #0F172A;
+    }
+
+    .eaw-msg {
+      margin-bottom: 8px;
+      max-width: 90%;
+      line-height: 1.4;
+      white-space: pre-wrap;
+    }
+
+    .eaw-msg.bot {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 10px 10px 10px 2px;
+      padding: 8px 10px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .eaw-msg.user {
+      background: #E63926;
+      border-radius: 10px 10px 2px 10px;
+      padding: 8px 10px;
+      margin-left: auto;
+      color: #F9FAFB;
+      border: 1px solid #b72a1b;
+    }
+
+    /* Options (buttons) */
+    #eaw-chat-options {
+      padding: 8px 10px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: #050816;
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    #eaw-chat-options button {
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      background: #050816;
+      color: #E5E7EB;
+      white-space: nowrap;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    #eaw-chat-options button:hover {
+      background: #E63926;
+      border-color: #E63926;
+      color: #F9FAFB;
+      transform: translateY(-0.5px);
+    }
+
+    /* Input field for free text steps */
+    #eaw-chat-input-wrapper {
+      display: flex;
+      padding: 8px 10px;
+      gap: 6px;
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      background: #050816;
+    }
+
+    #eaw-chat-input {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      background: #0F172A;
+      color: #F9FAFB;
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+
+    #eaw-chat-input::placeholder {
+      color: #6B7280;
+    }
+
+    #eaw-chat-send {
+      border-radius: 999px;
+      border: none;
+      padding: 6px 12px;
+      font-size: 13px;
+      background: #E63926;
+      color: #F9FAFB;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    }
+
+    #eaw-chat-send:hover {
+      background: #c52f1f;
+      transform: translateY(-0.5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    /* Simple mobile tweak */
+    @media (max-width: 640px) {
+      #eaw-chatbot {
+        width: calc(100% - 32px);
+        right: 16px;
+        bottom: 80px;
+      }
+
+      #eaw-chat-toggle {
+        bottom: 16px;
+        right: 16px;
+      }
+    }
+  </style>
+</head>
+<body class="bg-brandDark text-slate-100">
+
+  <!-- NAV -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <!-- Logo -->
+      <a href="../index.html" class="flex items-center gap-3">
+        <img src="../img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-4 text-xs sm:text-sm">
+        <a href="../index.html" class="hover:text-brandRed">Home</a>
+        <a href="../services.html" class="hover:text-brandRed">Services</a>
+        <a href="../portfolio.html" class="hover:text-brandRed">Portfolio</a>
+        <a href="../about.html" class="hover:text-brandRed">About</a>
+        <a href="../contact.html" class="hover:text-brandRed">Contact</a>
+        <a href="index.html" class="text-brandRed font-semibold">Legal</a>
+      </div>
+
+      <!-- CTA + Hamburger -->
+      <div class="flex items-center gap-2">
+        <a href="../contact.html" class="hidden md:inline-flex px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+          Get a Quote
+        </a>
+
+        <!-- hamburger -->
+        <button id="mobileMenuToggle"
+          class="md:hidden inline-flex flex-col justify-center gap-1.5 p-2 rounded-md border border-slate-700"
+          aria-label="Toggle navigation menu">
+          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
+          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
+          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- mobile nav -->
+    <div id="mobileMenu" class="md:hidden border-t border-slate-800 bg-brandDark hidden">
+      <nav class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="../index.html" class="py-1 hover:text-brandRed">Home</a>
+        <a href="../services.html" class="py-1 hover:text-brandRed">Services</a>
+        <a href="../portfolio.html" class="py-1 hover:text-brandRed">Portfolio</a>
+        <a href="../about.html" class="py-1 hover:text-brandRed">About</a>
+        <a href="../contact.html" class="py-1 hover:text-brandRed">Contact</a>
+        <a href="index.html" class="py-1 text-brandRed font-semibold">Legal</a>
+
+        <a href="../contact.html"
+          class="mt-2 inline-flex justify-center px-4 py-2 rounded-md bg-brandRed font-semibold hover:bg-red-600 transition">
+          Get a Quote
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="max-w-6xl mx-auto px-4 py-10 space-y-8 text-sm md:text-base">
+    <header class="space-y-2">
+      <p class="text-xs tracking-[0.25em] uppercase text-slate-400">Legal</p>
+      <h1 class="text-3xl md:text-4xl font-bold">Terms of Service</h1>
+      <p class="text-slate-300 max-w-3xl">
+        These Terms of Service outline how Elevated AI Works (“we”, “us”, or “our”) works with clients, how projects
+        are structured, and what both sides can reasonably expect.
+      </p>
+      <p class="text-xs text-slate-500">
+        Last Updated: January 2025
+      </p>
+    </header>
+
+    <!-- Scope -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">1. Scope of Work</h2>
+      <p class="text-slate-300">
+        Every project begins with a defined scope of work, usually in the form of a written proposal, estimate, or
+        project summary. This document will describe deliverables, timelines, and pricing to the best of our ability
+        based on the information available at the time.
+      </p>
+      <p class="text-slate-300">
+        The scope may include (for example): branding assets, website pages, AI workflows, automations, strategy
+        documents, or other creative and technical services.
+      </p>
+      <p class="text-slate-300">
+        If you ask for changes that go beyond the agreed scope, we may need to revise the timeline and pricing or
+        treat the new requests as a separate project.
+      </p>
+    </section>
+
+    <!-- Responsibilities -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">2. Client Responsibilities</h2>
+      <p class="text-slate-300">
+        To keep projects moving smoothly, we rely on you to:
+      </p>
+      <ul class="list-disc list-inside text-slate-300 space-y-1">
+        <li>Provide accurate and timely information about your business, goals, and preferences</li>
+        <li>Share any required assets (such as logos, brand guides, copy, or images) you already have</li>
+        <li>Review proofs and drafts within a reasonable time frame</li>
+        <li>Communicate changes clearly so revisions can be handled efficiently</li>
+      </ul>
+      <p class="text-slate-300">
+        Delays in providing content or feedback may impact the project timeline and completion date.
+      </p>
+    </section>
+
+    <!-- Payments -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">3. Payments &amp; Deposits</h2>
+      <p class="text-slate-300">
+        Unless otherwise stated, projects require a deposit before work begins. The remaining balance is due on
+        agreed milestones or when final deliverables are completed.
+      </p>
+      <p class="text-slate-300">
+        All invoices are payable in the currency and by the methods stated on the invoice. Late or missed payments
+        may pause project work until the account is current.
+      </p>
+      <p class="text-slate-300">
+        For details about deposits, cancellations, and refunds, please refer to the
+        <a href="refund-policy.html" class="text-brandRed hover:underline">Refund &amp; Revision Policy</a>.
+      </p>
+    </section>
+
+    <!-- Revisions -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">4. Revisions &amp; Changes</h2>
+      <p class="text-slate-300">
+        Most projects include a specific number of revision rounds, as stated in your proposal or scope.
+        Revisions are opportunities to refine designs, copy, or functionality based on your feedback.
+      </p>
+      <p class="text-slate-300">
+        Substantial changes in direction after a concept has been approved—or requests that add significant new
+        features—may be considered out of scope and subject to additional fees or timeline changes.
+      </p>
+    </section>
+
+    <!-- Intellectual property -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">5. Intellectual Property</h2>
+      <p class="text-slate-300">
+        Unless otherwise agreed in writing:
+      </p>
+      <ul class="list-disc list-inside text-slate-300 space-y-1">
+        <li>
+          Final deliverables that have been fully paid for are typically licensed or assigned to you for use in your
+          business.
+        </li>
+        <li>
+          Preliminary concepts, unused designs, internal tools, and working files remain the property of Elevated
+          AI Works.
+        </li>
+      </ul>
+      <p class="text-slate-300">
+        You are responsible for ensuring that any content, images, or materials you provide do not infringe upon the
+        rights of others. Elevated AI Works is not responsible for legal issues arising from materials you supply.
+      </p>
+    </section>
+
+    <!-- Use of AI tools -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">6. Use of AI Tools &amp; Automation</h2>
+      <p class="text-slate-300">
+        Elevated AI Works may use AI tools and automation as part of the creative or technical process—for example,
+        to generate drafts, explore variations, or assist with code and documentation.
+      </p>
+      <p class="text-slate-300">
+        All AI-assisted work is guided and reviewed by a human before delivery, but AI outputs may contain
+        limitations or inaccuracies. You agree to review deliverables carefully and use your own judgment when
+        applying them to your business.
+      </p>
+    </section>
+
+    <!-- Timelines -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">7. Timelines &amp; Delays</h2>
+      <p class="text-slate-300">
+        Project timelines are estimates based on the agreed scope and reasonable cooperation from both sides.
+        We will communicate if we foresee delays and appreciate the same from you.
+      </p>
+      <p class="text-slate-300">
+        Elevated AI Works is not responsible for delays caused by factors outside our control, including late
+        feedback, missing content, third-party outages, or major technical issues with external platforms.
+      </p>
+    </section>
+
+    <!-- Third-party services -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">8. Third-Party Services &amp; Integrations</h2>
+      <p class="text-slate-300">
+        Some projects may involve third-party tools or platforms (for example: hosting, domain registrars,
+        analytics, email services, or AI providers). Where possible, these accounts will be created in your name
+        so you can retain ownership and control.
+      </p>
+      <p class="text-slate-300">
+        Elevated AI Works is not responsible for changes made by third-party providers, such as pricing changes,
+        feature removals, outages, or policy updates. Your use of third-party services is subject to their
+        respective terms and privacy policies.
+      </p>
+    </section>
+
+    <!-- Limitation of liability -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">9. Limitation of Liability</h2>
+      <p class="text-slate-300">
+        To the fullest extent permitted by law, Elevated AI Works is not liable for any indirect, incidental,
+        special, or consequential damages, or for any loss of profits, revenue, data, or business opportunities
+        arising from your use of our services or deliverables.
+      </p>
+      <p class="text-slate-300">
+        In any case where liability is found, it will be limited to the total amount you have paid for the specific
+        project giving rise to the claim.
+      </p>
+    </section>
+
+    <!-- Termination -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">10. Termination</h2>
+      <p class="text-slate-300">
+        Either party may end a project if the other party materially breaches these terms and does not resolve
+        the issue within a reasonable time after being notified.
+      </p>
+      <p class="text-slate-300">
+        If a project is ended early, you will be responsible for paying for the portion of work completed up to
+        the termination date, as outlined in the Refund &amp; Revision Policy.
+      </p>
+    </section>
+
+    <!-- Changes to terms -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">11. Changes to These Terms</h2>
+      <p class="text-slate-300">
+        These Terms of Service may be updated periodically to reflect changes in how Elevated AI Works operates,
+        changes in applicable law, or improvements to our policies.
+      </p>
+      <p class="text-slate-300">
+        When material changes are made, we may update the “Last Updated” date at the top of this page. Your
+        continued use of our services after changes are posted signifies your acceptance of the updated terms.
+      </p>
+    </section>
+
+    <!-- Questions -->
+    <section class="text-sm text-slate-400">
+      <p>
+        If you have questions about these Terms of Service or how they apply to your project, you can reach out
+        any time through the <a href="../contact.html" class="text-brandRed hover:underline">contact page</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+
+  <!-- Mobile menu JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('mobileMenuToggle');
+      const menu   = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
+    });
+  </script>
+
+  <!-- EAW Chatbot HTML -->
+  <div id="eaw-chatbot">
+    <div class="eaw-chat-header">
+      <span>Elevated AI Works Assistant</span>
+      <button id="eaw-chat-close" aria-label="Close chat">×</button>
+    </div>
+    <div id="eaw-chat-messages"></div>
+    <div id="eaw-chat-input-wrapper" style="display:none;">
+      <input id="eaw-chat-input" type="text" placeholder="Type your answer..." />
+      <button id="eaw-chat-send">Send</button>
+    </div>
+    <div id="eaw-chat-options"></div>
+  </div>
+
+  <button id="eaw-chat-toggle" aria-label="Open chat">
+    💬
+  </button>
+
+  <!-- EAW Chatbot Logic -->
+  <script>
+    // ----- Conversation flow definition -----
+    const EAW_FLOW = {
+      start: {
+        type: "message",
+        text: "👋 Hey there, I’m the Elevated AI Works Assistant.\n\nI can help you:\n• understand what we offer\n• find the right service for your project\n• or start a quick quote.\n\nWhat would you like to do?",
+        options: [
+          { label: "🔍 Help me choose a service", next: "choose_service" },
+          { label: "📋 See all services", next: "services_overview" },
+          { label: "❓ FAQs", next: "faqs" },
+          { label: "💬 Get a project quote", next: "quote_intro" },
+          { label: "👤 About Elevated AI Works", next: "about" }
+        ]
+      },
+
+      // ----- A: choose a service -----
+      choose_service: {
+        type: "message",
+        text: "Awesome, let’s figure out what you need.\nWhat describes you best right now?",
+        options: [
+          { label: "🧱 I need a brand or logo", next: "service_branding" },
+          { label: "🌐 I need a website or refresh", next: "service_web" },
+          { label: "🤖 I want AI workflows/automation", next: "service_ai" },
+          { label: "🤷 I’m not sure yet", next: "service_unsure" }
+        ]
+      },
+
+      service_branding: {
+        type: "message",
+        text: "Perfect — that sounds like Branding & Visual Identity.\nWe help with logo design, color palettes, typography, and brand guidelines so everything feels consistent online and offline.\n\nWhat would you like to do next?",
+        options: [
+          { label: "📋 More about branding", next: "services_overview" },
+          { label: "💬 Start a quote", next: "quote_intro" },
+          { label: "🔙 Back to main menu", next: "start" }
+        ]
+      },
+
+      service_web: {
+        type: "message",
+        text: "Got it — that falls under Branding & Web Design.\nWe create modern, responsive websites that are aligned with your brand and easy to use.\n\nWhat would you like to do next?",
+        options: [
+          { label: "🌐 More about web design", next: "services_overview" },
+          { label: "💬 Start a quote", next: "quote_intro" },
+          { label: "🔙 Back to main menu", next: "start" }
+        ]
+      },
+
+      service_ai: {
+        type: "message",
+        text: "Nice. You’re looking for AI Solutions & Automation.\nWe help with things like content workflows, customer support assistants, and internal process automation.\n\nWhat would you like to do next?",
+        options: [
+          { label: "🤖 AI services overview", next: "services_overview" },
+          { label: "💬 Start a quote", next: "quote_intro" },
+          { label: "🔙 Back to main menu", next: "start" }
+        ]
+      },
+
+      service_unsure: {
+        type: "message",
+        text: "No worries — that’s what I’m here for.\nA quick way to start is to describe what isn’t working right now: website, branding, content, or processes.\n\nWant to send a short description and let Elevated AI Works review it?",
+        options: [
+          { label: "✍️ Yes, I’ll describe my situation", next: "quote_description_only" },
+          { label: "🔙 Back to main menu", next: "start" }
+        ]
+      },
+
+      // ----- B: services overview -----
+      services_overview: {
+        type: "message",
+        text:
+          "Here’s a quick overview of what Elevated AI Works offers:\n\n" +
+          "🎨 Branding & Visual Identity\nLogos, color palettes, typography, and brand guidelines.\n\n" +
+          "🌐 Branding & Web Design\nClean, modern websites that align with your brand.\n\n" +
+          "🤖 AI Solutions & Automation\nCustom AI tools and workflows to streamline your work.\n\nWhat would you like to do next?",
+        options: [
+          { label: "💬 Get a quote", next: "quote_intro" },
+          { label: "❓ FAQs", next: "faqs" },
+          { label: "🔙 Back to main menu", next: "start" }
+        ]
+      },
+
+      // ----- C: FAQs -----
+      faqs: {
+        type: "message",
+        text: "I’ve got answers to some common questions.\nWhat would you like to know?",
+        options: [
+          { label: "💲 How does pricing work?", next: "faq_pricing" },
+          { label: "⏱ How long do projects take?", next: "faq_timing" },
+          { label: "📁 What do I need to get started?", next: "faq_requirements" },
+          { label: "🤝 Do you work with small businesses/startups?", next: "faq_smallbiz" },
+          { label: "📬 How do I contact you directly?", next: "faq_contact" },
+          { label: "🔙 Back to main menu", next: "start" }
+        ]
+      },
+
+      faq_pricing: {
+        type: "message",
+        text:
+          "Pricing depends on the scope.\n• Branding & logos → usually project-based packages\n" +
+          "• Websites → based on page count, features, and integrations\n" +
+          "• AI solutions → based on complexity and tools required\n\n" +
+          "If you’d like a ballpark range, I can ask a few questions and send your details to Elevated AI Works.",
+        options: [
+          { label: "💬 Start a quote", next: "quote_intro" },
+          { label: "🔙 Back to FAQs", next: "faqs" }
+        ]
+      },
+
+      faq_timing: {
+        type: "message",
+        text:
+          "Project timelines vary:\n• Branding: usually a few weeks\n" +
+          "• Websites: a few weeks to a couple of months, depending on features and revisions\n" +
+          "• AI solutions: depends on complexity\n\nYour timeline will always be discussed before we start.",
+        options: [
+          { label: "🔙 Back to FAQs", next: "faqs" }
+        ]
+      },
+
+      faq_requirements: {
+        type: "message",
+        text:
+          "To get started, it helps to have:\n" +
+          "• A short description of your business\n" +
+          "• Any existing logos/branding\n" +
+          "• Examples of websites or brands you like\n" +
+          "• A rough budget and timeline\n\nIf you don’t have it all yet, that’s okay — we’ll figure it out together.",
+        options: [
+          { label: "💬 Start a quote", next: "quote_intro" },
+          { label: "🔙 Back to FAQs", next: "faqs" }
+        ]
+      },
+
+      faq_smallbiz: {
+        type: "message",
+        text:
+          "Absolutely. Elevated AI Works is built for small businesses, creators, and entrepreneurs.\n" +
+          "We can start small and scale alongside you.",
+        options: [
+          { label: "🔙 Back to FAQs", next: "faqs" }
+        ]
+      },
+
+      faq_contact: {
+        type: "message",
+        text:
+          "You can reach out anytime via the contact form on the site or by email.\n\n" +
+          "Or, if you’d like, you can start a quick quote here in chat.",
+        options: [
+          { label: "📬 Open contact page", next: "open_contact" },
+          { label: "💬 Start a quote here", next: "quote_intro" },
+          { label: "🔙 Back to FAQs", next: "faqs" }
+        ]
+      },
+
+      // ----- D: Quote flow (full) -----
+      quote_intro: {
+        type: "message",
+        text:
+          "Let’s grab a few quick details and I’ll pass them along to Elevated AI Works for a personalized response.\n\nWhat are you mainly interested in?",
+        options: [
+          { label: "🎨 Branding / logo", next: "quote_interest_branding" },
+          { label: "🌐 Website", next: "quote_interest_web" },
+          { label: "🤖 AI / automation", next: "quote_interest_ai" },
+          { label: "🧩 Combination / not sure", next: "quote_interest_combo" }
+        ]
+      },
+
+      quote_interest_branding: { type: "input", text: "Got it — branding.\nWhat’s your name?", key: "name", next: "quote_email" },
+      quote_interest_web:     { type: "input", text: "Got it — website.\nWhat’s your name?", key: "name", next: "quote_email" },
+      quote_interest_ai:      { type: "input", text: "Got it — AI / automation.\nWhat’s your name?", key: "name", next: "quote_email" },
+      quote_interest_combo:   { type: "input", text: "No problem — a mix is common.\nWhat’s your name?", key: "name", next: "quote_email" },
+
+      quote_email: {
+        type: "input",
+        text: "Thanks, {{name}}. What’s the best email to reach you?",
+        key: "email",
+        next: "quote_description"
+      },
+
+      quote_description: {
+        type: "input",
+        text: "Great. In 2–3 sentences, tell us what you’re hoping to achieve or what problem you’d like Elevated AI Works to help solve.",
+        key: "description",
+        next: "quote_budget"
+      },
+
+      quote_budget: {
+        type: "message",
+        text: "If you’re comfortable sharing, which range best fits your budget?",
+        options: [
+          { label: "💵 Under $1,000", next: "quote_done_under" },
+          { label: "💵 $1,000–$2,500", next: "quote_done_mid" },
+          { label: "💵 $2,500–$5,000", next: "quote_done_high" },
+          { label: "💵 $5,000+", next: "quote_done_premium" },
+          { label: "🙈 Not sure yet", next: "quote_done_unsure" }
+        ]
+      },
+
+      quote_done_under:   { type: "final", text: "Thanks, {{name}}! 🎉\nYou selected a budget under $1,000." },
+      quote_done_mid:     { type: "final", text: "Thanks, {{name}}! 🎉\nYou selected a budget of $1,000–$2,500." },
+      quote_done_high:    { type: "final", text: "Thanks, {{name}}! 🎉\nYou selected a budget of $2,500–$5,000." },
+      quote_done_premium: { type: "final", text: "Thanks, {{name}}! 🎉\nYou selected a budget of $5,000+." },
+      quote_done_unsure:  { type: "final", text: "Thanks, {{name}}! 🎉\nNo worries if you’re not sure on budget yet." },
+
+      // Special node for "describe only" (unsure service)
+      quote_description_only: {
+        type: "input",
+        text: "Go ahead and describe your situation in a few sentences and Elevated AI Works will review it.",
+        key: "description",
+        next: "quote_done_simple"
+      },
+
+      quote_done_simple: {
+        type: "final",
+        text: "Thanks for sharing! Elevated AI Works will review your message and follow up if you left contact info elsewhere on the site."
+      },
+
+      // About node
+      about: {
+        type: "message",
+        text:
+          "Elevated AI Works blends thoughtful design with practical AI solutions.\n\n" +
+          "Our goal is to make advanced tools feel approachable, human, and useful for small businesses and creators.\n\nWhat would you like to explore next?",
+        options: [
+          { label: "📋 See all services", next: "services_overview" },
+          { label: "💬 Get a quote", next: "quote_intro" },
+          { label: "🔙 Back to main menu", next: "start" }
+        ]
+      },
+
+      // Special pseudo-node for opening contact page (handled in JS)
+      open_contact: {
+        type: "action",
+        action: "openContact"
+      }
+    };
+
+    // ----- Basic chatbot engine -----
+    (function () {
+      const chatbot = document.getElementById("eaw-chatbot");
+      const toggleBtn = document.getElementById("eaw-chat-toggle");
+      const closeBtn = document.getElementById("eaw-chat-close");
+      const messagesEl = document.getElementById("eaw-chat-messages");
+      const optionsEl = document.getElementById("eaw-chat-options");
+      const inputWrapper = document.getElementById("eaw-chat-input-wrapper");
+      const inputField = document.getElementById("eaw-chat-input");
+      const sendBtn = document.getElementById("eaw-chat-send");
+
+      let currentNodeId = "start";
+      let pendingKey = null;
+      let pendingNext = null;
+      const userData = {};
+
+      function resetConversation() {
+        messagesEl.innerHTML = "";
+        optionsEl.innerHTML = "";
+        for (const key in userData) {
+          if (Object.prototype.hasOwnProperty.call(userData, key)) {
+            delete userData[key];
+          }
+        }
+        inputWrapper.style.display = "none";
+      }
+
+      function toggleChat(show) {
+        if (show === true) {
+          chatbot.style.display = "flex";
+        } else if (show === false) {
+          chatbot.style.display = "none";
+        } else {
+          chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+        }
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        toggleChat();
+        if (chatbot.style.display === "flex" && messagesEl.childElementCount === 0) {
+          showNode("start");
+        }
+      });
+
+      closeBtn.addEventListener("click", () => {
+        toggleChat(false);
+      });
+
+      function appendMessage(text, from = "bot") {
+        const div = document.createElement("div");
+        div.className = "eaw-msg " + from;
+        div.textContent = renderText(text);
+        messagesEl.appendChild(div);
+
+        requestAnimationFrame(() => {
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+        });
+      }
+
+      function renderText(text) {
+        return text.replace(/{{(\w+)}}/g, (_, key) => userData[key] || "");
+      }
+
+      function clearOptions() {
+        optionsEl.innerHTML = "";
+      }
+
+      function showNode(id) {
+        currentNodeId = id;
+        const node = EAW_FLOW[id];
+        if (!node) return;
+
+        clearOptions();
+        inputWrapper.style.display = "none";
+        pendingKey = null;
+        pendingNext = null;
+
+        if (node.type === "action") {
+          handleActionNode(node);
+          return;
+        }
+
+        if (node.type === "final") {
+          showFinal(node.text);
+          return;
+        }
+
+        appendMessage(node.text, "bot");
+
+        if (node.type === "message") {
+          if (node.options && node.options.length) {
+            node.options.forEach(opt => {
+              const btn = document.createElement("button");
+              btn.textContent = opt.label;
+              btn.addEventListener("click", () => handleOptionClick(opt));
+              optionsEl.appendChild(btn);
+            });
+          }
+        } else if (node.type === "input") {
+          pendingKey = node.key;
+          pendingNext = node.next;
+          inputWrapper.style.display = "flex";
+          inputField.value = "";
+          inputField.focus();
+        }
+      }
+
+      function handleOptionClick(opt) {
+        appendMessage(opt.label, "user");
+
+        const nextNode = EAW_FLOW[opt.next];
+        if (!nextNode) {
+          return;
+        }
+        if (nextNode.type === "action") {
+          handleActionNode(nextNode);
+        } else {
+          showNode(opt.next);
+        }
+      }
+
+      function handleActionNode(node) {
+        if (node.action === "openContact") {
+          window.open("../contact.html", "_blank");
+          showNode("faqs");
+        }
+      }
+
+      function handleInputSubmit() {
+        const value = inputField.value.trim();
+        if (!value || !pendingKey || !pendingNext) return;
+
+        appendMessage(value, "user");
+        userData[pendingKey] = value;
+
+        inputField.value = "";
+        inputWrapper.style.display = "none";
+
+        showNode(pendingNext);
+      }
+
+      sendBtn.addEventListener("click", handleInputSubmit);
+      inputField.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          handleInputSubmit();
+        }
+      });
+
+      function showFinal(finalText) {
+        appendMessage(finalText, "bot");
+
+        const summary =
+          "New inquiry from EAW Assistant:\n\n" +
+          "Name: " + (userData.name || "(not provided)") + "\n" +
+          "Email: " + (userData.email || "(not provided)") + "\n\n" +
+          "Description:\n" + (userData.description || "(not provided)") + "\n";
+
+        const mailtoHref =
+          "mailto:hello@elevatedaiworks.com" +
+          "?subject=" + encodeURIComponent("New Elevated AI Works inquiry") +
+          "&body=" + encodeURIComponent(summary);
+
+        clearOptions();
+        const btnEmail = document.createElement("button");
+        btnEmail.textContent = "📨 Send details to Elevated AI Works";
+        btnEmail.addEventListener("click", () => {
+          window.location.href = mailtoHref;
+        });
+
+        const btnRestart = document.createElement("button");
+        btnRestart.textContent = "🔁 Start over";
+        btnRestart.addEventListener("click", () => {
+          resetConversation();
+          showNode("start");
+        });
+
+        optionsEl.appendChild(btnEmail);
+        optionsEl.appendChild(btnRestart);
+      }
+    })();
+  </script>
+</body>
+</html>
