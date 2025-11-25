@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portfolio | Elevated AI Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandDark text-slate-100">
+
+  <!-- NAV -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-4 text-xs sm:text-sm">
+        <a href="index.html" class="hover:text-brandRed">Home</a>
+        <a href="services.html" class="hover:text-brandRed">Services</a>
+        <a href="portfolio.html" class="text-brandRed font-semibold">Portfolio</a>
+        <a href="about.html" class="hover:text-brandRed">About</a>
+        <a href="contact.html" class="hover:text-brandRed">Contact</a>
+        <a href="legal/index.html" class="hover:text-brandRed">Legal</a>
+      </div>
+
+      <!-- Mobile hamburger + CTA -->
+      <div class="flex items-center gap-2">
+
+        <button
+          id="mobileMenuBtn"
+          type="button"
+          class="md:hidden inline-flex items-center justify-center rounded-md border border-slate-700 px-2.5 py-1.5 text-xs text-slate-200 hover:border-brandRed hover:text-brandRed transition"
+          aria-label="Toggle navigation"
+        >
+          <span class="sr-only">Open menu</span>
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M3 6h18M3 12h18M3 18h18"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+
+        <a href="contact.html"
+           class="inline-flex px-3 md:px-4 py-1.5 md:py-2 rounded-md bg-brandRed text-xs sm:text-sm font-semibold hover:bg-red-600 transition">
+          Get a Quote
+        </a>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden border-t border-slate-800 bg-brandDark/95 hidden">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="index.html" class="py-1 hover:text-brandRed">Home</a>
+        <a href="services.html" class="py-1 hover:text-brandRed">Services</a>
+        <a href="portfolio.html" class="py-1 text-brandRed font-semibold">Portfolio</a>
+        <a href="about.html" class="py-1 hover:text-brandRed">About</a>
+        <a href="contact.html" class="py-1 hover:text-brandRed">Contact</a>
+        <a href="legal/index.html" class="py-1 hover:text-brandRed">Legal</a>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- CONTENT -->
+  <main class="max-w-6xl mx-auto px-4 py-10 space-y-12">
+
+    <header class="mb-6">
+      <p class="text-xs tracking-[0.25em] uppercase text-slate-400">Portfolio</p>
+      <h1 class="text-3xl md:text-4xl font-bold mb-3">Recent Work</h1>
+      <p class="text-slate-300 text-sm md:text-base">
+        A small showcase of logos, websites, tools, and practical assets built for everyday people and businesses.
+      </p>
+    </header>
+
+    <!-- Portfolio Cards -->
+    <div class="grid md:grid-cols-3 gap-6 text-sm">
+
+      <div class="bg-brandGray border border-slate-800 rounded-xl overflow-hidden">
+        <div class="h-32 bg-slate-800 flex items-center justify-center text-slate-500 text-xs">
+          Logo Example
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold mb-2">Branding – Pet Care Service</h3>
+          <p class="text-slate-300">
+            Friendly, modern visuals, plus web and print assets.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-brandGray border border-slate-800 rounded-xl overflow-hidden">
+        <div class="h-32 bg-slate-800 flex items-center justify-center text-slate-500 text-xs">
+          Website Example
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold mb-2">Website – Service Business</h3>
+          <p class="text-slate-300">
+            Multi-page site focused on clarity and mobile usability.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-brandGray border border-slate-800 rounded-xl overflow-hidden">
+        <div class="h-32 bg-slate-800 flex items-center justify-center text-slate-500 text-xs">
+          Document Example
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold mb-2">Fillable Forms & Docs</h3>
+          <p class="text-slate-300">
+            Auto-calculating invoices and reusable templates.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <section class="border-t border-slate-800 pt-8 text-center">
+      <h2 class="text-xl font-semibold mb-3">Want to see a specific type of work?</h2>
+      <p class="text-slate-300 text-sm md:text-base mb-5">
+        Ask anytime — I can highlight branding, planning tools, websites, or custom-made assets.
+      </p>
+
+      <a href="contact.html"
+         class="inline-flex px-6 py-3 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+        Start a Conversation
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      if (btn && menu) {
+        btn.addEventListener('click', () => {
+          menu.classList.toggle('hidden');
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
