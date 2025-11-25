@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portfolio | Elevated AI Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandDark text-slate-100">
+  <!-- NAV -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+      <div class="flex flex-wrap items-center justify-end gap-3 text-xs sm:text-sm">
+        <a href="index.html" class="hover:text-brandRed">Home</a>
+        <a href="services.html" class="hover:text-brandRed">Services</a>
+        <a href="portfolio.html" class="text-brandRed font-semibold">Portfolio</a>
+        <a href="about.html" class="hover:text-brandRed">About</a>
+        <a href="contact.html" class="hover:text-brandRed">Contact</a>
+        <a href="legal/index.html" class="hover:text-brandRed">Legal</a>
+      </div>
+      <a href="contact.html" class="inline-flex px-4 py-2 rounded-md bg-brandRed text-xs sm:text-sm font-semibold hover:bg-red-600 transition">
+        Get a Quote
+      </a>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10 space-y-8">
+    <section>
+      <p class="text-xs tracking-[0.25em] uppercase text-slate-400 mb-2">Portfolio</p>
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">
+        A snapshot of work from <span class="text-brandRed">Elevated AI Works.</span>
+      </h1>
+      <p class="text-slate-300 text-sm md:text-base max-w-2xl">
+        Here’s the kind of work you can expect: logos, brand kits, websites, fillable documents, and planning tools.
+        Some details are simplified or anonymized, but the overall style and approach are real.
+      </p>
+    </section>
+
+    <section class="grid md:grid-cols-3 gap-6 text-sm">
+      <article class="bg-brandGray border border-slate-800 rounded-xl overflow-hidden flex flex-col">
+        <div class="h-32 bg-slate-800 flex items-center justify-center text-slate-500 text-xs">
+          Branding Example
+        </div>
+        <div class="p-4 space-y-2">
+          <h2 class="font-semibold text-brandRed">Local Pet Care Brand</h2>
+          <p class="text-slate-300">
+            Friendly, professional branding for a neighborhood pet care business,
+            including logo, card design, and web graphics.
+          </p>
+        </div>
+      </article>
+
+      <article class="bg-brandGray border border-slate-800 rounded-xl overflow-hidden flex flex-col">
+        <div class="h-32 bg-slate-800 flex items-center justify-center text-slate-500 text-xs">
+          Website Example
+        </div>
+        <div class="p-4 space-y-2">
+          <h2 class="font-semibold text-brandRed">Service Business Website</h2>
+          <p class="text-slate-300">
+            Multi-page brochure site focused on clarity, mobile usability, and simple calls to action.
+          </p>
+        </div>
+      </article>
+
+      <article class="bg-brandGray border border-slate-800 rounded-xl overflow-hidden flex flex-col">
+        <div class="h-32 bg-slate-800 flex items-center justify-center text-slate-500 text-xs">
+          Systems &amp; Docs</div>
+        <div class="p-4 space-y-2">
+          <h2 class="font-semibold text-brandRed">Fillable Invoice &amp; Checklist</h2>
+          <p class="text-slate-300">
+            Custom auto-calculating invoice and checklist tailored to a short-term rental cleaner's workflow.
+          </p>
+        </div>
+      </article>
+
+      <article class="bg-brandGray border border-slate-800 rounded-xl overflow-hidden flex flex-col">
+        <div class="h-32 bg-slate-800 flex items-center justify-center text-slate-500 text-xs">
+          Planning &amp; Tools
+        </div>
+        <div class="p-4 space-y-2">
+          <h2 class="font-semibold text-brandRed">Road Trip Itinerary System</h2>
+          <p class="text-slate-300">
+            Multi-day itinerary with routes, hotel stops, budget tracking, and backup plans for weather or timing.
+          </p>
+        </div>
+      </article>
+
+      <article class="bg-brandGray border border-slate-800 rounded-xl overflow-hidden flex flex-col">
+        <div class="h-32 bg-slate-800 flex items-center justify-center text-slate-500 text-xs">
+          Social Graphics
+        </div>
+        <div class="p-4 space-y-2">
+          <h2 class="font-semibold text-brandRed">Social Promo Set</h2>
+          <p class="text-slate-300">
+            Reusable, on-brand graphics for announcements, promotions, and updates across social platforms.
+          </p>
+        </div>
+      </article>
+
+      <article class="bg-brandGray border border-slate-800 rounded-xl overflow-hidden flex flex-col">
+        <div class="h-32 bg-slate-800 flex items-center justify-center text-slate-500 text-xs">
+          Budget / Planning
+        </div>
+        <div class="p-4 space-y-2">
+          <h2 class="font-semibold text-brandRed">Budget &amp; Paycheck Planner</h2>
+          <p class="text-slate-300">
+            Custom sheets built around real pay schedules, helping keep bills, savings, and goals organized.
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section class="border-t border-slate-800 pt-8 text-center">
+      <h2 class="text-2xl font-semibold mb-3">Want to see something like this for your project?</h2>
+      <p class="text-slate-300 text-sm md:text-base mb-4 max-w-xl mx-auto">
+        Tell us what you’re building and what kind of examples you’d like to see more of.
+      </p>
+      <a href="contact.html" class="inline-flex px-6 py-3 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+        Talk About Your Project
+      </a>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+</body>
+</html>
