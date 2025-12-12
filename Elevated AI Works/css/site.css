@@ -1,0 +1,310 @@
+/* ==========================================================================
+   ELEVATED AI WORKS — SITE EXPERIENCE LAYER (v2)
+   Authoritative paste-over file
+   Purpose: atmosphere, depth, polish, brand cohesion
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Brand Variables (match EAW logo exactly)
+   -------------------------------------------------------------------------- */
+
+:root{
+  --eaw-orange: #ff7a3d;
+  --eaw-red: #e84b3c;
+
+  --eaw-orange-soft: rgba(255,122,61,0.22);
+  --eaw-red-soft: rgba(232,75,60,0.18);
+
+  --eaw-bg-deep: #09090a;
+  --eaw-bg-deeper: #080809;
+
+  --eaw-text-strong: rgba(255,255,255,0.94);
+  --eaw-text: rgba(255,255,255,0.86);
+  --eaw-text-muted: rgba(255,255,255,0.68);
+  --eaw-text-faint: rgba(255,255,255,0.52);
+
+  --eaw-border: rgba(255,255,255,0.12);
+  --eaw-border-soft: rgba(255,255,255,0.08);
+
+  --eaw-shadow-sm: 0 10px 24px rgba(0,0,0,0.28);
+  --eaw-shadow-md: 0 20px 48px rgba(0,0,0,0.36);
+  --eaw-shadow-lg: 0 32px 80px rgba(0,0,0,0.45);
+
+  --eaw-ease: cubic-bezier(.22,.9,.22,1);
+}
+
+/* --------------------------------------------------------------------------
+   Base Environment
+   -------------------------------------------------------------------------- */
+
+html, body{
+  scroll-behavior: smooth;
+}
+
+body{
+  background:
+    radial-gradient(1200px 700px at 18% -10%, rgba(255,122,61,0.10), transparent 55%),
+    radial-gradient(900px 650px at 88% 5%, rgba(232,75,60,0.08), transparent 60%),
+    linear-gradient(180deg, var(--eaw-bg-deep), var(--eaw-bg-deeper));
+  color: var(--eaw-text);
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Environmental Backdrop (PREMIUM MOUNTAINS)
+   -------------------------------------------------------------------------- */
+
+.page{
+  position: relative;
+}
+
+.page::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    /* premium mountain image */
+    url("../img/mountains-premium.png") center 110px / cover no-repeat,
+
+    /* brand lighting */
+    radial-gradient(900px 320px at 18% 18%, var(--eaw-orange-soft), transparent 62%),
+    radial-gradient(760px 300px at 82% 20%, var(--eaw-red-soft), transparent 64%),
+
+    /* ultra-subtle grid texture */
+    linear-gradient(to right, rgba(255,255,255,0.010) 1px, transparent 1px) 0 0 / 120px 120px,
+    linear-gradient(to bottom, rgba(255,255,255,0.008) 1px, transparent 1px) 0 0 / 120px 120px,
+
+    linear-gradient(180deg, var(--eaw-bg-deep), var(--eaw-bg-deeper));
+
+  opacity: 0.94;
+  filter: saturate(1.08) contrast(1.04);
+}
+
+/* subtle grain */
+.page::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.012),
+      rgba(255,255,255,0.012) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+}
+
+.page > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Header (studio-grade glass)
+   -------------------------------------------------------------------------- */
+
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(12,12,14,0.65);
+  border-bottom: 1px solid var(--eaw-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.header-inner{
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.brand{
+  gap: 10px;
+}
+
+.brand-name{
+  color: var(--eaw-text-strong);
+  letter-spacing: -0.01em;
+}
+
+.nav a{
+  padding: 10px 12px;
+  border-radius: 999px;
+  color: rgba(255,255,255,0.78);
+  border: 1px solid transparent;
+  transition: transform .15s var(--eaw-ease), background .2s var(--eaw-ease), border-color .2s var(--eaw-ease);
+}
+
+.nav a:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: var(--eaw-border-soft);
+  transform: translateY(-1px);
+}
+
+.nav a[aria-current="page"]{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,122,61,0.35);
+  color: var(--eaw-text-strong);
+}
+
+/* mobile nav sanity */
+.mobile-nav{ display:none; }
+.nav-toggle{ display:none; }
+
+@media (max-width: 900px){
+  .nav{ display:none; }
+  .nav-toggle{ display:inline-flex; }
+  .mobile-nav.open{ display:block; }
+}
+
+/* --------------------------------------------------------------------------
+   Hero (cinematic but calm)
+   -------------------------------------------------------------------------- */
+
+.hero{
+  position: relative;
+  padding-top: 56px;
+  padding-bottom: 56px;
+  overflow: hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-80px -80px auto -80px;
+  height: 680px;
+  pointer-events:none;
+
+  background:
+    radial-gradient(900px 360px at 20% 26%, var(--eaw-orange-soft), transparent 60%),
+    radial-gradient(720px 320px at 80% 26%, var(--eaw-red-soft), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+}
+
+.kicker{
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: var(--fs-0);
+  color: var(--eaw-text-faint);
+}
+
+.h1{
+  color: var(--eaw-text-strong);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.lede{
+  font-size: clamp(16px, 1.25vw, 20px);
+  line-height: 1.55;
+  color: var(--eaw-text);
+}
+
+/* --------------------------------------------------------------------------
+   Buttons (product-level feel)
+   -------------------------------------------------------------------------- */
+
+.btn{
+  transition:
+    transform .15s var(--eaw-ease),
+    box-shadow .25s var(--eaw-ease),
+    background .25s var(--eaw-ease);
+}
+
+.btn-primary{
+  background: linear-gradient(180deg, var(--eaw-orange), var(--eaw-red));
+  color: #0b0b0c;
+  border: none;
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--eaw-shadow-md);
+}
+
+.btn:active{
+  transform: scale(0.98);
+}
+
+/* --------------------------------------------------------------------------
+   Cards / Panels (quiet premium)
+   -------------------------------------------------------------------------- */
+
+.card,
+.hero-panel,
+.work-card{
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--eaw-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--eaw-shadow-sm);
+}
+
+.card{
+  transition: transform .25s var(--eaw-ease), box-shadow .25s var(--eaw-ease), border-color .25s var(--eaw-ease);
+}
+
+.card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(255,122,61,0.30);
+  box-shadow: var(--eaw-shadow-md);
+}
+
+/* --------------------------------------------------------------------------
+   Tiles
+   -------------------------------------------------------------------------- */
+
+.tile{
+  background: rgba(10,10,12,0.45);
+  border: 1px solid var(--eaw-border-soft);
+  transition: transform .25s var(--eaw-ease), border-color .25s var(--eaw-ease);
+}
+
+.tile:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,122,61,0.25);
+}
+
+/* --------------------------------------------------------------------------
+   Section separators
+   -------------------------------------------------------------------------- */
+
+.divider{
+  border-color: var(--eaw-border-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.site-footer{
+  background: rgba(8,8,9,0.75);
+  border-top: 1px solid var(--eaw-border);
+}
+
+.footer-note{
+  color: var(--eaw-text-faint);
+}
+
+/* --------------------------------------------------------------------------
+   Chatbot polish (kept subtle)
+   -------------------------------------------------------------------------- */
+
+#eaw-chatbot{
+  background: rgba(14,14,16,0.94);
+  border: 1px solid var(--eaw-border);
+  box-shadow: var(--eaw-shadow-lg);
+}
+
+#eaw-chat-toggle{
+  background: linear-gradient(180deg, var(--eaw-orange), var(--eaw-red));
+  color: #0b0b0c;
+}
