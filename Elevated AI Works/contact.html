@@ -46,7 +46,6 @@
           <a href="portfolio.html">Portfolio</a>
           <a href="about.html">About</a>
           <a href="contact.html" aria-current="page">Contact</a>
-          <a href="legal/index.html">Legal</a>
         </nav>
 
         <div class="header-actions">
@@ -65,7 +64,6 @@
           <a href="portfolio.html">Portfolio</a>
           <a href="about.html">About</a>
           <a href="contact.html" aria-current="page">Contact</a>
-          <a href="legal/index.html">Legal</a>
         </div>
       </div>
     </header>
@@ -134,21 +132,21 @@
                   Share a few details below. I’ll follow up with a recommendation and next steps.
                 </p>
 
-                <form id="contactForm" class="stack" style="margin-top: var(--space-5);">
+                <form id="contactForm" class="stack form-modern" style="margin-top: var(--space-5);">
 
-                  <label>
-                    <span class="muted small">Name</span>
-                    <input type="text" name="name" required>
+                  <label class="field">
+                    <span class="label">Name</span>
+                    <input class="input" type="text" name="name" placeholder="Your full name" required>
                   </label>
 
-                  <label>
-                    <span class="muted small">Email</span>
-                    <input type="email" name="email" required>
+                  <label class="field">
+                    <span class="label">Email</span>
+                    <input class="input" type="email" name="email" placeholder="you@example.com" required>
                   </label>
 
-                  <label>
-                    <span class="muted small">What do you need?</span>
-                    <select name="service">
+                  <label class="field">
+                    <span class="label">What do you need?</span>
+                    <select class="select" name="service">
                       <option>Website</option>
                       <option>Branding / Logo</option>
                       <option>Docs / Systems</option>
@@ -157,9 +155,9 @@
                     </select>
                   </label>
 
-                  <label>
-                    <span class="muted small">Details</span>
-                    <textarea name="message" rows="5" required></textarea>
+                  <label class="field">
+                    <span class="label">Details</span>
+                    <textarea class="textarea" name="message" rows="5" placeholder="Share goals, timelines, or links to existing work" required></textarea>
                   </label>
 
                   <button class="btn btn-primary" type="submit">
@@ -233,7 +231,7 @@
     </div>
     <div id="eaw-chat-options"></div>
   </div>
-  <button id="eaw-chat-toggle" aria-label="Open chat">💬</button>
+  <button id="eaw-chat-toggle" aria-label="Open assistant">+</button>
 
   <!-- ================= SCRIPTS ================= -->
   <script src="js/main.js"></script>

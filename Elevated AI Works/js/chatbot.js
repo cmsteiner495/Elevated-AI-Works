@@ -5,13 +5,55 @@
   const EAW_FLOW = {
     start: {
       type: "message",
-      text: "👋 Hey there, I’m the Elevated AI Works Assistant.\n\nI can help you:\n• understand what we offer\n• find the right service for your project\n• or start a quick quote.\n\nWhat would you like to do?",
+      text: "Hi, I’m the Elevated AI Works assistant. Choose a quick start and I’ll point you in the right direction.",
       options: [
-        { label: "🔍 Help me choose a service", next: "choose_service" },
-        { label: "📋 See all services", next: "services_overview" },
-        { label: "❓ FAQs", next: "faqs" },
-        { label: "💬 Get a project quote", next: "quote_intro" },
-        { label: "👤 About Elevated AI Works", next: "about" }
+        { label: "I need a website", next: "need_website" },
+        { label: "I want branding", next: "need_branding" },
+        { label: "I need something smarter (AI/tools)", next: "need_ai" },
+        { label: "I’m not sure yet", next: "need_unsure" }
+      ]
+    },
+
+    need_website: {
+      type: "message",
+      text: "Great choice. We build conversion-ready sites that stay on-brand and feel effortless on mobile. Best next steps:",
+      options: [
+        { label: "View Services", next: "open_services" },
+        { label: "See portfolio examples", next: "open_portfolio" },
+        { label: "Contact directly", next: "open_contact" },
+        { label: "Talk through it", next: "quote_intro" }
+      ]
+    },
+
+    need_branding: {
+      type: "message",
+      text: "Branding keeps everything consistent—from logos to social posts. I can show you the services page or examples.",
+      options: [
+        { label: "Branding services", next: "open_services" },
+        { label: "See finished work", next: "open_portfolio" },
+        { label: "Contact directly", next: "open_contact" },
+        { label: "Start a quick scope", next: "quote_intro" }
+      ]
+    },
+
+    need_ai: {
+      type: "message",
+      text: "You want something smarter. We ship assistants, workflows, and light automation without the hype.",
+      options: [
+        { label: "AI & automation overview", next: "open_services" },
+        { label: "Show portfolio", next: "open_portfolio" },
+        { label: "Contact about AI", next: "open_contact" },
+        { label: "Start a project conversation", next: "quote_intro" }
+      ]
+    },
+
+    need_unsure: {
+      type: "message",
+      text: "No worries. Give me a little context and I’ll align you with the right service.",
+      options: [
+        { label: "Send a quick note", next: "quote_description_only" },
+        { label: "Browse services", next: "services_overview" },
+        { label: "Open contact page", next: "open_contact" }
       ]
     },
 
@@ -213,6 +255,8 @@
       ]
     },
 
+    open_services: { type: "action", action: "openServices" },
+    open_portfolio: { type: "action", action: "openPortfolio" },
     open_contact: { type: "action", action: "openContact" }
   };
 
@@ -266,9 +310,20 @@
     }
 
     function handleActionNode(node) {
+      const basePath = window.location.pathname.includes("/legal/") ? "../" : "";
+
       if (node.action === "openContact") {
-        window.open("contact.html", "_blank");
-        showNode("faqs");
+        window.location.href = basePath + "contact.html";
+        return;
+      }
+
+      if (node.action === "openServices") {
+        window.location.href = basePath + "services.html";
+        return;
+      }
+
+      if (node.action === "openPortfolio") {
+        window.location.href = basePath + "portfolio.html";
       }
     }
 
