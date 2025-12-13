@@ -74,17 +74,45 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       cursor: pointer;
-      font-size: 26px;
-      box-shadow: 0 18px 38px rgba(0,0,0,0.45);
-      background: linear-gradient(135deg, #ff7a3d, #e84b3c);
+      box-shadow: 0 18px 38px rgba(0,0,0,0.55);
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.24), transparent 45%), linear-gradient(145deg, #ff7a3d, #e84b3c);
       color: #0b0b0c;
-      z-index: 9999;
+      z-index: 100000;
       display: grid;
       place-items: center;
-      transition: transform 0.18s cubic-bezier(.22,.9,.22,1), box-shadow 0.2s ease;
+      transition: transform 0.18s cubic-bezier(.22,.9,.22,1), box-shadow 0.2s ease, border-color 0.2s ease;
     }
+
+    #eaw-chat-toggle .icon {
+      position: relative;
+      display: block;
+      width: 18px;
+      height: 18px;
+      transition: transform .32s cubic-bezier(.22,.9,.22,1);
+    }
+
+    #eaw-chat-toggle .icon::before,
+    #eaw-chat-toggle .icon::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 2px;
+      background: #0b0b0c;
+      border-radius: 999px;
+      transform: translate(-50%, -50%) rotate(0deg);
+      transition: transform .28s cubic-bezier(.22,.9,.22,1), opacity .2s ease;
+    }
+
+    #eaw-chat-toggle .icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+
+    #eaw-chat-toggle.is-open { border-color: rgba(255,255,255,0.32); box-shadow: 0 26px 64px rgba(0,0,0,0.68); }
+    #eaw-chat-toggle.is-open .icon { transform: rotate(180deg); }
+    #eaw-chat-toggle.is-open .icon::before { transform: translate(-50%, -50%) rotate(45deg); }
+    #eaw-chat-toggle.is-open .icon::after { transform: translate(-50%, -50%) rotate(135deg); }
 
     #eaw-chat-toggle:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 24px 46px rgba(0,0,0,0.55); }
     #eaw-chat-toggle:active { transform: scale(0.97); }
@@ -96,18 +124,30 @@
       right: 20px;
       width: 340px;
       max-height: 520px;
-      background: rgba(12,12,14,0.94);
+      background: linear-gradient(160deg, rgba(12,12,14,0.96), rgba(10,10,12,0.9));
       color: #F9FAFB;
       border-radius: 18px;
-      box-shadow: 0 22px 60px rgba(0,0,0,0.55);
-      display: none;
+      box-shadow: 0 30px 120px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.04);
+      display: flex;
       flex-direction: column;
       overflow: hidden;
-      z-index: 9999;
+      z-index: 99999;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate3d(0,24px,0) scale(0.98);
+      transition: opacity .28s cubic-bezier(.22,.9,.22,1), transform .28s cubic-bezier(.22,.9,.22,1), visibility .28s ease;
+    }
+
+    #eaw-chatbot.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate3d(0,0,0) scale(1);
     }
 
     .eaw-chat-header {
@@ -362,23 +402,21 @@
       toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
     });
   </script>
-
-  
-<!-- EAW Chatbot HTML -->
-  <div id="eaw-chatbot">
+<!-- EAW Chatbot (shared IDs required by js/chatbot.js) -->
+  <div id="eaw-chatbot" role="dialog" aria-modal="false" aria-label="Elevated AI Works Assistant" aria-hidden="true" tabindex="-1">
     <div class="eaw-chat-header">
       <span>Elevated AI Works Assistant</span>
-      <button id="eaw-chat-close" aria-label="Close chat">×</button>
+      <button id="eaw-chat-close" type="button" aria-label="Close chat" data-chat-focus="true">×</button>
     </div>
     <div id="eaw-chat-messages"></div>
     <div id="eaw-chat-input-wrapper" style="display:none;">
       <input id="eaw-chat-input" type="text" placeholder="Type your answer..." />
-      <button id="eaw-chat-send">Send</button>
+      <button id="eaw-chat-send" type="button">Send</button>
     </div>
     <div id="eaw-chat-options"></div>
   </div>
 
-  <button id="eaw-chat-toggle" aria-label="Open assistant"><span class="icon" aria-hidden="true">+</span></button>
+  <button id="eaw-chat-toggle" type="button" aria-label="Open assistant" aria-controls="eaw-chatbot" aria-expanded="false"><span class="icon" aria-hidden="true"></span></button>
 
   <script src="js/chatbot.js"></script>
 </body>
