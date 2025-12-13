@@ -276,6 +276,8 @@
       return;
     }
 
+    chatbot.setAttribute("aria-hidden", "true");
+
     let pendingKey = null;
     let pendingNext = null;
     const userData = {};
@@ -304,9 +306,13 @@
     }
 
     function toggleChat(show) {
-      if (show === true) chatbot.style.display = "flex";
-      else if (show === false) chatbot.style.display = "none";
-      else chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+      const shouldOpen =
+        show === true ? true : show === false ? false : !chatbot.classList.contains("open");
+
+      chatbot.classList.toggle("open", shouldOpen);
+      toggleBtn.setAttribute("aria-expanded", String(shouldOpen));
+      chatbot.setAttribute("aria-hidden", String(!shouldOpen));
+      return shouldOpen;
     }
 
     function handleActionNode(node) {
@@ -404,9 +410,12 @@
       showNode(pendingNext);
     }
 
+    toggleBtn.setAttribute("aria-expanded", "false");
+    toggleBtn.setAttribute("aria-haspopup", "dialog");
+
     toggleBtn.addEventListener("click", () => {
-      toggleChat();
-      if (chatbot.style.display === "flex" && messagesEl.childElementCount === 0) {
+      const isOpen = toggleChat();
+      if (isOpen && messagesEl.childElementCount === 0) {
         showNode("start");
       }
     });
