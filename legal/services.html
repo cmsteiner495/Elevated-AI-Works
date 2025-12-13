@@ -314,21 +314,21 @@
       </div>
     </footer>
   </div>
-
-  <!-- Chatbot HTML (shared IDs required by js/chatbot.js) -->
-  <div id="eaw-chatbot">
+<!-- EAW Chatbot (shared IDs required by js/chatbot.js) -->
+  <div id="eaw-chatbot" role="dialog" aria-modal="false" aria-label="Elevated AI Works Assistant" aria-hidden="true" tabindex="-1">
     <div class="eaw-chat-header">
       <span>Elevated AI Works Assistant</span>
-      <button id="eaw-chat-close" aria-label="Close chat">×</button>
+      <button id="eaw-chat-close" type="button" aria-label="Close chat" data-chat-focus="true">×</button>
     </div>
     <div id="eaw-chat-messages"></div>
     <div id="eaw-chat-input-wrapper" style="display:none;">
       <input id="eaw-chat-input" type="text" placeholder="Type your answer..." />
-      <button id="eaw-chat-send">Send</button>
+      <button id="eaw-chat-send" type="button">Send</button>
     </div>
     <div id="eaw-chat-options"></div>
   </div>
-  <button id="eaw-chat-toggle" aria-label="Open assistant">+</button>
+
+  <button id="eaw-chat-toggle" type="button" aria-label="Open assistant" aria-controls="eaw-chatbot" aria-expanded="false"><span class="icon" aria-hidden="true"></span></button>
 
   <!-- Shared scripts -->
   <script src="js/main.js"></script>
