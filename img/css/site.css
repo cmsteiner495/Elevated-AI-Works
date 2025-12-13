@@ -1,0 +1,507 @@
+/* ==========================================================================
+   ELEVATED AI WORKS — SITE EXPERIENCE LAYER (v2)
+   Authoritative paste-over file
+   Purpose: atmosphere, depth, polish, brand cohesion
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Brand Variables (match EAW logo exactly)
+   -------------------------------------------------------------------------- */
+
+:root{
+  --eaw-orange: #ff7a3d;
+  --eaw-red: #e84b3c;
+
+  --eaw-orange-soft: rgba(255,122,61,0.22);
+  --eaw-red-soft: rgba(232,75,60,0.18);
+
+  --eaw-bg-deep: #09090a;
+  --eaw-bg-deeper: #080809;
+
+  --eaw-text-strong: rgba(255,255,255,0.94);
+  --eaw-text: rgba(255,255,255,0.86);
+  --eaw-text-muted: rgba(255,255,255,0.68);
+  --eaw-text-faint: rgba(255,255,255,0.52);
+
+  --eaw-border: rgba(255,255,255,0.12);
+  --eaw-border-soft: rgba(255,255,255,0.08);
+
+  --eaw-shadow-sm: 0 10px 24px rgba(0,0,0,0.28);
+  --eaw-shadow-md: 0 20px 48px rgba(0,0,0,0.36);
+  --eaw-shadow-lg: 0 32px 80px rgba(0,0,0,0.45);
+
+  --eaw-ease: cubic-bezier(.22,.9,.22,1);
+}
+
+/* --------------------------------------------------------------------------
+   Base Environment
+   -------------------------------------------------------------------------- */
+
+html, body{
+  scroll-behavior: smooth;
+}
+
+body{
+  background:
+    radial-gradient(1200px 700px at 18% -10%, rgba(255,122,61,0.10), transparent 55%),
+    radial-gradient(900px 650px at 88% 5%, rgba(232,75,60,0.08), transparent 60%),
+    linear-gradient(180deg, var(--eaw-bg-deep), var(--eaw-bg-deeper));
+  color: var(--eaw-text);
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Environmental Backdrop (PREMIUM MOUNTAINS)
+   -------------------------------------------------------------------------- */
+
+.page{
+  position: relative;
+}
+
+.page::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    /* premium mountain image */
+    url("../img/backgrounds/mountains-premium.png") center 110px / cover no-repeat,
+
+    /* brand lighting */
+    radial-gradient(900px 320px at 18% 18%, var(--eaw-orange-soft), transparent 62%),
+    radial-gradient(760px 300px at 82% 20%, var(--eaw-red-soft), transparent 64%),
+
+    /* ultra-subtle grid texture */
+    linear-gradient(to right, rgba(255,255,255,0.010) 1px, transparent 1px) 0 0 / 120px 120px,
+    linear-gradient(to bottom, rgba(255,255,255,0.008) 1px, transparent 1px) 0 0 / 120px 120px,
+
+    linear-gradient(180deg, var(--eaw-bg-deep), var(--eaw-bg-deeper));
+
+  background-attachment: fixed, fixed, fixed, fixed, fixed, fixed;
+  opacity: 0.96;
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.bgdebug .page::before{
+  opacity: 1;
+  filter: saturate(1.2) contrast(1.12) brightness(1.05);
+  background-position: center 80px;
+}
+
+/* subtle grain */
+.page::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.012),
+      rgba(255,255,255,0.012) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+}
+
+.page > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Header (studio-grade glass)
+   -------------------------------------------------------------------------- */
+
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(12,12,14,0.65);
+  border-bottom: 1px solid var(--eaw-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.header-inner{
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.brand{
+  gap: 10px;
+}
+
+.brand-name{
+  color: var(--eaw-text-strong);
+  letter-spacing: -0.01em;
+}
+
+.nav a{
+  padding: 10px 12px;
+  border-radius: 999px;
+  color: rgba(255,255,255,0.78);
+  border: 1px solid transparent;
+  transition: transform .15s var(--eaw-ease), background .2s var(--eaw-ease), border-color .2s var(--eaw-ease);
+}
+
+.nav a:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: var(--eaw-border-soft);
+  transform: translateY(-1px);
+}
+
+.nav a[aria-current="page"]{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,122,61,0.35);
+  color: var(--eaw-text-strong);
+}
+
+.nav-toggle{
+  min-width: 44px;
+  gap: 8px;
+  letter-spacing: 0.04em;
+  border-color: rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+}
+
+.nav-toggle:hover{ background: rgba(255,255,255,0.10); }
+
+.mobile-nav{
+  transition: transform var(--dur-2) var(--eaw-ease), opacity var(--dur-2) var(--eaw-ease);
+  transform-origin: top;
+  transform: translateY(-8px);
+  opacity: 0;
+}
+
+/* mobile nav sanity */
+.mobile-nav{ display:none; }
+.nav-toggle{ display:none; }
+
+@media (max-width: 900px){
+  .nav{ display:none; }
+  .nav-toggle{ display:inline-flex; }
+  .mobile-nav.open{
+    display:block;
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hero (cinematic but calm)
+   -------------------------------------------------------------------------- */
+
+.hero{
+  position: relative;
+  padding-top: 56px;
+  padding-bottom: 56px;
+  min-height: 78vh;
+  overflow: hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-80px -80px auto -80px;
+  height: 680px;
+  pointer-events:none;
+
+  background:
+    radial-gradient(900px 360px at 20% 26%, var(--eaw-orange-soft), transparent 60%),
+    radial-gradient(720px 320px at 80% 26%, var(--eaw-red-soft), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+}
+
+.kicker{
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: var(--fs-0);
+  color: var(--eaw-text-faint);
+}
+
+.h1{
+  color: var(--eaw-text-strong);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.lede{
+  font-size: clamp(16px, 1.25vw, 20px);
+  line-height: 1.55;
+  color: var(--eaw-text);
+}
+
+/* --------------------------------------------------------------------------
+   Buttons (product-level feel)
+   -------------------------------------------------------------------------- */
+
+.btn{
+  transition:
+    transform .15s var(--eaw-ease),
+    box-shadow .25s var(--eaw-ease),
+    background .25s var(--eaw-ease);
+}
+
+.btn-primary{
+  background: linear-gradient(180deg, var(--eaw-orange), var(--eaw-red));
+  color: #0b0b0c;
+  border: none;
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--eaw-shadow-md);
+}
+
+.btn:active{
+  transform: scale(0.98);
+}
+
+/* --------------------------------------------------------------------------
+   Cards / Panels (quiet premium)
+   -------------------------------------------------------------------------- */
+
+.card,
+.hero-panel,
+.work-card{
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--eaw-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--eaw-shadow-sm);
+}
+
+.card{
+  transition: transform .25s var(--eaw-ease), box-shadow .25s var(--eaw-ease), border-color .25s var(--eaw-ease);
+}
+
+.card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(255,122,61,0.30);
+  box-shadow: var(--eaw-shadow-md);
+}
+
+/* --------------------------------------------------------------------------
+   Tiles
+   -------------------------------------------------------------------------- */
+
+.tile{
+  background: rgba(10,10,12,0.45);
+  border: 1px solid var(--eaw-border-soft);
+  transition: transform .25s var(--eaw-ease), border-color .25s var(--eaw-ease);
+}
+
+.tile:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,122,61,0.25);
+}
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+
+.form-modern .input,
+.form-modern .textarea,
+.form-modern .select{
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.16);
+  border-radius: 14px;
+  padding: 14px 16px;
+  transition: border-color .18s var(--eaw-ease), box-shadow .2s var(--eaw-ease), transform .12s var(--eaw-ease), background .2s var(--eaw-ease);
+}
+
+.form-modern .input:focus,
+.form-modern .textarea:focus,
+.form-modern .select:focus{
+  border-color: rgba(255,122,61,0.55);
+  box-shadow: 0 0 0 3px rgba(255,122,61,0.25);
+  background: rgba(255,255,255,0.06);
+}
+
+.form-modern label .label{ color: var(--eaw-text); font-weight: 600; letter-spacing: 0.01em; display: flex; align-items: center; gap: 10px; }
+
+.form-modern .label::after{ content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.14), transparent); max-width: 120px; }
+
+.form-modern .textarea{ min-height: 160px; }
+
+.form-modern ::placeholder{ color: rgba(255,255,255,0.5); }
+
+.form-modern .input:focus-visible,
+.form-modern .textarea:focus-visible,
+.form-modern .select:focus-visible{ outline: none; }
+
+.form-modern .input:invalid:not(:focus):not(:placeholder-shown),
+.form-modern .textarea:invalid:not(:focus):not(:placeholder-shown){
+  border-color: rgba(255, 122, 61, 0.55);
+  box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.18);
+}
+
+/* --------------------------------------------------------------------------
+   Section separators
+   -------------------------------------------------------------------------- */
+
+.divider{
+  border-color: var(--eaw-border-soft);
+}
+
+/* --------------------------------------------------------------------------
+   CTA alignment
+   -------------------------------------------------------------------------- */
+
+.cta-block{
+  text-align: center;
+  display: grid;
+  gap: var(--space-4);
+  justify-items: center;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-3);
+}
+
+.cta-block .lede{ margin: 0 auto; }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.site-footer{
+  background: rgba(8,8,9,0.75);
+  border-top: 1px solid var(--eaw-border);
+}
+
+.footer-note{
+  color: var(--eaw-text-faint);
+}
+
+/* --------------------------------------------------------------------------
+   Chatbot polish (kept subtle)
+   -------------------------------------------------------------------------- */
+
+#eaw-chatbot{
+  position: fixed;
+  bottom: 92px;
+  right: 22px;
+  width: 360px;
+  max-height: 540px;
+  background: rgba(12,12,14,0.94);
+  border: 1px solid var(--eaw-border);
+  box-shadow: var(--eaw-shadow-lg);
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 60;
+  opacity: 0;
+  transform: translateY(12px) scale(0.99);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity var(--dur-3) var(--eaw-ease), transform var(--dur-3) var(--eaw-ease), box-shadow var(--dur-2) var(--eaw-ease);
+}
+
+#eaw-chatbot.open{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+#eaw-chat-messages{ background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 28%); }
+
+#eaw-chat-options button{
+  border-radius: 12px;
+  border-color: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.03);
+  transition: transform .12s var(--eaw-ease), border-color .18s var(--eaw-ease), background .18s var(--eaw-ease);
+}
+
+#eaw-chat-options button:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,122,61,0.35);
+  background: rgba(255,255,255,0.05);
+}
+
+#eaw-chat-input{
+  border-radius: 12px;
+  border-color: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.03);
+}
+
+#eaw-chat-input:focus{ border-color: rgba(255, 122, 61, 0.55); box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.25); }
+
+#eaw-chat-send{
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--eaw-orange), var(--eaw-red));
+  color: #0b0b0c;
+  font-weight: 650;
+  transition: transform .12s var(--eaw-ease), box-shadow .18s var(--eaw-ease);
+}
+
+#eaw-chat-send:hover{ transform: translateY(-1px); box-shadow: var(--eaw-shadow-sm); }
+#eaw-chat-send:active{ transform: scale(0.98); }
+
+#eaw-chat-toggle{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(255,122,61,0.95), rgba(232,75,60,0.9));
+  color: #0b0b0c;
+  font-size: 28px;
+  font-weight: 700;
+  box-shadow: 0 18px 38px rgba(0,0,0,0.35);
+  transition: transform .18s var(--eaw-ease), box-shadow .2s var(--eaw-ease), border-color .2s var(--eaw-ease);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 61;
+}
+
+#eaw-chat-toggle:hover{ transform: translateY(-2px) scale(1.02); box-shadow: 0 24px 46px rgba(0,0,0,0.48); border-color: rgba(255,255,255,0.26); }
+#eaw-chat-toggle:active{ transform: scale(0.97); }
+
+@media (max-width: 720px){
+  #eaw-chatbot{ width: calc(100% - 32px); right: 16px; bottom: 88px; }
+  #eaw-chat-toggle{ bottom: 16px; right: 16px; width: 56px; height: 56px; font-size: 26px; }
+}
+
+/* --------------------------------------------------------------------------
+   Reveal animations (respect reduced motion)
+   -------------------------------------------------------------------------- */
+
+.reveal{
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-3) var(--eaw-ease), transform var(--dur-3) var(--eaw-ease);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *, *::before, *::after{
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal{ opacity: 1 !important; transform: none !important; }
+  #eaw-chatbot{ transition: none; transform: none !important; }
+  .btn:hover, .card:hover, .tile:hover{ transform: none !important; }
+}

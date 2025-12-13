@@ -1,0 +1,154 @@
+/* ==========================================================================
+   EAW v2 — Components
+   ========================================================================== */
+
+/* Type */
+.h1 {
+  font-size: var(--fs-5);
+  line-height: var(--lh-tight);
+  margin: 0 0 var(--space-4);
+  letter-spacing: -0.02em;
+}
+
+.h2 {
+  font-size: var(--fs-4);
+  line-height: var(--lh-tight);
+  margin: 0 0 var(--space-3);
+  letter-spacing: -0.01em;
+}
+
+.lede {
+  font-size: var(--fs-2);
+  color: var(--text-muted);
+  margin: 0 0 var(--space-5);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-size: var(--fs-0);
+  font-weight: 650;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform var(--dur-1) var(--ease), background var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+}
+
+.btn:focus { outline: none; box-shadow: var(--focus); }
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: linear-gradient(180deg, rgba(255, 122, 61, 0.95), rgba(224, 97, 46, 0.92));
+  border-color: rgba(255, 122, 61, 0.35);
+  color: #0b0b0c;
+}
+
+.btn-primary:hover {
+  border-color: rgba(255, 122, 61, 0.55);
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+/* Pills / badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  font-size: var(--fs-0);
+  color: var(--text-muted);
+}
+
+/* Cards */
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,0.03);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.card-inner {
+  padding: var(--space-6);
+}
+
+.card-title {
+  font-size: var(--fs-2);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.card-text {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* Grids */
+.grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: var(--space-7) 0;
+}
+
+/* Forms */
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-size: var(--fs-0);
+  color: var(--text-muted);
+}
+
+.input, .textarea, .select {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: var(--fs-1);
+  outline: none;
+  transition: border-color var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+}
+
+.textarea { min-height: 140px; resize: vertical; }
+
+.input:focus, .textarea:focus, .select:focus {
+  border-color: rgba(255, 122, 61, 0.45);
+  box-shadow: var(--focus);
+}
+
+.help {
+  font-size: var(--fs-0);
+  color: var(--text-faint);
+}
