@@ -303,10 +303,21 @@
       pendingNext = null;
     }
 
+    chatbot.setAttribute("aria-hidden", "true");
+    toggleBtn.setAttribute("aria-expanded", "false");
+
     function toggleChat(show) {
-      if (show === true) chatbot.style.display = "flex";
-      else if (show === false) chatbot.style.display = "none";
-      else chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+      const shouldOpen = show === true ? true : show === false ? false : !chatbot.classList.contains("open");
+
+      chatbot.classList.toggle("open", shouldOpen);
+      toggleBtn.classList.toggle("is-open", shouldOpen);
+      toggleBtn.setAttribute("aria-expanded", String(shouldOpen));
+      toggleBtn.setAttribute("aria-label", shouldOpen ? "Close assistant" : "Open assistant");
+      chatbot.setAttribute("aria-hidden", shouldOpen ? "false" : "true");
+
+      if (shouldOpen && messagesEl.childElementCount === 0) {
+        showNode("start");
+      }
     }
 
     function handleActionNode(node) {
@@ -404,13 +415,7 @@
       showNode(pendingNext);
     }
 
-    toggleBtn.addEventListener("click", () => {
-      toggleChat();
-      if (chatbot.style.display === "flex" && messagesEl.childElementCount === 0) {
-        showNode("start");
-      }
-    });
-
+    toggleBtn.addEventListener("click", () => toggleChat());
     closeBtn.addEventListener("click", () => toggleChat(false));
     sendBtn.addEventListener("click", handleInputSubmit);
     inputField.addEventListener("keydown", (e) => {

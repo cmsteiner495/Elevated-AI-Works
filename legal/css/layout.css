@@ -24,15 +24,15 @@ main {
 
 /* Section rhythm */
 .section {
-  padding: clamp(var(--space-7), 12vw, var(--space-9)) 0;
+  padding: var(--space-8) 0;
 }
 
 .section-sm {
-  padding: clamp(var(--space-6), 10vw, var(--space-7)) 0;
+  padding: var(--space-7) 0;
 }
 
 .section-tight {
-  padding: clamp(var(--space-5), 8vw, var(--space-6)) 0;
+  padding: var(--space-6) 0;
 }
 
 /* Hero */
@@ -95,20 +95,18 @@ main {
 }
 
 .brand-mark {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: var(--grad-surface);
-  border: 1px solid var(--border);
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
-  overflow: hidden;
 }
+
+.brand-mark img { width: 42px; height: 42px; border-radius: 12px; box-shadow: 0 10px 28px rgba(0,0,0,0.35); }
 
 .brand-name {
   font-size: var(--fs-1);
-  letter-spacing: 0.2px;
-  font-weight: 650;
+  letter-spacing: 0.1px;
+  font-weight: 700;
 }
 
 .nav {
@@ -136,6 +134,12 @@ main {
   gap: 10px;
 }
 
+@media (max-width: 720px) {
+  .header-inner { flex-wrap: wrap; row-gap: 12px; }
+  .brand { flex: 1 1 100%; }
+  .header-actions { width: 100%; justify-content: space-between; }
+}
+
 .nav-toggle {
   display: none;
 }
@@ -153,7 +157,6 @@ main {
   .mobile-nav {
     display: none;
     border-top: 1px solid var(--border);
-    background: rgba(11, 11, 12, 0.9);
   }
 
   .mobile-nav.open {
