@@ -24,15 +24,15 @@ main {
 
 /* Section rhythm */
 .section {
-  padding: var(--space-8) 0;
+  padding: clamp(var(--space-7), 12vw, var(--space-9)) 0;
 }
 
 .section-sm {
-  padding: var(--space-7) 0;
+  padding: clamp(var(--space-6), 10vw, var(--space-7)) 0;
 }
 
 .section-tight {
-  padding: var(--space-6) 0;
+  padding: clamp(var(--space-5), 8vw, var(--space-6)) 0;
 }
 
 /* Hero */
@@ -153,6 +153,7 @@ main {
   .mobile-nav {
     display: none;
     border-top: 1px solid var(--border);
+    background: rgba(11, 11, 12, 0.9);
   }
 
   .mobile-nav.open {

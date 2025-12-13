@@ -71,6 +71,7 @@
   --ease: cubic-bezier(.2,.8,.2,1);
   --dur-1: 120ms;
   --dur-2: 220ms;
+  --dur-3: 360ms;
 
   /* Focus */
   --focus: 0 0 0 3px rgba(255, 122, 61, 0.28);
@@ -95,6 +96,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+p { margin: 0 0 var(--space-3); }
 
 img { max-width: 100%; height: auto; display: block; }
 

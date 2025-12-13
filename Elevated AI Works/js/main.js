@@ -22,7 +22,42 @@
     });
   }
 
+  function initRevealAnimations() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const nodes = Array.from(
+      document.querySelectorAll('section, .hero-panel, .card, .tile, .work-card, .cta-block')
+    );
+
+    if (!nodes.length) return;
+
+    nodes.forEach((node, index) => {
+      node.classList.add('reveal');
+      if (!reduceMotion.matches) {
+        node.style.transitionDelay = `${Math.min(index * 40, 240)}ms`;
+      } else {
+        node.classList.add('is-visible');
+      }
+    });
+
+    if (reduceMotion.matches || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.18 }
+    );
+
+    nodes.forEach((node) => observer.observe(node));
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initMobileNav();
+    initRevealAnimations();
   });
 })();
