@@ -1,487 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HLV32W95T0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HLV32W95T0');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLV32W95T0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HLV32W95T0');
+  </script>
 
   <meta charset="UTF-8" />
   <title>Services | Elevated AI Works</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brandRed: '#E63926',
-            brandDark: '#050816',
-            brandGray: '#0F172A',
-          }
-        }
-      }
-    }
-  </script>
+  <!-- Favicons / manifest -->
+  <link rel="manifest" href="img/favicon/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/favicon-180x180.png">
+  <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
-<link rel="manifest" href="img/favicon/site.webmanifest">
-
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/favicon-180x180.png">
-<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
-<link rel="manifest" href="img/favicon/site.webmanifest">
-
-  <!-- EAW Chatbot styles -->
-  <style>
-    /* Chat toggle button */
-    #eaw-chat-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      font-size: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-      background: #E63926; /* brandRed */
-      color: #F9FAFB;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    }
-
-    #eaw-chat-toggle:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.45);
-      background: #c52f1f; /* slightly darker red */
-    }
-
-    /* Chat window container */
-    #eaw-chatbot {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 320px;
-      max-height: 480px;
-      background: #0F172A; /* brandGray */
-      color: #F9FAFB;
-      border-radius: 16px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 9999;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      border: 1px solid rgba(148, 163, 184, 0.4); /* slate-400-ish */
-    }
-
-    .eaw-chat-header {
-      padding: 10px 12px;
-      background: #050816; /* brandDark */
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 600;
-      font-size: 14px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-    }
-
-    .eaw-chat-header span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .eaw-chat-header span::before {
-      content: "";
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e; /* online indicator */
-    }
-
-    .eaw-chat-header button {
-      background: transparent;
-      border: none;
-      color: #9CA3AF;
-      font-size: 18px;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .eaw-chat-header button:hover {
-      color: #E5E7EB;
-    }
-
-    #eaw-chat-messages {
-      padding: 10px;
-      overflow-y: auto;
-      flex: 1;
-      font-size: 14px;
-      background: radial-gradient(circle at top left, rgba(230,57,38,0.12), transparent 55%), #0F172A;
-    }
-
-    .eaw-msg {
-      margin-bottom: 8px;
-      max-width: 90%;
-      line-height: 1.4;
-      white-space: pre-wrap;
-    }
-
-    .eaw-msg.bot {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 10px 10px 10px 2px;
-      padding: 8px 10px;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-    }
-
-    .eaw-msg.user {
-      background: #E63926;
-      border-radius: 10px 10px 2px 10px;
-      padding: 8px 10px;
-      margin-left: auto;
-      color: #F9FAFB;
-      border: 1px solid #b72a1b;
-    }
-
-    /* Options (buttons) */
-    #eaw-chat-options {
-      padding: 8px 10px 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      background: #050816;
-      border-top: 1px solid rgba(15, 23, 42, 0.9);
-    }
-
-    #eaw-chat-options button {
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
-      cursor: pointer;
-      background: #050816;
-      color: #E5E7EB;
-      white-space: nowrap;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
-    }
-
-    #eaw-chat-options button:hover {
-      background: #E63926;
-      border-color: #E63926;
-      color: #F9FAFB;
-      transform: translateY(-0.5px);
-    }
-
-    /* Input field for free text steps */
-    #eaw-chat-input-wrapper {
-      display: flex;
-      padding: 8px 10px;
-      gap: 6px;
-      border-top: 1px solid rgba(15, 23, 42, 0.9);
-      background: #050816;
-    }
-
-    #eaw-chat-input {
-      flex: 1;
-      border-radius: 999px;
-      border: 1px solid #374151;
-      background: #0F172A;
-      color: #F9FAFB;
-      padding: 6px 10px;
-      font-size: 13px;
-    }
-
-    #eaw-chat-input::placeholder {
-      color: #6B7280;
-    }
-
-    #eaw-chat-send {
-      border-radius: 999px;
-      border: none;
-      padding: 6px 12px;
-      font-size: 13px;
-      background: #E63926;
-      color: #F9FAFB;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
-    }
-
-    #eaw-chat-send:hover {
-      background: #c52f1f;
-      transform: translateY(-0.5px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-
-    /* Simple mobile tweak */
-    @media (max-width: 640px) {
-      #eaw-chatbot {
-        width: calc(100% - 32px);
-        right: 16px;
-        bottom: 80px;
-      }
-
-      #eaw-chat-toggle {
-        bottom: 16px;
-        right: 16px;
-      }
-    }
-  </style>
+  <!-- EAW v2 styles -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/utilities.css">
+  <link rel="stylesheet" href="css/site.css">
 </head>
 
-<body class="bg-brandDark text-slate-100">
+<body>
+  <div class="page">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Elevated AI Works Home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="img/logo.png" alt="" width="26" height="26" />
+          </span>
+          <span>
+            <span class="brand-name">Elevated AI Works</span><br>
+            <span class="muted" style="font-size: 12px;">Bringing Your Ideas to Altitude</span>
+          </span>
+        </a>
 
-  <!-- HEADER / NAV -->
-  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
-    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+        <nav class="nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="services.html" aria-current="page">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
 
-      <!-- Logo -->
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
-        <div>
-          <p class="font-semibold tracking-wide">Elevated AI Works</p>
-          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        <div class="header-actions">
+          <button class="btn btn-ghost nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav">
+            Menu
+          </button>
+          <a class="btn btn-primary" href="contact.html">Get a Quote</a>
         </div>
-      </a>
-
-      <!-- Desktop nav -->
-      <div class="hidden md:flex items-center gap-6 text-sm">
-        <a href="index.html" class="hover:text-brandRed">Home</a>
-        <a href="services.html" class="text-brandRed font-semibold">Services</a>
-        <a href="portfolio.html" class="hover:text-brandRed">Portfolio</a>
-        <a href="about.html" class="hover:text-brandRed">About</a>
-        <a href="contact.html" class="hover:text-brandRed">Contact</a>
-        <a href="legal/index.html" class="hover:text-brandRed">Legal</a>
       </div>
 
-      <!-- CTA + Hamburger -->
-      <div class="flex items-center gap-2">
-        <a
-          href="contact.html"
-          class="inline-flex px-3 md:px-4 py-1.5 md:py-2 rounded-md bg-brandRed text-xs sm:text-sm font-semibold hover:bg-red-600 transition"
-        >
-          Get a Quote
-        </a>
-
-        <!-- Hamburger (mobile only) -->
-        <button
-          id="mobileMenuToggle"
-          class="md:hidden inline-flex flex-col justify-center gap-1.5 p-2 rounded-md border border-slate-700"
-          aria-label="Toggle navigation menu"
-        >
-          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
-          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
-          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
-        </button>
+      <div class="mobile-nav" id="mobileNav">
+        <div class="container">
+          <a href="index.html">Home</a>
+          <a href="services.html" aria-current="page">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
       </div>
-    </nav>
-
-    <!-- Mobile menu -->
-    <div id="mobileMenu" class="md:hidden border-t border-slate-800 bg-brandDark/95 hidden">
-      <nav class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
-        <a href="index.html" class="py-1 hover:text-brandRed">Home</a>
-        <a href="services.html" class="py-1 text-brandRed font-semibold">Services</a>
-        <a href="portfolio.html" class="py-1 hover:text-brandRed">Portfolio</a>
-        <a href="about.html" class="py-1 hover:text-brandRed">About</a>
-        <a href="contact.html" class="py-1 hover:text-brandRed">Contact</a>
-        <a href="legal/index.html" class="py-1 hover:text-brandRed">Legal</a>
-
-        <a href="contact.html"
-           class="mt-2 inline-flex justify-center px-4 py-2 rounded-md bg-brandRed font-semibold hover:bg-red-600 transition">
-          Get a Quote
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- MAIN CONTENT -->
-  <main class="max-w-6xl mx-auto px-4 py-10 space-y-12">
-    <header class="mb-6">
-      <p class="text-xs tracking-[0.25em] uppercase text-slate-400">Services</p>
-      <h1 class="text-3xl md:text-4xl font-bold mb-3">
-        From logos to AI systems—<span class="text-brandRed">all in one place.</span>
-      </h1>
-      <p class="text-slate-300 text-sm md:text-base max-w-2xl">
-        Elevated AI Works blends clean design with practical systems. Whether you need a brand, a website, a smart document, or an AI-powered tool that takes work off your plate, everything here is built to actually be used, not just admired in a mockup.
-      </p>
     </header>
 
-    <!-- Featured Services -->
-    <section class="space-y-4">
-      <div>
-        <h2 class="text-lg md:text-xl font-semibold">Featured Services</h2>
-        <p class="text-xs md:text-sm text-slate-400">
-          Branding and websites are the core of what we do. Most other services plug into these foundations.
-        </p>
+    <main>
+      <!-- Page Hero -->
+      <section class="hero section-tight">
+        <div class="container hero-inner">
+          <div class="max-wide">
+            <p class="kicker">Services</p>
+            <h1 class="h1">
+              From logos to AI systems —
+              <span style="color: var(--accent-500);">all in one place.</span>
+            </h1>
+            <p class="lede">
+              Elevated AI Works blends clean design with practical systems. Whether you need a brand, a website,
+              a smart document, or a useful AI tool, it’s built to be used — not just admired in a mockup.
+            </p>
+
+            <div class="row">
+              <a class="btn btn-primary" href="contact.html">Start a Project</a>
+              <a class="btn btn-ghost" href="portfolio.html">See Examples</a>
+            </div>
+
+            <p class="help" style="margin-top: var(--space-4);">
+              Premium studio feel, without premium pricing. Clear scope, clear timeline, no fluff.
+            </p>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="card-inner stack">
+              <div class="badge">Best starting point</div>
+              <div class="stack-sm">
+                <div style="font-weight:650;">Brand + Website</div>
+                <div class="muted" style="font-size: var(--fs-0);">
+                  Most clients get the biggest lift by tightening their identity and making the site feel effortless on mobile.
+                </div>
+              </div>
+
+              <div class="tile-grid">
+                <div class="tile">
+                  <p class="tile-kicker">Fast</p>
+                  <p>Clear steps, quick drafts, and steady progress.</p>
+                </div>
+                <div class="tile">
+                  <p class="tile-kicker">Simple</p>
+                  <p>No bloated platforms or confusing handoffs.</p>
+                </div>
+                <div class="tile">
+                  <p class="tile-kicker">Usable</p>
+                  <p>Built around how you actually operate.</p>
+                </div>
+                <div class="tile">
+                  <p class="tile-kicker">Expandable</p>
+                  <p>Start small now, scale later when ready.</p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Featured Services -->
+      <section class="section">
+        <div class="container">
+          <div class="stack-sm" style="margin-bottom: var(--space-5);">
+            <h2 class="h2">Featured services</h2>
+            <p class="muted" style="max-width: 70ch;">
+              Branding and websites are the core. Most other services plug into these foundations.
+            </p>
+          </div>
+
+          <div class="grid grid-2">
+            <article class="card">
+              <div class="card-inner">
+                <div class="badge">🎨 Branding</div>
+                <h3 class="card-title" style="margin-top: 12px;">Branding &amp; logo design</h3>
+                <p class="card-text">
+                  Logos, palettes, typography, and assets that feel modern, readable, and consistent everywhere.
+                </p>
+
+                <div class="divider" style="margin: var(--space-5) 0;"></div>
+
+                <ul class="muted" style="margin:0; padding-left: 18px; display:grid; gap:8px; font-size: var(--fs-0);">
+                  <li>Primary logo + alternates</li>
+                  <li>Brand color &amp; font selections</li>
+                  <li>Business card or social graphics</li>
+                  <li>Simple brand reference sheet</li>
+                </ul>
+
+                <p class="help" style="margin-top: var(--space-4);">
+                  Best for: new businesses, rebrands, or anyone who wants a clean identity that still feels approachable.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-inner">
+                <div class="badge">🌐 Websites</div>
+                <h3 class="card-title" style="margin-top: 12px;">Website design &amp; build</h3>
+                <p class="card-text">
+                  Simple, responsive websites that look professional on desktop and mobile — without drowning you in tech.
+                </p>
+
+                <div class="divider" style="margin: var(--space-5) 0;"></div>
+
+                <ul class="muted" style="margin:0; padding-left: 18px; display:grid; gap:8px; font-size: var(--fs-0);">
+                  <li>Clean, focused page layouts</li>
+                  <li>Mobile-ready responsive structure</li>
+                  <li>Contact forms + basic SEO setup</li>
+                  <li>Copy tuned to your audience</li>
+                </ul>
+
+                <p class="help" style="margin-top: var(--space-4);">
+                  Best for: service businesses, side hustlers, and creators who want something that works.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Systems & AI -->
+      <section class="section">
+        <div class="container">
+          <div class="stack-sm" style="margin-bottom: var(--space-5);">
+            <h2 class="h2">Systems &amp; AI-powered tools</h2>
+            <p class="muted" style="max-width: 70ch;">
+              Tools built around how you actually work: repeatable, reusable, and easy to hand off.
+            </p>
+          </div>
+
+          <div class="grid grid-2">
+            <article class="card">
+              <div class="card-inner">
+                <div class="badge">📄 Smart docs</div>
+                <h3 class="card-title" style="margin-top: 12px;">Fillable PDFs &amp; smart documents</h3>
+                <p class="card-text">
+                  Reusable docs that calculate totals, capture client info, and guide repeatable workflows.
+                </p>
+
+                <div class="divider" style="margin: var(--space-5) 0;"></div>
+
+                <ul class="muted" style="margin:0; padding-left: 18px; display:grid; gap:8px; font-size: var(--fs-0);">
+                  <li>Invoices + recurring billing templates</li>
+                  <li>Client intake + info forms</li>
+                  <li>Checklists and repeatable workflows</li>
+                  <li>Simple automation where helpful</li>
+                </ul>
+
+                <p class="help" style="margin-top: var(--space-4);">
+                  Best for: freelancers and operators who are tired of rewriting the same stuff every month.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-inner">
+                <div class="badge">🤖 AI helpers</div>
+                <h3 class="card-title" style="margin-top: 12px;">AI assistants &amp; workflow helpers</h3>
+                <p class="card-text">
+                  Custom AI tools for your tasks — answering questions, guiding clients, planning, organizing, and more.
+                </p>
+
+                <div class="divider" style="margin: var(--space-5) 0;"></div>
+
+                <ul class="muted" style="margin:0; padding-left: 18px; display:grid; gap:8px; font-size: var(--fs-0);">
+                  <li>Website chatbot flows + FAQs</li>
+                  <li>Internal planning helpers (content, ops)</li>
+                  <li>Prompt systems tailored to your tools</li>
+                  <li>Future automation ideas (when ready)</li>
+                </ul>
+
+                <p class="help" style="margin-top: var(--space-4);">
+                  Best for: anyone who wants AI to feel like a calm assistant — not another app to babysit.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- How it works -->
+          <div class="stack-sm" style="margin-bottom: var(--space-5);">
+            <h2 class="h2">How projects usually work</h2>
+          </div>
+
+          <div class="grid grid-3">
+            <article class="card">
+              <div class="card-inner">
+                <p class="kicker">Step 01</p>
+                <h3 class="card-title">Quick conversation</h3>
+                <p class="card-text">We outline what you’re building, what’s not working, and what “good” looks like.</p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-inner">
+                <p class="kicker">Step 02</p>
+                <h3 class="card-title">Simple proposal</h3>
+                <p class="card-text">Clear scope, timeline, and price — no mystery deliverables or surprise add-ons.</p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-inner">
+                <p class="kicker">Step 03</p>
+                <h3 class="card-title">Build, review, refine</h3>
+                <p class="card-text">We iterate together until it feels right for how you’ll actually use it.</p>
+              </div>
+            </article>
+          </div>
+
+          <!-- CTA -->
+          <div class="cta-block">
+            <h2 class="h2">Not sure where your project fits?</h2>
+            <p class="lede" style="margin-left:auto;margin-right:auto;max-width:65ch;">
+              You don’t have to know the right label. Share what you’re trying to build or fix, and we’ll map a realistic path forward.
+            </p>
+            <a class="btn btn-primary" href="contact.html">Talk About Your Project</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="stack-sm">
+          <div style="font-weight: 650;">Elevated AI Works</div>
+          <div class="footer-note">AI-powered creative &amp; digital solutions for real-world businesses.</div>
+        </div>
+
+        <div class="footer-meta">
+          <div class="footer-links">
+            <a href="legal/index.html">Legal Center</a>
+            <a href="legal/privacy-policy.html">Privacy Policy</a>
+            <a href="legal/terms-of-service.html">Terms of Service</a>
+            <a href="legal/refund-policy.html">Refund Policy</a>
+          </div>
+          <div class="footer-note">© 2025 Elevated AI Works. All rights reserved.</div>
+        </div>
       </div>
+    </footer>
+  </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
-
-        <!-- Branding & Logo Design -->
-        <article class="bg-brandGray border border-slate-800 rounded-2xl p-5 shadow-xl card-hover">
-          <h3 class="text-base md:text-lg font-semibold mb-2 text-brandRed">Branding & Logo Design</h3>
-          <p class="text-slate-200 text-sm mb-3">
-            Logos, color palettes, typography, and brand assets that feel modern, readable, and consistent across print and digital.
-          </p>
-
-          <ul class="list-disc list-inside text-xs md:text-sm text-slate-300 space-y-1 mb-3">
-            <li>Primary logo + alternates</li>
-            <li>Brand color & font selections</li>
-            <li>Business card or social profile graphics</li>
-            <li>Simple brand reference sheet</li>
-          </ul>
-
-          <p class="text-[11px] text-slate-400">
-            Best for: new businesses, rebrands, or anyone who wants a clean identity that still feels approachable.
-          </p>
-        </article>
-
-        <!-- Website Design & Build -->
-        <article class="bg-brandGray border border-slate-800 rounded-2xl p-5 shadow-xl card-hover">
-          <h3 class="text-base md:text-lg font-semibold mb-2 text-brandRed">Website Design & Build</h3>
-          <p class="text-slate-200 text-sm mb-3">
-            Simple, responsive websites that look professional on desktop and mobile without drowning you in tech.
-          </p>
-
-          <ul class="list-disc list-inside text-xs md:text-sm text-slate-300 space-y-1 mb-3">
-            <li>Clean, focused page layouts</li>
-            <li>Mobile-friendly responsive structure</li>
-            <li>Contact forms and basic SEO structure</li>
-            <li>Content tuned to your audience</li>
-          </ul>
-
-          <p class="text-[11px] text-slate-400">
-            Best for: service businesses, side hustlers, and creators who want something that works, not a complicated build.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Systems & AI-Powered Tools -->
-    <section class="space-y-4">
-      <div>
-        <h2 class="text-lg md:text-xl font-semibold">Systems & AI-Powered Tools</h2>
-        <p class="text-xs md:text-sm text-slate-400">
-          Tools built around how you actually work: repeatable, reuseable, and easy to hand off.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6">
-
-        <!-- Fillable PDFs & Smart Docs -->
-        <article class="bg-brandGray border border-slate-800 rounded-2xl p-5 shadow-xl card-hover">
-          <h3 class="text-base md:text-lg font-semibold mb-2 text-brandRed">Fillable PDFs & Smart Documents</h3>
-          <p class="text-slate-200 text-sm mb-3">
-            Reusable documents that calculate totals, capture client info, or guide you through the same process without rebuilding it from scratch.
-          </p>
-          <ul class="list-disc list-inside text-xs md:text-sm text-slate-300 space-y-1 mb-3">
-            <li>Invoices and recurring billing templates</li>
-            <li>Client intake or information forms</li>
-            <li>Checklists and repeatable workflows</li>
-            <li>Simple automations where helpful</li>
-          </ul>
-          <p class="text-[11px] text-slate-400">
-            Best for: cleaners, freelancers, and operators who are tired of rewriting the same info month after month.
-          </p>
-        </article>
-
-        <!-- AI Assistants & Workflow Helpers -->
-        <article class="bg-brandGray border border-slate-800 rounded-2xl p-5 shadow-xl card-hover">
-          <h3 class="text-base md:text-lg font-semibold mb-2 text-brandRed">AI Assistants & Workflow Helpers</h3>
-          <p class="text-slate-200 text-sm mb-3">
-            Custom AI tools built around your specific tasks—answering questions, walking clients through options, or helping you plan and organize.
-          </p>
-          <ul class="list-disc list-inside text-xs md:text-sm text-slate-300 space-y-1 mb-3">
-            <li>Website chatbot flows and FAQs</li>
-            <li>Planning helpers for trips or budgets</li>
-            <li>Prompt systems tailored to your tools</li>
-            <li>Ideas for future automation layers</li>
-          </ul>
-          <p class="text-[11px] text-slate-400">
-            Best for: anyone who wants AI to feel like a friendly helper, not another app to babysit.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- How Projects Work -->
-    <section class="space-y-4 border-t border-slate-800 pt-8">
-      <h2 class="text-lg md:text-xl font-semibold">How projects usually work</h2>
-
-      <div class="grid md:grid-cols-3 gap-6 text-sm">
-        <article class="bg-brandGray border border-slate-800 rounded-2xl p-4">
-          <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">Step 01</p>
-          <h3 class="font-semibold mb-1 text-sm">Quick conversation</h3>
-          <p class="text-slate-300 text-xs">
-            We outline what you’re trying to build, what’s not working now, and what “good” looks like for you.
-          </p>
-        </article>
-
-        <article class="bg-brandGray border border-slate-800 rounded-2xl p-4">
-          <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">Step 02</p>
-          <h3 class="font-semibold mb-1 text-sm">Simple proposal</h3>
-          <p class="text-slate-300 text-xs">
-            You get a clear scope, timeline, and price—no mystery deliverables or surprise add-ons.
-          </p>
-        </article>
-
-        <article class="bg-brandGray border border-slate-800 rounded-2xl p-4">
-          <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">Step 03</p>
-          <h3 class="font-semibold mb-1 text-sm">Build, review, refine</h3>
-          <p class="text-slate-300 text-xs">
-            We work through drafts together and tweak things until they feel right for how you’ll actually use them.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="border-t border-slate-800 pt-10 text-center">
-      <h2 class="text-2xl font-semibold mb-3">Not sure where your project fits?</h2>
-      <p class="text-slate-300 text-sm md:text-base mb-6 max-w-xl mx-auto">
-        You don’t have to know the right label. Share what you’re trying to build or fix, and we’ll figure out a realistic way to bring it to life.
-      </p>
-      <a href="contact.html"
-         class="inline-flex px-6 py-3 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
-        Talk About Your Project
-      </a>
-    </section>
-  </main>
-
-  <footer class="border-t border-slate-800 mt-10">
-    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
-      <p>© 2025 Elevated AI Works. All rights reserved.</p>
-      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
-    </div>
-  </footer>
-
-  <!-- Mobile menu JS -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const toggle = document.getElementById('mobileMenuToggle');
-      const menu   = document.getElementById('mobileMenu');
-      if (toggle && menu) {
-        toggle.addEventListener('click', () => {
-          menu.classList.toggle('hidden');
-        });
-      }
-    });
-  </script>
-
-  <!-- EAW Chatbot HTML -->
+  <!-- Chatbot HTML (shared IDs required by js/chatbot.js) -->
   <div id="eaw-chatbot">
     <div class="eaw-chat-header">
       <span>Elevated AI Works Assistant</span>
@@ -494,440 +326,10 @@
     </div>
     <div id="eaw-chat-options"></div>
   </div>
+  <button id="eaw-chat-toggle" aria-label="Open assistant">+</button>
 
-  <button id="eaw-chat-toggle" aria-label="Open chat">
-    💬
-  </button>
-
-  <!-- EAW Chatbot Logic -->
-  <script>
-    // ----- Conversation flow definition -----
-    const EAW_FLOW = {
-      start: {
-        type: "message",
-        text: "👋 Hey there, I’m the Elevated AI Works Assistant.\n\nI can help you:\n• understand what we offer\n• find the right service for your project\n• or start a quick quote.\n\nWhat would you like to do?",
-        options: [
-          { label: "🔍 Help me choose a service", next: "choose_service" },
-          { label: "📋 See all services", next: "services_overview" },
-          { label: "❓ FAQs", next: "faqs" },
-          { label: "💬 Get a project quote", next: "quote_intro" },
-          { label: "👤 About Elevated AI Works", next: "about" }
-        ]
-      },
-
-      // ----- A: choose a service -----
-      choose_service: {
-        type: "message",
-        text: "Awesome, let’s figure out what you need.\nWhat describes you best right now?",
-        options: [
-          { label: "🧱 I need a brand or logo", next: "service_branding" },
-          { label: "🌐 I need a website or refresh", next: "service_web" },
-          { label: "🤖 I want AI workflows/automation", next: "service_ai" },
-          { label: "🤷 I’m not sure yet", next: "service_unsure" }
-        ]
-      },
-
-      service_branding: {
-        type: "message",
-        text: "Perfect — that sounds like Branding & Visual Identity.\nWe help with logo design, color palettes, typography, and brand guidelines so everything feels consistent online and offline.\n\nWhat would you like to do next?",
-        options: [
-          { label: "📋 More about branding", next: "services_overview" },
-          { label: "💬 Start a quote", next: "quote_intro" },
-          { label: "🔙 Back to main menu", next: "start" }
-        ]
-      },
-
-      service_web: {
-        type: "message",
-        text: "Got it — that falls under Branding & Web Design.\nWe create modern, responsive websites that are aligned with your brand and easy to use.\n\nWhat would you like to do next?",
-        options: [
-          { label: "🌐 More about web design", next: "services_overview" },
-          { label: "💬 Start a quote", next: "quote_intro" },
-          { label: "🔙 Back to main menu", next: "start" }
-        ]
-      },
-
-      service_ai: {
-        type: "message",
-        text: "Nice. You’re looking for AI Solutions & Automation.\nWe help with things like content workflows, customer support assistants, and internal process automation.\n\nWhat would you like to do next?",
-        options: [
-          { label: "🤖 AI services overview", next: "services_overview" },
-          { label: "💬 Start a quote", next: "quote_intro" },
-          { label: "🔙 Back to main menu", next: "start" }
-        ]
-      },
-
-      service_unsure: {
-        type: "message",
-        text: "No worries — that’s what I’m here for.\nA quick way to start is to describe what isn’t working right now: website, branding, content, or processes.\n\nWant to send a short description and let Elevated AI Works review it?",
-        options: [
-          { label: "✍️ Yes, I’ll describe my situation", next: "quote_description_only" },
-          { label: "🔙 Back to main menu", next: "start" }
-        ]
-      },
-
-      // ----- B: services overview -----
-      services_overview: {
-        type: "message",
-        text:
-          "Here’s a quick overview of what Elevated AI Works offers:\n\n" +
-          "🎨 Branding & Visual Identity\nLogos, color palettes, typography, and brand guidelines.\n\n" +
-          "🌐 Branding & Web Design\nClean, modern websites that align with your brand.\n\n" +
-          "🤖 AI Solutions & Automation\nCustom AI tools and workflows to streamline your work.\n\nWhat would you like to do next?",
-        options: [
-          { label: "💬 Get a quote", next: "quote_intro" },
-          { label: "❓ FAQs", next: "faqs" },
-          { label: "🔙 Back to main menu", next: "start" }
-        ]
-      },
-
-      // ----- C: FAQs -----
-      faqs: {
-        type: "message",
-        text: "I’ve got answers to some common questions.\nWhat would you like to know?",
-        options: [
-          { label: "💲 How does pricing work?", next: "faq_pricing" },
-          { label: "⏱ How long do projects take?", next: "faq_timing" },
-          { label: "📁 What do I need to get started?", next: "faq_requirements" },
-          { label: "🤝 Do you work with small businesses/startups?", next: "faq_smallbiz" },
-          { label: "📬 How do I contact you directly?", next: "faq_contact" },
-          { label: "🔙 Back to main menu", next: "start" }
-        ]
-      },
-
-      faq_pricing: {
-        type: "message",
-        text:
-          "Pricing depends on the scope.\n• Branding & logos → usually project-based packages\n" +
-          "• Websites → based on page count, features, and integrations\n" +
-          "• AI solutions → based on complexity and tools required\n\n" +
-          "If you’d like a ballpark range, I can ask a few questions and send your details to Elevated AI Works.",
-        options: [
-          { label: "💬 Start a quote", next: "quote_intro" },
-          { label: "🔙 Back to FAQs", next: "faqs" }
-        ]
-      },
-
-      faq_timing: {
-        type: "message",
-        text:
-          "Project timelines vary:\n• Branding: usually a few weeks\n" +
-          "• Websites: a few weeks to a couple of months, depending on features and revisions\n" +
-          "• AI solutions: depends on complexity\n\nYour timeline will always be discussed before we start.",
-        options: [
-          { label: "🔙 Back to FAQs", next: "faqs" }
-        ]
-      },
-
-      faq_requirements: {
-        type: "message",
-        text:
-          "To get started, it helps to have:\n" +
-          "• A short description of your business\n" +
-          "• Any existing logos/branding\n" +
-          "• Examples of websites or brands you like\n" +
-          "• A rough budget and timeline\n\nIf you don’t have it all yet, that’s okay — we’ll figure it out together.",
-        options: [
-          { label: "💬 Start a quote", next: "quote_intro" },
-          { label: "🔙 Back to FAQs", next: "faqs" }
-        ]
-      },
-
-      faq_smallbiz: {
-        type: "message",
-        text:
-          "Absolutely. Elevated AI Works is built for small businesses, creators, and entrepreneurs.\n" +
-          "We can start small and scale alongside you.",
-        options: [
-          { label: "🔙 Back to FAQs", next: "faqs" }
-        ]
-      },
-
-      faq_contact: {
-        type: "message",
-        text:
-          "You can reach out anytime via the contact form on the site or by email.\n\n" +
-          "Or, if you’d like, you can start a quick quote here in chat.",
-        options: [
-          { label: "📬 Open contact page", next: "open_contact" },
-          { label: "💬 Start a quote here", next: "quote_intro" },
-          { label: "🔙 Back to FAQs", next: "faqs" }
-        ]
-      },
-
-      // ----- D: Quote flow (full) -----
-      quote_intro: {
-        type: "message",
-        text:
-          "Let’s grab a few quick details and I’ll pass them along to Elevated AI Works for a personalized response.\n\nWhat are you mainly interested in?",
-        options: [
-          { label: "🎨 Branding / logo", next: "quote_interest_branding" },
-          { label: "🌐 Website", next: "quote_interest_web" },
-          { label: "🤖 AI / automation", next: "quote_interest_ai" },
-          { label: "🧩 Combination / not sure", next: "quote_interest_combo" }
-        ]
-      },
-
-      quote_interest_branding: { type: "input", text: "Got it — branding.\nWhat’s your name?", key: "name", next: "quote_email" },
-      quote_interest_web:     { type: "input", text: "Got it — website.\nWhat’s your name?", key: "name", next: "quote_email" },
-      quote_interest_ai:      { type: "input", text: "Got it — AI / automation.\nWhat’s your name?", key: "name", next: "quote_email" },
-      quote_interest_combo:   { type: "input", text: "No problem — a mix is common.\nWhat’s your name?", key: "name", next: "quote_email" },
-
-      quote_email: {
-        type: "input",
-        text: "Thanks, {{name}}. What’s the best email to reach you?",
-        key: "email",
-        next: "quote_description"
-      },
-
-      quote_description: {
-        type: "input",
-        text: "Great. In 2–3 sentences, tell us what you’re hoping to achieve or what problem you’d like Elevated AI Works to help solve.",
-        key: "description",
-        next: "quote_budget"
-      },
-
-      quote_budget: {
-        type: "message",
-        text: "If you’re comfortable sharing, which range best fits your budget?",
-        options: [
-          { label: "💵 Under $1,000", next: "quote_done_under" },
-          { label: "💵 $1,000–$2,500", next: "quote_done_mid" },
-          { label: "💵 $2,500–$5,000", next: "quote_done_high" },
-          { label: "💵 $5,000+", next: "quote_done_premium" },
-          { label: "💵 Not sure yet", next: "quote_done_unsure" }
-        ]
-      },
-
-      quote_done_under:   { type: "final", text: "Thanks, {{name}}! 🎉\nYou selected a budget under $1,000." },
-      quote_done_mid:     { type: "final", text: "Thanks, {{name}}! 🎉\nYou selected a budget of $1,000–$2,500." },
-      quote_done_high:    { type: "final", text: "Thanks, {{name}}! 🎉\nYou selected a budget of $2,500–$5,000." },
-      quote_done_premium: { type: "final", text: "Thanks, {{name}}! 🎉\nYou selected a budget of $5,000+." },
-      quote_done_unsure:  { type: "final", text: "Thanks, {{name}}! 🎉\nNo worries if you’re not sure on budget yet." },
-
-      // Special node for "describe only" (unsure service)
-      quote_description_only: {
-        type: "input",
-        text: "Go ahead and describe your situation in a few sentences and Elevated AI Works will review it.",
-        key: "description",
-        next: "quote_done_simple"
-      },
-
-      quote_done_simple: {
-        type: "final",
-        text: "Thanks for sharing! Elevated AI Works will review your message and follow up if you left contact info elsewhere on the site."
-      },
-
-      // About node
-      about: {
-        type: "message",
-        text:
-          "Elevated AI Works blends thoughtful design with practical AI solutions.\n\n" +
-          "Our goal is to make advanced tools feel approachable, human, and useful for small businesses and creators.\n\nWhat would you like to explore next?",
-        options: [
-          { label: "📋 See all services", next: "services_overview" },
-          { label: "💬 Get a quote", next: "quote_intro" },
-          { label: "🔙 Back to main menu", next: "start" }
-        ]
-      },
-
-      // Special pseudo-node for opening contact page (handled in JS)
-      open_contact: {
-        type: "action",
-        action: "openContact"
-      }
-    };
-
-    // ----- Basic chatbot engine -----
-    (function () {
-      const chatbot = document.getElementById("eaw-chatbot");
-      const toggleBtn = document.getElementById("eaw-chat-toggle");
-      const closeBtn = document.getElementById("eaw-chat-close");
-      const messagesEl = document.getElementById("eaw-chat-messages");
-      const optionsEl = document.getElementById("eaw-chat-options");
-      const inputWrapper = document.getElementById("eaw-chat-input-wrapper");
-      const inputField = document.getElementById("eaw-chat-input");
-      const sendBtn = document.getElementById("eaw-chat-send");
-
-      let currentNodeId = "start";
-      let pendingKey = null;
-      let pendingNext = null;
-      const userData = {};
-
-      function resetConversation() {
-        // Clear messages and options and reset stored data
-        messagesEl.innerHTML = "";
-        optionsEl.innerHTML = "";
-        for (const key in userData) {
-          if (Object.prototype.hasOwnProperty.call(userData, key)) {
-            delete userData[key];
-          }
-        }
-        inputWrapper.style.display = "none";
-      }
-
-      function toggleChat(show) {
-        if (show === true) {
-          chatbot.style.display = "flex";
-        } else if (show === false) {
-          chatbot.style.display = "none";
-        } else {
-          chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
-        }
-      }
-
-      toggleBtn.addEventListener("click", () => {
-        toggleChat();
-        if (chatbot.style.display === "flex" && messagesEl.childElementCount === 0) {
-          showNode("start");
-        }
-      });
-
-      closeBtn.addEventListener("click", () => {
-        toggleChat(false);
-      });
-
-      function appendMessage(text, from = "bot") {
-        const div = document.createElement("div");
-        div.className = "eaw-msg " + from;
-        div.textContent = renderText(text);
-        messagesEl.appendChild(div);
-
-        // Smooth auto-scroll to bottom after DOM updates
-        requestAnimationFrame(() => {
-          messagesEl.scrollTop = messagesEl.scrollHeight;
-        });
-      }
-
-      function renderText(text) {
-        return text.replace(/{{(\w+)}}/g, (_, key) => userData[key] || "");
-      }
-
-      function clearOptions() {
-        optionsEl.innerHTML = "";
-      }
-
-      function showNode(id) {
-        currentNodeId = id;
-        const node = EAW_FLOW[id];
-        if (!node) return;
-
-        clearOptions();
-        inputWrapper.style.display = "none";
-        pendingKey = null;
-        pendingNext = null;
-
-        if (node.type === "action") {
-          handleActionNode(node);
-          return;
-        }
-
-        // Handle final nodes separately so we don't double-append text
-        if (node.type === "final") {
-          showFinal(node.text);
-          return;
-        }
-
-        // Normal message / input nodes
-        appendMessage(node.text, "bot");
-
-        if (node.type === "message") {
-          // Show options as buttons
-          if (node.options && node.options.length) {
-            node.options.forEach(opt => {
-              const btn = document.createElement("button");
-              btn.textContent = opt.label;
-              btn.addEventListener("click", () => handleOptionClick(opt));
-              optionsEl.appendChild(btn);
-            });
-          }
-        } else if (node.type === "input") {
-          // Show text input
-          pendingKey = node.key;
-          pendingNext = node.next;
-          inputWrapper.style.display = "flex";
-          inputField.value = "";
-          inputField.focus();
-        }
-      }
-
-      function handleOptionClick(opt) {
-        appendMessage(opt.label, "user");
-
-        const nextNode = EAW_FLOW[opt.next];
-        if (!nextNode) {
-          return;
-        }
-        if (nextNode.type === "action") {
-          handleActionNode(nextNode);
-        } else {
-          showNode(opt.next);
-        }
-      }
-
-      function handleActionNode(node) {
-        if (node.action === "openContact") {
-          // Open contact page in a new tab
-          window.open("contact.html", "_blank");
-          // After action, go back to FAQs
-          showNode("faqs");
-        }
-      }
-
-      function handleInputSubmit() {
-        const value = inputField.value.trim();
-        if (!value || !pendingKey || !pendingNext) return;
-
-        appendMessage(value, "user");
-        userData[pendingKey] = value;
-
-        inputField.value = "";
-        inputWrapper.style.display = "none";
-
-        showNode(pendingNext);
-      }
-
-      sendBtn.addEventListener("click", handleInputSubmit);
-      inputField.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          handleInputSubmit();
-        }
-      });
-
-      function showFinal(finalText) {
-        appendMessage(finalText, "bot");
-
-        // Build a simple summary for you to receive by email (mailto link)
-        const summary =
-          "New inquiry from EAW Assistant:\n\n" +
-          "Name: " + (userData.name || "(not provided)") + "\n" +
-          "Email: " + (userData.email || "(not provided)") + "\n\n" +
-          "Description:\n" + (userData.description || "(not provided)") + "\n";
-
-        const mailtoHref =
-          "mailto:hello@elevatedaiworks.com" +
-          "?subject=" + encodeURIComponent("New Elevated AI Works inquiry") +
-          "&body=" + encodeURIComponent(summary);
-
-        clearOptions();
-        const btnEmail = document.createElement("button");
-        btnEmail.textContent = "📨 Send details to Elevated AI Works";
-        btnEmail.addEventListener("click", () => {
-          window.location.href = mailtoHref;
-        });
-
-        const btnRestart = document.createElement("button");
-        btnRestart.textContent = "🔁 Start over";
-        btnRestart.addEventListener("click", () => {
-          resetConversation();
-          showNode("start");
-        });
-
-        optionsEl.appendChild(btnEmail);
-        optionsEl.appendChild(btnRestart);
-      }
-    })();
-  </script>
+  <!-- Shared scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
 </body>
 </html>

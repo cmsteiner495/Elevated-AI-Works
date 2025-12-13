@@ -1,0 +1,106 @@
+/* ==========================================================================
+   EAW v2 — Design Tokens
+   - Keep this file “boring”: only variables + a few global defaults.
+   ========================================================================== */
+
+:root {
+  /* Brand */
+  --brand-900: #0b0b0c;
+  --brand-800: #121214;
+  --brand-700: #1a1a1e;
+
+  /* Accent (EAW orange vibe) */
+  --accent-700: #c5522a;
+  --accent-600: #e0612e;
+  --accent-500: #ff7a3d;
+
+  /* Neutrals */
+  --bg: #0b0b0c;
+  --surface-1: #101012;
+  --surface-2: #151518;
+  --surface-3: #1b1b20;
+
+  --text: #f4f5f6;
+  --text-muted: rgba(244, 245, 246, 0.72);
+  --text-faint: rgba(244, 245, 246, 0.55);
+
+  --border: rgba(244, 245, 246, 0.12);
+  --border-strong: rgba(244, 245, 246, 0.18);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+  /* Radii */
+  --r-xs: 10px;
+  --r-sm: 14px;
+  --r-md: 18px;
+  --r-lg: 24px;
+
+  /* Spacing */
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 18px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 44px;
+  --space-8: 64px;
+  --space-9: 92px;
+
+  /* Layout */
+  --container: 1120px;
+  --container-wide: 1240px;
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --fs-0: 0.875rem; /* 14 */
+  --fs-1: 1rem;     /* 16 */
+  --fs-2: 1.125rem; /* 18 */
+  --fs-3: 1.35rem;  /* ~22 */
+  --fs-4: clamp(1.6rem, 1.2rem + 1.3vw, 2.2rem);
+  --fs-5: clamp(2.0rem, 1.35rem + 2.2vw, 3.1rem);
+
+  --lh-tight: 1.15;
+  --lh-normal: 1.55;
+
+  /* Motion */
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 360ms;
+
+  /* Focus */
+  --focus: 0 0 0 3px rgba(255, 122, 61, 0.28);
+
+  /* Decorative gradients */
+  --grad-accent: radial-gradient(60% 60% at 30% 20%, rgba(255, 122, 61, 0.35), transparent 55%),
+                 radial-gradient(70% 65% at 70% 40%, rgba(224, 97, 46, 0.18), transparent 60%);
+  --grad-surface: radial-gradient(100% 90% at 30% 10%, rgba(255, 122, 61, 0.10), transparent 60%),
+                  linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 60%);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p { margin: 0 0 var(--space-3); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+::selection { background: rgba(255, 122, 61, 0.28); }
