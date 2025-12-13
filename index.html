@@ -97,7 +97,7 @@
     <!-- Header -->
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="Elevated AI Works Home">
+        <a class="brand" href="index.html" aria-label="Elevated AI Works Home" data-nav-link>
           <span class="brand-mark" aria-hidden="true">
             <img src="img/logo.png" alt="" width="26" height="26" />
           </span>
@@ -108,11 +108,11 @@
         </a>
 
         <nav class="nav" aria-label="Primary">
-          <a href="index.html" aria-current="page">Home</a>
-          <a href="services.html">Services</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a href="index.html" aria-current="page" data-nav-link>Home</a>
+          <a href="services.html" data-nav-link>Services</a>
+          <a href="portfolio.html" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" data-nav-link>Contact</a>
         </nav>
 
         <div class="header-actions">
@@ -125,18 +125,18 @@
 
       <div class="mobile-nav" id="mobileNav">
         <div class="container">
-          <a href="index.html" aria-current="page">Home</a>
-          <a href="services.html">Services</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a href="index.html" aria-current="page" data-nav-link>Home</a>
+          <a href="services.html" data-nav-link>Services</a>
+          <a href="portfolio.html" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" data-nav-link>Contact</a>
         </div>
       </div>
     </header>
 
     <!-- Hero -->
-    <main>
-      <section class="hero">
+    <main data-transition-container>
+      <section class="hero" data-reveal>
         <div class="container hero-inner">
           <div class="max-wide">
             <p class="kicker">Logos • Brand Kits • Websites • Docs • Business Systems</p>
@@ -193,12 +193,12 @@
       </section>
 
       <!-- What we do -->
-      <section class="section">
+      <section class="section" data-reveal>
         <div class="container">
           <h2 class="h2">What we do</h2>
 
-          <div class="grid grid-3">
-            <div class="card">
+          <div class="grid grid-3" data-reveal data-stagger>
+            <div class="card card-interactive">
               <div class="card-inner">
                 <div class="badge">🎨 Branding</div>
                 <h3 class="card-title" style="margin-top: 12px;">Branding &amp; logos</h3>
@@ -206,7 +206,7 @@
               </div>
             </div>
 
-            <div class="card">
+            <div class="card card-interactive">
               <div class="card-inner">
                 <div class="badge">🌐 Websites</div>
                 <h3 class="card-title" style="margin-top: 12px;">Web design &amp; build</h3>
@@ -214,7 +214,7 @@
               </div>
             </div>
 
-            <div class="card">
+            <div class="card card-interactive">
               <div class="card-inner">
                 <div class="badge">📄 Systems</div>
                 <h3 class="card-title" style="margin-top: 12px;">Docs &amp; workflows</h3>
@@ -273,6 +273,7 @@
   <button id="eaw-chat-toggle" type="button" aria-label="Open assistant" aria-controls="eaw-chatbot" aria-expanded="false"><span class="icon" aria-hidden="true"></span></button>
 
   <!-- Shared scripts -->
+  <script src="js/interactions.js"></script>
   <script src="js/main.js"></script>
   <script src="js/chatbot.js"></script>
 </body>

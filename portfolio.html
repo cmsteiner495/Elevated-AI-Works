@@ -34,7 +34,7 @@
     <!-- Header -->
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="Elevated AI Works Home">
+        <a class="brand" href="index.html" aria-label="Elevated AI Works Home" data-nav-link>
           <span class="brand-mark" aria-hidden="true">
             <img src="img/logo.png" alt="" width="26" height="26" />
           </span>
@@ -45,11 +45,11 @@
         </a>
 
         <nav class="nav" aria-label="Primary">
-          <a href="index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="portfolio.html" aria-current="page">Portfolio</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="services.html" data-nav-link>Services</a>
+          <a href="portfolio.html" aria-current="page" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" data-nav-link>Contact</a>
         </nav>
 
         <div class="header-actions">
@@ -62,18 +62,18 @@
 
       <div class="mobile-nav" id="mobileNav">
         <div class="container">
-          <a href="index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="portfolio.html" aria-current="page">Portfolio</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="services.html" data-nav-link>Services</a>
+          <a href="portfolio.html" aria-current="page" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" data-nav-link>Contact</a>
         </div>
       </div>
     </header>
 
-    <main>
+    <main data-transition-container>
       <!-- Page intro -->
-      <section class="section-tight">
+      <section class="section-tight" data-reveal>
         <div class="container">
           <div class="portfolio-header">
             <div class="stack-sm">
@@ -94,7 +94,7 @@
             <span class="section-chip">01 · Flagship Work</span>
           </div>
 
-          <div class="grid grid-2">
+          <div class="grid grid-2" data-reveal data-stagger>
             <!-- Elevated Health (2026) -->
             <article class="work-card">
               <div class="work-media">
@@ -201,7 +201,7 @@
             <span class="section-chip">02 · Visual Identity</span>
           </div>
 
-          <div class="grid grid-2">
+          <div class="grid grid-2" data-reveal data-stagger>
             <!-- Elevated AI Works Logo -->
             <article class="work-card">
               <div class="work-media">
@@ -359,7 +359,7 @@
             </div>
           </div>
 
-          <div class="grid grid-2">
+          <div class="grid grid-2" data-reveal data-stagger>
             <!-- Elevated AI Works Chatbot -->
             <article class="work-card">
               <div class="work-media">
@@ -481,6 +481,7 @@
   <button id="eaw-chat-toggle" type="button" aria-label="Open assistant" aria-controls="eaw-chatbot" aria-expanded="false"><span class="icon" aria-hidden="true"></span></button>
 
   <!-- Shared scripts -->
+  <script src="js/interactions.js"></script>
   <script src="js/main.js"></script>
   <script src="js/chatbot.js"></script>
 </body>

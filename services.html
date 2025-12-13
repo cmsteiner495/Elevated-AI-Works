@@ -34,7 +34,7 @@
     <!-- Header -->
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="Elevated AI Works Home">
+        <a class="brand" href="index.html" aria-label="Elevated AI Works Home" data-nav-link>
           <span class="brand-mark" aria-hidden="true">
             <img src="img/logo.png" alt="" width="26" height="26" />
           </span>
@@ -45,11 +45,11 @@
         </a>
 
         <nav class="nav" aria-label="Primary">
-          <a href="index.html">Home</a>
-          <a href="services.html" aria-current="page">Services</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="services.html" aria-current="page" data-nav-link>Services</a>
+          <a href="portfolio.html" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" data-nav-link>Contact</a>
         </nav>
 
         <div class="header-actions">
@@ -62,18 +62,18 @@
 
       <div class="mobile-nav" id="mobileNav">
         <div class="container">
-          <a href="index.html">Home</a>
-          <a href="services.html" aria-current="page">Services</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="services.html" aria-current="page" data-nav-link>Services</a>
+          <a href="portfolio.html" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" data-nav-link>Contact</a>
         </div>
       </div>
     </header>
 
-    <main>
+    <main data-transition-container>
       <!-- Page Hero -->
-      <section class="hero section-tight">
+      <section class="hero section-tight" data-reveal>
         <div class="container hero-inner">
           <div class="max-wide">
             <p class="kicker">Services</p>
@@ -130,7 +130,7 @@
       </section>
 
       <!-- Featured Services -->
-      <section class="section">
+      <section class="section" data-reveal>
         <div class="container">
           <div class="stack-sm" style="margin-bottom: var(--space-5);">
             <h2 class="h2">Featured services</h2>
@@ -139,8 +139,8 @@
             </p>
           </div>
 
-          <div class="grid grid-2">
-            <article class="card">
+          <div class="grid grid-2" data-reveal data-stagger>
+            <article class="card card-interactive">
               <div class="card-inner">
                 <div class="badge">🎨 Branding</div>
                 <h3 class="card-title" style="margin-top: 12px;">Branding &amp; logo design</h3>
@@ -163,7 +163,7 @@
               </div>
             </article>
 
-            <article class="card">
+            <article class="card card-interactive">
               <div class="card-inner">
                 <div class="badge">🌐 Websites</div>
                 <h3 class="card-title" style="margin-top: 12px;">Website design &amp; build</h3>
@@ -190,7 +190,7 @@
       </section>
 
       <!-- Systems & AI -->
-      <section class="section">
+      <section class="section" data-reveal>
         <div class="container">
           <div class="stack-sm" style="margin-bottom: var(--space-5);">
             <h2 class="h2">Systems &amp; AI-powered tools</h2>
@@ -199,8 +199,8 @@
             </p>
           </div>
 
-          <div class="grid grid-2">
-            <article class="card">
+          <div class="grid grid-2" data-reveal data-stagger>
+            <article class="card card-interactive">
               <div class="card-inner">
                 <div class="badge">📄 Smart docs</div>
                 <h3 class="card-title" style="margin-top: 12px;">Fillable PDFs &amp; smart documents</h3>
@@ -223,7 +223,7 @@
               </div>
             </article>
 
-            <article class="card">
+            <article class="card card-interactive">
               <div class="card-inner">
                 <div class="badge">🤖 AI helpers</div>
                 <h3 class="card-title" style="margin-top: 12px;">AI assistants &amp; workflow helpers</h3>
@@ -254,8 +254,8 @@
             <h2 class="h2">How projects usually work</h2>
           </div>
 
-          <div class="grid grid-3">
-            <article class="card">
+          <div class="grid grid-3" data-reveal data-stagger>
+            <article class="card card-interactive">
               <div class="card-inner">
                 <p class="kicker">Step 01</p>
                 <h3 class="card-title">Quick conversation</h3>
@@ -263,7 +263,7 @@
               </div>
             </article>
 
-            <article class="card">
+            <article class="card card-interactive">
               <div class="card-inner">
                 <p class="kicker">Step 02</p>
                 <h3 class="card-title">Simple proposal</h3>
@@ -271,7 +271,7 @@
               </div>
             </article>
 
-            <article class="card">
+            <article class="card card-interactive">
               <div class="card-inner">
                 <p class="kicker">Step 03</p>
                 <h3 class="card-title">Build, review, refine</h3>
@@ -329,6 +329,7 @@
   <button id="eaw-chat-toggle" type="button" aria-label="Open assistant" aria-controls="eaw-chatbot" aria-expanded="false"><span class="icon" aria-hidden="true"></span></button>
 
   <!-- Shared scripts -->
+  <script src="js/interactions.js"></script>
   <script src="js/main.js"></script>
   <script src="js/chatbot.js"></script>
 </body>

@@ -40,12 +40,20 @@
   letter-spacing: 0.2px;
   cursor: pointer;
   user-select: none;
-  transition: transform var(--dur-1) var(--ease), background var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+  transition:
+    transform var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-base) var(--ease-standard),
+    border-color var(--motion-base) var(--ease-standard),
+    color var(--motion-base) var(--ease-standard);
 }
 
-.btn:focus { outline: none; box-shadow: var(--focus); }
+.btn:focus-visible { outline: none; box-shadow: var(--focus); }
 
-.btn:hover { transform: translateY(-1px); }
+.btn:hover { opacity: 0.94; }
+
+.btn:active {
+  transform: scale(0.98);
+}
 
 .btn-primary {
   background: linear-gradient(180deg, rgba(255, 122, 61, 0.95), rgba(224, 97, 46, 0.92));
@@ -86,6 +94,25 @@
   background: rgba(255,255,255,0.03);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
+}
+
+.card-interactive {
+  transition:
+    box-shadow var(--motion-base) var(--ease-standard),
+    border-color var(--motion-base) var(--ease-standard),
+    background-color var(--motion-base) var(--ease-standard);
+}
+
+.card-interactive:hover,
+.card-interactive:focus-within {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.card-interactive:active {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border);
 }
 
 .card-inner {
