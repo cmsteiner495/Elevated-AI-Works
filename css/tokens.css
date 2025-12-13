@@ -67,10 +67,13 @@
   --lh-tight: 1.15;
   --lh-normal: 1.55;
 
-  /* Motion */
-  --ease: cubic-bezier(.2,.8,.2,1);
-  --dur-1: 120ms;
-  --dur-2: 220ms;
+  /* Motion (EAW Interaction Language v1) */
+  --motion-fast: 120ms;
+  --motion-base: 240ms;
+  --motion-slow: 400ms;
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0.0, 1, 1);
+  --ease-enter: cubic-bezier(0.0, 0.0, 0.2, 1);
 
   /* Focus */
   --focus: 0 0 0 3px rgba(255, 122, 61, 0.28);

@@ -32,7 +32,7 @@
     <!-- ================= HEADER ================= -->
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" data-nav-link>
           <img src="img/logo.png" alt="Elevated AI Works logo" width="26" height="26">
           <span>
             <strong class="brand-name">Elevated AI Works</strong><br>
@@ -41,11 +41,11 @@
         </a>
 
         <nav class="nav" aria-label="Primary navigation">
-          <a href="index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="about.html">About</a>
-          <a href="contact.html" aria-current="page">Contact</a>
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="services.html" data-nav-link>Services</a>
+          <a href="portfolio.html" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" aria-current="page" data-nav-link>Contact</a>
         </nav>
 
         <div class="header-actions">
@@ -59,20 +59,20 @@
 
       <div id="mobileNav" class="mobile-nav">
         <div class="container">
-          <a href="index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="about.html">About</a>
-          <a href="contact.html" aria-current="page">Contact</a>
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="services.html" data-nav-link>Services</a>
+          <a href="portfolio.html" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" aria-current="page" data-nav-link>Contact</a>
         </div>
       </div>
     </header>
 
     <!-- ================= MAIN ================= -->
-    <main>
+    <main data-transition-container>
 
       <!-- Hero -->
-      <section class="hero section-tight">
+      <section class="hero section-tight" data-reveal>
         <div class="container hero-inner">
           <div class="max-wide">
             <p class="kicker">Contact</p>
@@ -121,11 +121,11 @@
       </section>
 
       <!-- Contact Form -->
-      <section class="section">
+      <section class="section" data-reveal>
         <div class="container">
-          <div class="grid grid-2">
+          <div class="grid grid-2" data-reveal data-stagger>
 
-            <article class="card">
+            <article class="card card-interactive">
               <div class="card-inner">
                 <h2 class="h2">Project request</h2>
                 <p class="muted">
@@ -169,7 +169,7 @@
               </div>
             </article>
 
-            <article class="card">
+            <article class="card card-interactive">
               <div class="card-inner">
                 <h2 class="h2">What happens next</h2>
 
@@ -234,6 +234,7 @@
   <button id="eaw-chat-toggle" type="button" aria-label="Open assistant" aria-controls="eaw-chatbot" aria-expanded="false"><span class="icon" aria-hidden="true"></span></button>
 
   <!-- ================= SCRIPTS ================= -->
+  <script src="js/interactions.js"></script>
   <script src="js/main.js"></script>
   <script src="js/chatbot.js"></script>
 
