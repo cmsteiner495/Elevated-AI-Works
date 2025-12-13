@@ -15,6 +15,8 @@
   <title>Privacy Policy | Elevated AI Works</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <script src="../js/bgdebug.js" defer></script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -56,12 +58,17 @@
       inset: 0;
       z-index: -1;
       background:
+        linear-gradient(180deg, rgba(5, 5, 7, 0.78), rgba(5, 5, 7, 0.88)),
         radial-gradient(900px 360px at 16% 18%, rgba(255, 122, 61, 0.16), transparent 60%),
         radial-gradient(760px 320px at 84% 16%, rgba(232, 75, 60, 0.14), transparent 62%),
-        linear-gradient(180deg, rgba(5, 5, 7, 0.9), rgba(5, 5, 7, 0.96)),
-        url('../img/mountains-premium.png') center 140px / cover no-repeat;
+        url('../img/backgrounds/mountains-premium.png') center 140px / cover no-repeat;
       background-attachment: fixed, fixed, fixed, fixed;
       filter: saturate(1.05) contrast(1.02);
+    }
+
+    body.bgdebug::before {
+      filter: saturate(1.2) contrast(1.1) brightness(1.05);
+      background-position: center 100px;
     }
 
     a { transition: color 0.2s ease, opacity 0.2s ease; }
