@@ -273,14 +273,51 @@
     const sendBtn = $("eaw-chat-send");
 
     if (!chatbot || !toggleBtn || !closeBtn || !messagesEl || !optionsEl || !inputWrapper || !inputField || !sendBtn) {
+      if (window?.console?.warn) {
+        console.warn("EAW chatbot init aborted: missing nodes", {
+          chatbot: Boolean(chatbot),
+          toggleBtn: Boolean(toggleBtn),
+          closeBtn: Boolean(closeBtn),
+          messagesEl: Boolean(messagesEl),
+          optionsEl: Boolean(optionsEl),
+          inputWrapper: Boolean(inputWrapper),
+          inputField: Boolean(inputField),
+          sendBtn: Boolean(sendBtn)
+        });
+      }
       return;
     }
 
-    chatbot.setAttribute("aria-hidden", "true");
+    const moveToBody = (node) => {
+      if (node && node.parentElement !== document.body) {
+        document.body.appendChild(node);
+      }
+    };
+
+    moveToBody(chatbot);
+    moveToBody(toggleBtn);
 
     let pendingKey = null;
     let pendingNext = null;
     const userData = {};
+    let lastFocusedElement = null;
+    let lastPointerToggle = 0;
+
+    const focusFirstInteractive = () => {
+      const firstOption = optionsEl.querySelector("button");
+      if (firstOption) {
+        firstOption.focus({ preventScroll: true });
+        return true;
+      }
+
+      const focusTarget = chatbot.querySelector("[data-chat-focus]");
+      if (focusTarget instanceof HTMLElement) {
+        focusTarget.focus({ preventScroll: true });
+        return true;
+      }
+
+      return false;
+    };
 
     function renderText(text) {
       return String(text).replace(/{{(\w+)}}/g, (_, key) => userData[key] || "");
@@ -305,13 +342,50 @@
       pendingNext = null;
     }
 
-    function toggleChat(show) {
-      const shouldOpen =
-        show === true ? true : show === false ? false : !chatbot.classList.contains("open");
+    chatbot.setAttribute("aria-hidden", "true");
+    toggleBtn.setAttribute("aria-expanded", "false");
+    toggleBtn.setAttribute("aria-controls", "eaw-chatbot");
+    toggleBtn.setAttribute("type", "button");
+    chatbot.setAttribute("role", "dialog");
+    chatbot.setAttribute("aria-label", "Elevated AI Works assistant");
+    chatbot.setAttribute("tabindex", "-1");
+    closeBtn.setAttribute("data-chat-focus", "true");
 
-      chatbot.classList.toggle("open", shouldOpen);
-      toggleBtn.setAttribute("aria-expanded", String(shouldOpen));
-      chatbot.setAttribute("aria-hidden", String(!shouldOpen));
+    function toggleChat(show) {
+      const shouldOpen = show === true ? true : show === false ? false : !chatbot.classList.contains("open");
+
+      try {
+        if (shouldOpen) {
+          lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        }
+
+        chatbot.classList.toggle("open", shouldOpen);
+        toggleBtn.classList.toggle("is-open", shouldOpen);
+        toggleBtn.classList.toggle("is-shelved", shouldOpen);
+        toggleBtn.setAttribute("aria-expanded", String(shouldOpen));
+        toggleBtn.setAttribute("aria-label", shouldOpen ? "Close assistant" : "Open assistant");
+        toggleBtn.setAttribute("aria-hidden", shouldOpen ? "true" : "false");
+        toggleBtn.tabIndex = shouldOpen ? -1 : 0;
+        chatbot.setAttribute("aria-hidden", shouldOpen ? "false" : "true");
+
+        if (shouldOpen && messagesEl.childElementCount === 0) {
+          showNode("start");
+        }
+
+        if (shouldOpen) {
+          requestAnimationFrame(() => {
+            if (!focusFirstInteractive()) {
+              const fallback = chatbot.querySelector("[data-chat-focus]") || chatbot;
+              fallback.focus({ preventScroll: true });
+            }
+          });
+        } else if (lastFocusedElement) {
+          requestAnimationFrame(() => lastFocusedElement.focus({ preventScroll: true }));
+        }
+      } catch (err) {
+        if (window?.console?.warn) console.warn("EAW chatbot toggle failed", err);
+      }
+
       return shouldOpen;
     }
 
@@ -379,6 +453,7 @@
         (node.options || []).forEach(opt => {
           const btn = document.createElement("button");
           btn.textContent = opt.label;
+          btn.type = "button";
           btn.addEventListener("click", () => {
             appendMessage(opt.label, "user");
             const nextNode = EAW_FLOW[opt.next];
@@ -388,12 +463,15 @@
           });
           optionsEl.appendChild(btn);
         });
+        if (chatbot.classList.contains("open")) {
+          requestAnimationFrame(() => { if (optionsEl.firstElementChild) focusFirstInteractive(); });
+        }
       } else if (node.type === "input") {
         pendingKey = node.key;
         pendingNext = node.next;
         inputWrapper.style.display = "flex";
         inputField.value = "";
-        inputField.focus();
+        inputField.focus({ preventScroll: true });
       }
     }
 
@@ -410,22 +488,39 @@
       showNode(pendingNext);
     }
 
-    toggleBtn.setAttribute("aria-expanded", "false");
-    toggleBtn.setAttribute("aria-haspopup", "dialog");
+    const handlePointerToggle = () => {
+      lastPointerToggle = Date.now();
+      toggleChat();
+    };
 
-    toggleBtn.addEventListener("click", () => {
-      const isOpen = toggleChat();
-      if (isOpen && messagesEl.childElementCount === 0) {
-        showNode("start");
-      }
-    });
+    const handleClickToggle = () => {
+      if (Date.now() - lastPointerToggle < 300) return;
+      toggleChat();
+    };
 
+    toggleBtn.addEventListener("pointerup", handlePointerToggle);
+    toggleBtn.addEventListener("click", handleClickToggle);
     closeBtn.addEventListener("click", () => toggleChat(false));
     sendBtn.addEventListener("click", handleInputSubmit);
     inputField.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
         handleInputSubmit();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && chatbot.classList.contains("open")) {
+        e.preventDefault();
+        toggleChat(false);
+      }
+    });
+
+    document.addEventListener("pointerdown", (e) => {
+      if (!chatbot.classList.contains("open")) return;
+      const target = e.target;
+      if (!chatbot.contains(target) && !toggleBtn.contains(target)) {
+        toggleChat(false);
       }
     });
   }
