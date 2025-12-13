@@ -67,7 +67,7 @@ body{
 
   background:
     /* premium mountain image */
-    url("../img/mountains-premium.png") center 110px / cover no-repeat,
+    url("../img/backgrounds/mountains-premium.png") center 110px / cover no-repeat,
 
     /* brand lighting */
     radial-gradient(900px 320px at 18% 18%, var(--eaw-orange-soft), transparent 62%),
