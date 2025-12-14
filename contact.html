@@ -11,13 +11,47 @@
   </script>
 
   <meta charset="UTF-8" />
-  <title>Contact | Elevated AI Works</title>
+  <title>Contact Elevated AI Works | Calm, Clear Project Requests</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="description" content="Start a project with Elevated AI Works. Clear scope, modern design, and practical AI systems built to actually work." />
+  <meta name="description" content="Start a project with Elevated AI Works. Share your goals and get a calm, clear response with practical next steps." />
+  <link rel="canonical" href="https://elevatedaiworks.com/contact">
+
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elevatedaiworks.com/contact">
+  <meta property="og:title" content="Contact Elevated AI Works | Calm, Clear Project Requests">
+  <meta property="og:description" content="Share your goals and get a thoughtful plan for branding, websites, or AI systems tailored to your workflow.">
+  <meta property="og:image" content="https://elevatedaiworks.com/img/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact Elevated AI Works | Calm, Clear Project Requests">
+  <meta name="twitter:description" content="Share your goals and get a thoughtful plan for branding, websites, or AI systems tailored to your workflow.">
+  <meta name="twitter:image" content="https://elevatedaiworks.com/img/logo.png">
 
   <link rel="manifest" href="img/favicon/site.webmanifest">
   <link rel="icon" href="img/favicon/favicon.ico">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://elevatedaiworks.com/#organization",
+    "name": "Elevated AI Works",
+    "url": "https://elevatedaiworks.com",
+    "logo": "https://elevatedaiworks.com/img/logo.png",
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "email": "contact@elevatedaiworks.com",
+      "contactType": "customer support"
+    }],
+    "sameAs": [
+      "https://www.instagram.com/elevatedaiworks?igsh=MWgzbjB6c29yeWdobQ%3D%3D&utm_source=qr",
+      "https://www.facebook.com/share/16Q5qJL9Vi/?mibextid=wwXIfr"
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/layout.css">
@@ -34,7 +68,7 @@
       <div class="container header-inner">
         <a class="brand" href="index.html" aria-label="Elevated AI Works Home" data-nav-link>
           <span class="brand-mark" aria-hidden="true">
-            <img src="img/logo.png" alt="" width="26" height="26" />
+            <img src="img/logo.png" alt="Elevated AI Works logo" width="26" height="26" />
           </span>
           <span>
             <span class="brand-name">Elevated AI Works</span><br>
@@ -134,7 +168,9 @@
                   Share a few details below. I’ll follow up with a recommendation and next steps.
                 </p>
 
-                <form id="contactForm" class="stack form-modern" style="margin-top: var(--space-5);" action="https://formspree.io/f/mldrqydw" method="POST">
+                <form id="contactForm" class="stack form-modern" style="margin-top: var(--space-5);" action="https://formspree.io/f/xyzajvpr" method="POST" data-thank-you="thank-you.html">
+
+                  <input type="hidden" name="_subject" value="New EAW Project Request" />
 
                   <label class="field">
                     <span class="label">Name</span>
@@ -148,7 +184,8 @@
 
                   <label class="field">
                     <span class="label">What do you need?</span>
-                    <select class="select" name="service">
+                    <select class="select" name="service" required aria-label="Project need">
+                      <option value="" disabled selected>Select a focus</option>
                       <option>Website</option>
                       <option>Branding / Logo</option>
                       <option>Docs / Systems</option>
