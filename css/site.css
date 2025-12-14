@@ -724,6 +724,12 @@ body.chat-open #eaw-chatbot,
   border-color: var(--eaw-focus-color);
 }
 
+@media (min-width: 721px){
+  #eaw-chatbot{
+    bottom: calc(16px + env(safe-area-inset-bottom) + 72px);
+  }
+}
+
 @media (max-width: 720px){
   #eaw-chatbot{ width: calc(100% - 28px); right: 14px; left: 14px; bottom: calc(env(safe-area-inset-bottom) + 96px); }
   #eaw-chat-toggle{ bottom: calc(14px + env(safe-area-inset-bottom)); right: 14px; width: 56px; height: 56px; font-size: 26px; }
