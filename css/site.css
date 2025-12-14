@@ -128,11 +128,6 @@ body{
   z-index: 1;
 }
 
-body.nav-open #eaw-chatbot,
-body.nav-open #eaw-chat-toggle{
-  display: none;
-}
-
 /* --------------------------------------------------------------------------
    Motion & interactions (EAW Interaction Language v1)
    -------------------------------------------------------------------------- */
@@ -742,13 +737,6 @@ body.nav-open #eaw-chat-toggle{
   outline: none;
   box-shadow: var(--eaw-focus-ring);
   border-color: var(--eaw-focus-color);
-}
-
-#eaw-chat-toggle.is-shelved{
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(8px) scale(0.94);
 }
 
 @media (max-width: 720px){
