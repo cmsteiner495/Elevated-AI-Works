@@ -79,10 +79,10 @@
 
   /* Layer tokens (Task C) */
   --z-base: 0;
-  --z-header: 10;
-  --z-overlay: 30;
-  --z-modal: 60;
   --z-chat: 90;
+  --z-header: 110;
+  --z-overlay: 120;
+  --z-modal: 140;
 
   /* Focus */
   --focus: 0 0 0 3px rgba(255, 122, 61, 0.28);
