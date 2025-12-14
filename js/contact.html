@@ -132,7 +132,9 @@
                   Share a few details below. I’ll follow up with a recommendation and next steps.
                 </p>
 
-                <form id="contactForm" class="stack form-modern" style="margin-top: var(--space-5);">
+                <form id="contactForm" class="stack form-modern" style="margin-top: var(--space-5);" action="https://formspree.io/f/xyzajvpr" method="POST" data-thank-you="../thank-you.html">
+
+                  <input type="hidden" name="_subject" value="New EAW Project Request" />
 
                   <label class="field">
                     <span class="label">Name</span>
@@ -146,7 +148,8 @@
 
                   <label class="field">
                     <span class="label">What do you need?</span>
-                    <select class="select" name="service">
+                    <select class="select" name="service" required aria-label="Project need">
+                      <option value="" disabled selected>Select a focus</option>
                       <option>Website</option>
                       <option>Branding / Logo</option>
                       <option>Docs / Systems</option>
