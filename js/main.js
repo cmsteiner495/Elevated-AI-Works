@@ -23,7 +23,6 @@
       overlay.classList.toggle('is-visible', open);
       btn.setAttribute('aria-expanded', String(open));
       menu.setAttribute('aria-hidden', String(!open));
-      document.body.classList.toggle('nav-open', open);
     }
 
     // Initialize in a known closed state for accessibility tools
@@ -86,20 +85,8 @@
     window.addEventListener('scroll', () => requestAnimationFrame(syncHeader), { passive: true });
   }
 
-  function initHeroBackground() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-
-    // Root cause: the crossfade stack was splitting/duplicating the hero background; revert to a single static frame.
-    hero.style.backgroundImage = "url('img/backgrounds/mountains-premium.png')";
-    hero.style.backgroundSize = 'cover';
-    hero.style.backgroundPosition = 'center 12%';
-    hero.style.backgroundRepeat = 'no-repeat';
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     const navStateGetter = initMobileNav();
     initHeaderState(navStateGetter);
-    initHeroBackground();
   });
 })();
