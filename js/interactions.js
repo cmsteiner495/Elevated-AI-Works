@@ -49,6 +49,17 @@
     );
 
     revealables.forEach((el) => {
+      // Root cause: portfolio sections were briefly revealed then hidden because the observer fired too late; ensure visible if already in view.
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.9 && rect.bottom > window.innerHeight * 0.1;
+      if (inView) {
+        if (el.dataset.stagger !== undefined) {
+          prepareStagger(el);
+        }
+        el.classList.add('is-revealed');
+        return;
+      }
+
       if (prefersReduce) {
         if (el.dataset.stagger !== undefined) {
           prepareStagger(el);
