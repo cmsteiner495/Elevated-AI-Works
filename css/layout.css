@@ -159,6 +159,11 @@ main {
   display: none;
 }
 
+body.nav-open {
+  overflow: hidden;
+  height: 100%;
+}
+
 @media (max-width: 720px) {
   .header-inner { flex-wrap: wrap; row-gap: 12px; }
   .brand { flex: 1 1 100%; }
