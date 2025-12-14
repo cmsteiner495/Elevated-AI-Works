@@ -1,33 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HLV32W95T0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HLV32W95T0');
-</script>
-
   <meta charset="UTF-8" />
   <title>Thank You | Elevated AI Works</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Thanks for reaching out to Elevated AI Works. We received your request and will respond with a clear plan." />
-  <link rel="canonical" href="https://elevatedaiworks.com/thank-you">
-  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://elevatedaiworks.com/thank-you" />
+  <meta name="robots" content="noindex, follow" />
 
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://elevatedaiworks.com/thank-you">
-  <meta property="og:title" content="Thank You | Elevated AI Works">
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://elevatedaiworks.com/thank-you" />
+  <meta property="og:title" content="Thank You | Elevated AI Works" />
   <meta property="og:description" content="We received your note and will respond shortly with thoughtful next steps." />
-  <meta property="og:image" content="https://elevatedaiworks.com/img/logo.png">
+  <meta property="og:image" content="https://elevatedaiworks.com/img/logo.png" />
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Thank You | Elevated AI Works">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Thank You | Elevated AI Works" />
   <meta name="twitter:description" content="We received your note and will respond shortly with thoughtful next steps." />
-  <meta name="twitter:image" content="https://elevatedaiworks.com/img/logo.png">
+  <meta name="twitter:image" content="https://elevatedaiworks.com/img/logo.png" />
 
   <script type="application/ld+json">
   {
@@ -49,386 +39,136 @@
   }
   </script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brandRed: '#E63926',
-            brandDark: '#050816',
-            brandGray: '#0F172A',
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="manifest" href="img/favicon/site.webmanifest" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/favicon-180x180.png" />
+  <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon" />
 
-<link rel="manifest" href="img/favicon/site.webmanifest">
-
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/favicon-180x180.png">
-<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
-<link rel="manifest" href="img/favicon/site.webmanifest">
-
-  <!-- EAW Chatbot Styles -->
-  
-  <style>
-    /* Premium backdrop: single source of truth so the mountain image never seams on tall pages. */
-    body {
-      position: relative;
-      min-height: 100vh;
-      background:
-        url('img/backgrounds/mountains-premium.png') center 12% / cover no-repeat,
-        radial-gradient(1200px 700px at 18% -10%, rgba(255, 122, 61, 0.10), transparent 55%),
-        radial-gradient(900px 650px at 88% 5%, rgba(232, 75, 60, 0.08), transparent 60%),
-        linear-gradient(180deg, rgba(6, 6, 8, 0.90), rgba(7, 7, 8, 0.96)),
-        linear-gradient(180deg, #09090a, #080809);
-      background-attachment: scroll;
-      color: #F9FAFB;
-      overflow-x: hidden;
-    }
-
-    a { transition: color 0.2s ease, opacity 0.2s ease; }
-
-    /* Chat toggle button */
-    #eaw-chat-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      cursor: pointer;
-      box-shadow: 0 18px 38px rgba(0,0,0,0.55);
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.24), transparent 45%), linear-gradient(145deg, #ff7a3d, #e84b3c);
-      color: #0b0b0c;
-      z-index: 100000;
-      display: grid;
-      place-items: center;
-      transition: transform 0.18s cubic-bezier(.22,.9,.22,1), box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    #eaw-chat-toggle .icon {
-      position: relative;
-      display: block;
-      width: 18px;
-      height: 18px;
-      transition: transform .32s cubic-bezier(.22,.9,.22,1);
-    }
-
-    #eaw-chat-toggle .icon::before,
-    #eaw-chat-toggle .icon::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 18px;
-      height: 2px;
-      background: #0b0b0c;
-      border-radius: 999px;
-      transform: translate(-50%, -50%) rotate(0deg);
-      transition: transform .28s cubic-bezier(.22,.9,.22,1), opacity .2s ease;
-    }
-
-    #eaw-chat-toggle .icon::after { transform: translate(-50%, -50%) rotate(90deg); }
-
-    #eaw-chat-toggle.is-open { border-color: rgba(255,255,255,0.32); box-shadow: 0 26px 64px rgba(0,0,0,0.68); }
-    #eaw-chat-toggle.is-open .icon { transform: rotate(180deg); }
-    #eaw-chat-toggle.is-open .icon::before { transform: translate(-50%, -50%) rotate(45deg); }
-    #eaw-chat-toggle.is-open .icon::after { transform: translate(-50%, -50%) rotate(135deg); }
-
-    #eaw-chat-toggle:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 24px 46px rgba(0,0,0,0.55); }
-    #eaw-chat-toggle:active { transform: scale(0.97); }
-
-    /* Chat window container */
-    #eaw-chatbot {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 340px;
-      max-height: 520px;
-      background: linear-gradient(160deg, rgba(12,12,14,0.96), rgba(10,10,12,0.9));
-      color: #F9FAFB;
-      border-radius: 18px;
-      box-shadow: 0 30px 120px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.04);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 99999;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: translate3d(0,24px,0) scale(0.98);
-      transition: opacity .28s cubic-bezier(.22,.9,.22,1), transform .28s cubic-bezier(.22,.9,.22,1), visibility .28s ease;
-    }
-
-    #eaw-chatbot.open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translate3d(0,0,0) scale(1);
-    }
-
-    .eaw-chat-header {
-      padding: 12px 14px;
-      background: linear-gradient(120deg, rgba(255, 122, 61, 0.16), rgba(232, 75, 60, 0.12));
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 600;
-      font-size: 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-    }
-
-    .eaw-chat-header span { display: inline-flex; align-items: center; gap: 6px; }
-    .eaw-chat-header span::before {
-      content: "";
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 6px rgba(34,197,94,0.08);
-    }
-
-    .eaw-chat-header button {
-      background: transparent;
-      border: none;
-      color: #E5E7EB;
-      font-size: 18px;
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 8px;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .eaw-chat-header button:hover { background: rgba(255,255,255,0.06); color: #fff; }
-
-    #eaw-chat-messages {
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      overflow-y: auto;
-      max-height: 340px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 24%);
-    }
-
-    .eaw-msg { padding: 10px 12px; border-radius: 14px; font-size: 14px; line-height: 1.5; }
-    .eaw-msg.bot { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
-    .eaw-msg.user { align-self: flex-end; background: linear-gradient(135deg, #ff7a3d, #e84b3c); color: #0b0b0c; }
-
-    #eaw-chat-options {
-      display: grid;
-      gap: 8px;
-      padding: 12px 14px 16px;
-      background: rgba(255,255,255,0.02);
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    #eaw-chat-options button {
-      width: 100%;
-      text-align: left;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.03);
-      color: #F9FAFB;
-      padding: 10px 12px;
-      cursor: pointer;
-      transition: transform 0.12s ease, border-color 0.2s ease, background 0.2s ease;
-    }
-    #eaw-chat-options button:hover { transform: translateY(-1px); border-color: rgba(255,122,61,0.35); background: rgba(255,255,255,0.05); }
-
-    #eaw-chat-input-wrapper {
-      display: none;
-      gap: 8px;
-      padding: 12px 14px 14px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-    }
-
-    #eaw-chat-input {
-      flex: 1;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.03);
-      padding: 10px 12px;
-      color: #F9FAFB;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    #eaw-chat-input:focus { border-color: rgba(255, 122, 61, 0.55); box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.25); }
-
-    #eaw-chat-input::placeholder { color: #94A3B8; }
-
-    #eaw-chat-send {
-      border-radius: 12px;
-      border: none;
-      padding: 10px 14px;
-      font-size: 13px;
-      background: linear-gradient(135deg, #ff7a3d, #e84b3c);
-      color: #0b0b0c;
-      cursor: pointer;
-      font-weight: 650;
-      transition: transform 0.12s ease, box-shadow 0.15s ease;
-    }
-
-    #eaw-chat-send:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.35); }
-    #eaw-chat-send:active { transform: scale(0.98); }
-
-    @media (max-width: 640px) {
-      #eaw-chatbot { width: calc(100% - 32px); right: 16px; bottom: 82px; }
-      #eaw-chat-toggle { bottom: 16px; right: 16px; }
-    }
-  </style>
-
+  <!-- EAW v2 styles -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <link rel="stylesheet" href="css/site.css" />
 </head>
-<body class="bg-brandDark text-slate-100">
 
-  <!-- NAV -->
-  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
-    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-      <!-- Logo -->
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
-        <div>
-          <p class="font-semibold tracking-wide">Elevated AI Works</p>
-          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+<body>
+  <div class="page">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Elevated AI Works Home" data-nav-link>
+          <span class="brand-mark" aria-hidden="true">
+            <img src="img/logo.png" alt="Elevated AI Works logo" width="26" height="26" />
+          </span>
+          <span>
+            <span class="brand-name">Elevated AI Works</span><br />
+            <span class="muted" style="font-size: 12px;">Bringing Your Ideas to Altitude</span>
+          </span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="services.html" data-nav-link>Services</a>
+          <a href="portfolio.html" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" data-nav-link>Contact</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="btn btn-ghost nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav">
+            Menu
+          </button>
+          <a class="btn btn-primary" href="contact.html">Start a Project</a>
         </div>
-      </a>
-
-      <!-- Desktop nav -->
-      <div class="hidden md:flex items-center gap-4 text-xs sm:text-sm">
-        <a href="index.html" class="hover:text-brandRed">Home</a>
-        <a href="services.html" class="hover:text-brandRed">Services</a>
-        <a href="portfolio.html" class="hover:text-brandRed">Portfolio</a>
-        <a href="about.html" class="hover:text-brandRed">About</a>
-        <a href="contact.html" class="hover:text-brandRed">Contact</a>
       </div>
 
-      <!-- CTA + Hamburger -->
-      <div class="flex items-center gap-2">
-        <a href="contact.html" class="hidden md:inline-flex px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
-          Start a Project
-        </a>
-
-        <!-- hamburger -->
-        <button id="mobileMenuToggle"
-          class="md:hidden inline-flex flex-col justify-center gap-1.5 p-2 rounded-md border border-slate-700"
-          aria-label="Toggle navigation menu">
-          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
-          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
-          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
-        </button>
+      <div class="mobile-nav" id="mobileNav">
+        <div class="container">
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="services.html" data-nav-link>Services</a>
+          <a href="portfolio.html" data-nav-link>Portfolio</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="contact.html" data-nav-link>Contact</a>
+        </div>
       </div>
-    </nav>
+    </header>
 
-    <!-- mobile nav -->
-    <div id="mobileMenu" class="md:hidden border-t border-slate-800 bg-brandDark hidden">
-      <nav class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
-        <a href="index.html" class="py-1 hover:text-brandRed">Home</a>
-        <a href="services.html" class="py-1 hover:text-brandRed">Services</a>
-        <a href="portfolio.html" class="py-1 hover:text-brandRed">Portfolio</a>
-        <a href="about.html" class="py-1 hover:text-brandRed">About</a>
-        <a href="contact.html" class="py-1 hover:text-brandRed">Contact</a>
+    <main data-transition-container>
+      <section class="section" data-reveal>
+        <div class="container stack" style="gap: var(--space-4); max-width: 840px; text-align: center;">
+          <div class="badge" style="margin: 0 auto;">Thank you</div>
+          <h1 class="h1">Thank you for reaching out!</h1>
+          <p class="lede" style="margin-left: auto; margin-right: auto;">
+            Your message is in. We’ll review the details you shared and respond soon with next steps, questions, or a tailored plan.
+          </p>
+          <div class="row" style="justify-content: center;">
+            <a class="btn btn-primary" href="index.html">Back to Home</a>
+            <a class="btn btn-ghost" href="services.html">View Services</a>
+          </div>
+        </div>
+      </section>
 
-        <a href="contact.html"
-          class="mt-2 inline-flex justify-center px-4 py-2 rounded-md bg-brandRed font-semibold hover:bg-red-600 transition">
-          Start a Project
-        </a>
-      </nav>
-    </div>
-  </header>
+      <section class="section" data-reveal>
+        <div class="container" style="display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+          <div class="card">
+            <div class="card-inner stack" style="gap: 12px;">
+              <div class="badge">What happens next</div>
+              <p class="card-text">We’ll read through your message and any project notes you provided.</p>
+              <p class="card-text">If something is unclear, we’ll follow up with a few quick questions.</p>
+              <p class="card-text">You’ll receive a reply at the email you shared with next steps or a draft plan.</p>
+            </div>
+          </div>
 
-  <!-- MAIN CONTENT -->
-  <main class="max-w-4xl mx-auto px-4 py-16 text-center space-y-8">
-    <section class="space-y-4">
-      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brandRed/10 border border-brandRed/40 mb-2">
-        <span class="text-3xl">✅</span>
+          <div class="card">
+            <div class="card-inner stack" style="gap: 12px;">
+              <div class="badge">In the meantime</div>
+              <p class="card-text">Explore the <a href="services.html">services page</a> to see everything we can help with.</p>
+              <p class="card-text">Browse the <a href="portfolio.html">portfolio</a> for inspiration and examples.</p>
+              <p class="card-text">Jot down any extra ideas, references, or timelines you want us to keep in mind.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" data-reveal>
+        <div class="container cta-block" style="text-align: center;">
+          <h2 class="h2">Want to keep exploring?</h2>
+          <p class="lede" style="margin-left: auto; margin-right: auto; max-width: 72ch;">
+            Keep browsing the site while we prepare your response. You can also send a follow-up note to add more detail.
+          </p>
+          <div class="row" style="justify-content: center;">
+            <a class="btn btn-primary" href="contact.html">Send another note</a>
+            <a class="btn btn-ghost" href="portfolio.html">See our work</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="stack-sm">
+          <div style="font-weight: 650;">Elevated AI Works</div>
+          <div class="footer-note">AI-powered creative &amp; digital solutions for real-world businesses.</div>
+        </div>
+
+        <div class="footer-meta">
+          <div class="footer-links">
+            <a href="legal/index.html">Legal Center</a>
+            <a href="legal/ai-disclaimer.html">AI Disclaimer</a>
+            <a href="legal/privacy-policy.html">Privacy Policy</a>
+            <a href="legal/terms-of-service.html">Terms of Service</a>
+            <a href="legal/refund-policy.html">Refund Policy</a>
+          </div>
+          <div class="footer-note">© 2025 Elevated AI Works. All rights reserved.</div>
+        </div>
       </div>
-      <h1 class="text-3xl md:text-4xl font-bold">Thank you for reaching out!</h1>
-      <p class="text-slate-300 max-w-2xl mx-auto">
-        Your message has been received. Elevated AI Works will review your details and get back to you as soon
-        as possible with next steps, questions, or a tailored quote.
-      </p>
-    </section>
+    </footer>
+  </div>
 
-    <section class="grid md:grid-cols-2 gap-6 text-left">
-      <div class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
-        <h2 class="text-lg font-semibold text-brandRed">What happens next?</h2>
-        <ul class="list-disc list-inside text-slate-300 space-y-1 text-sm">
-          <li>We’ll read through your message and any project details you provided.</li>
-          <li>If something is unclear, we may follow up with a few quick questions.</li>
-          <li>You’ll receive a reply at the email you shared, usually with next steps or a rough game plan.</li>
-        </ul>
-      </div>
-
-      <div class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
-        <h2 class="text-lg font-semibold text-brandRed">In the meantime…</h2>
-        <ul class="list-disc list-inside text-slate-300 space-y-1 text-sm">
-          <li>
-            Take a look at the <a href="services.html" class="text-brandRed hover:underline">services page</a> to
-            see everything Elevated AI Works can help with.
-          </li>
-          <li>
-            Browse the <a href="portfolio.html" class="text-brandRed hover:underline">portfolio</a> for inspiration
-            and examples.
-          </li>
-          <li>
-            Jot down any extra ideas, examples, or references you’d like to share in a follow-up email.
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="space-y-3">
-      <h2 class="text-lg font-semibold">Want to keep exploring?</h2>
-      <div class="flex flex-wrap justify-center gap-3 text-sm">
-        <a href="index.html" class="px-4 py-2 rounded-full border border-slate-700 hover:border-brandRed hover:text-brandRed transition">
-          Back to Home
-        </a>
-        <a href="services.html" class="px-4 py-2 rounded-full border border-slate-700 hover:border-brandRed hover:text-brandRed transition">
-          View Services
-        </a>
-        <a href="portfolio.html" class="px-4 py-2 rounded-full border border-slate-700 hover:border-brandRed hover:text-brandRed transition">
-          View Portfolio
-        </a>
-      </div>
-    </section>
-
-    <section class="text-xs text-slate-500">
-      <p>
-        Didn’t mean to submit that form? You can always send a corrected message through the
-        <a href="contact.html" class="text-brandRed hover:underline">contact page</a> or reply to any email you get from us.
-      </p>
-    </section>
-  </main>
-
-  <footer class="border-t border-slate-800 mt-10">
-    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
-      <p>© 2025 Elevated AI Works. All rights reserved.</p>
-      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
-    </div>
-  </footer>
-
-  <!-- Mobile menu JS -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const toggle = document.getElementById('mobileMenuToggle');
-      const menu   = document.getElementById('mobileMenu');
-      if (!toggle || !menu) return;
-      toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
-    });
-  </script>
-<!-- EAW Chatbot (shared IDs required by js/chatbot.js) -->
+  <!-- EAW Chatbot (shared IDs required by js/chatbot.js) -->
   <div id="eaw-chatbot" role="dialog" aria-modal="false" aria-label="Elevated AI Works Assistant" aria-hidden="true" tabindex="-1">
     <div class="eaw-chat-header">
       <span>Elevated AI Works Assistant</span>
@@ -444,6 +184,10 @@
 
   <button id="eaw-chat-toggle" type="button" aria-label="Open assistant" aria-controls="eaw-chatbot" aria-expanded="false"><span class="icon" aria-hidden="true"></span></button>
 
+  <!-- Shared scripts -->
+  <script src="js/interactions.js"></script>
+  <script src="js/main.js"></script>
   <script src="js/chatbot.js"></script>
+  <script defer src="/js/cookie-consent.js"></script>
 </body>
 </html>
