@@ -41,27 +41,19 @@
   <!-- EAW Chatbot Styles -->
   
   <style>
-    /* Premium backdrop */
+    /* Premium backdrop: single source of truth so the mountain image never seams on tall pages. */
     body {
       position: relative;
       min-height: 100vh;
-      background: #09090b;
+      background:
+        url('img/backgrounds/mountains-premium.png') center 12% / cover no-repeat,
+        radial-gradient(1200px 700px at 18% -10%, rgba(255, 122, 61, 0.10), transparent 55%),
+        radial-gradient(900px 650px at 88% 5%, rgba(232, 75, 60, 0.08), transparent 60%),
+        linear-gradient(180deg, rgba(6, 6, 8, 0.90), rgba(7, 7, 8, 0.96)),
+        linear-gradient(180deg, #09090a, #080809);
+      background-attachment: scroll;
       color: #F9FAFB;
       overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background:
-        radial-gradient(900px 360px at 16% 18%, rgba(255, 122, 61, 0.16), transparent 60%),
-        radial-gradient(760px 320px at 84% 16%, rgba(232, 75, 60, 0.14), transparent 62%),
-        linear-gradient(180deg, rgba(5, 5, 7, 0.9), rgba(5, 5, 7, 0.96)),
-        url('img/backgrounds/mountains-premium.png') center 140px / cover no-repeat;
-      background-attachment: fixed, fixed, fixed, fixed;
-      filter: saturate(1.05) contrast(1.02);
     }
 
     a { transition: color 0.2s ease, opacity 0.2s ease; }
@@ -291,7 +283,7 @@
       <!-- CTA + Hamburger -->
       <div class="flex items-center gap-2">
         <a href="contact.html" class="hidden md:inline-flex px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
-          Get a Quote
+          Start a Project
         </a>
 
         <!-- hamburger -->
@@ -316,7 +308,7 @@
 
         <a href="contact.html"
           class="mt-2 inline-flex justify-center px-4 py-2 rounded-md bg-brandRed font-semibold hover:bg-red-600 transition">
-          Get a Quote
+          Start a Project
         </a>
       </nav>
     </div>

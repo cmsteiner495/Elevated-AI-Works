@@ -302,7 +302,6 @@
     let pendingNext = null;
     const userData = {};
     let lastFocusedElement = null;
-    let lastPointerToggle = 0;
 
     const focusFirstInteractive = () => {
       const firstOption = optionsEl.querySelector("button");
@@ -365,8 +364,8 @@
         toggleBtn.classList.toggle("is-shelved", shouldOpen); // Keep launcher out of the way when the panel is open.
         toggleBtn.setAttribute("aria-expanded", String(shouldOpen));
         toggleBtn.setAttribute("aria-label", shouldOpen ? "Close assistant" : "Open assistant");
-        toggleBtn.setAttribute("aria-hidden", "false");
-        toggleBtn.tabIndex = 0; // keep launcher focusable so it never disappears
+        toggleBtn.setAttribute("aria-hidden", shouldOpen ? "true" : "false");
+        toggleBtn.tabIndex = shouldOpen ? -1 : 0; // keep launcher focusable when available
         chatbot.setAttribute("aria-hidden", shouldOpen ? "false" : "true");
         chatbot.setAttribute("aria-modal", shouldOpen ? "true" : "false");
 
@@ -490,18 +489,15 @@
       showNode(pendingNext);
     }
 
-    const handlePointerToggle = () => {
-      lastPointerToggle = Date.now();
+    const handleToggle = (event) => {
+      // Root cause: touch + click were racing on mobile and left the launcher hidden. Use a single path and stop bubbling.
+      event.preventDefault();
+      event.stopPropagation();
       toggleChat();
     };
 
-    const handleClickToggle = () => {
-      if (Date.now() - lastPointerToggle < 300) return;
-      toggleChat();
-    };
-
-    toggleBtn.addEventListener("pointerup", handlePointerToggle);
-    toggleBtn.addEventListener("click", handleClickToggle);
+    toggleBtn.addEventListener("click", handleToggle);
+    toggleBtn.addEventListener("touchend", handleToggle);
     closeBtn.addEventListener("click", () => toggleChat(false));
     sendBtn.addEventListener("click", handleInputSubmit);
     inputField.addEventListener("keydown", (e) => {

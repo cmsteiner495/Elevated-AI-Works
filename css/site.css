@@ -18,10 +18,11 @@
   --eaw-bg-deep: #09090a;
   --eaw-bg-deeper: #080809;
 
-  --eaw-text-strong: rgba(255,255,255,0.94);
-  --eaw-text: rgba(255,255,255,0.86);
-  --eaw-text-muted: rgba(255,255,255,0.68);
-  --eaw-text-faint: rgba(255,255,255,0.52);
+  /* Root cause: body copy was drifting too low-contrast against the textured backdrop. Nudge opacity up without redesigning. */
+  --eaw-text-strong: rgba(255,255,255,0.96);
+  --eaw-text: rgba(255,255,255,0.90);
+  --eaw-text-muted: rgba(255,255,255,0.76);
+  --eaw-text-faint: rgba(255,255,255,0.60);
 
   --eaw-border: rgba(255,255,255,0.12);
   --eaw-border-soft: rgba(255,255,255,0.08);
