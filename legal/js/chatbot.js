@@ -263,6 +263,7 @@
   function $(id) { return document.getElementById(id); }
 
   function initChatbot() {
+    // Public selectors: IDs are the contract for layout + logic (shared across static exports).
     const chatbot = $("eaw-chatbot");
     const toggleBtn = $("eaw-chat-toggle");
     const closeBtn = $("eaw-chat-close");
@@ -302,6 +303,22 @@
     const userData = {};
     let lastFocusedElement = null;
     let lastPointerToggle = 0;
+
+    const focusFirstInteractive = () => {
+      const firstOption = optionsEl.querySelector("button");
+      if (firstOption) {
+        firstOption.focus({ preventScroll: true });
+        return true;
+      }
+
+      const focusTarget = chatbot.querySelector("[data-chat-focus]");
+      if (focusTarget instanceof HTMLElement) {
+        focusTarget.focus({ preventScroll: true });
+        return true;
+      }
+
+      return false;
+    };
 
     function renderText(text) {
       return String(text).replace(/{{(\w+)}}/g, (_, key) => userData[key] || "");
@@ -345,17 +362,25 @@
 
         chatbot.classList.toggle("open", shouldOpen);
         toggleBtn.classList.toggle("is-open", shouldOpen);
+        toggleBtn.classList.toggle("is-shelved", shouldOpen);
         toggleBtn.setAttribute("aria-expanded", String(shouldOpen));
         toggleBtn.setAttribute("aria-label", shouldOpen ? "Close assistant" : "Open assistant");
+        toggleBtn.setAttribute("aria-hidden", shouldOpen ? "true" : "false");
+        toggleBtn.tabIndex = shouldOpen ? -1 : 0;
         chatbot.setAttribute("aria-hidden", shouldOpen ? "false" : "true");
+        chatbot.setAttribute("aria-modal", shouldOpen ? "true" : "false");
 
         if (shouldOpen && messagesEl.childElementCount === 0) {
           showNode("start");
         }
 
         if (shouldOpen) {
-          const focusTarget = chatbot.querySelector("[data-chat-focus]") || chatbot;
-          requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }));
+          requestAnimationFrame(() => {
+            if (!focusFirstInteractive()) {
+              const fallback = chatbot.querySelector("[data-chat-focus]") || chatbot;
+              fallback.focus({ preventScroll: true });
+            }
+          });
         } else if (lastFocusedElement) {
           requestAnimationFrame(() => lastFocusedElement.focus({ preventScroll: true }));
         }
@@ -430,6 +455,7 @@
         (node.options || []).forEach(opt => {
           const btn = document.createElement("button");
           btn.textContent = opt.label;
+          btn.type = "button";
           btn.addEventListener("click", () => {
             appendMessage(opt.label, "user");
             const nextNode = EAW_FLOW[opt.next];
@@ -439,12 +465,15 @@
           });
           optionsEl.appendChild(btn);
         });
+        if (chatbot.classList.contains("open")) {
+          requestAnimationFrame(() => { if (optionsEl.firstElementChild) focusFirstInteractive(); });
+        }
       } else if (node.type === "input") {
         pendingKey = node.key;
         pendingNext = node.next;
         inputWrapper.style.display = "flex";
         inputField.value = "";
-        inputField.focus();
+        inputField.focus({ preventScroll: true });
       }
     }
 

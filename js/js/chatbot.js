@@ -263,6 +263,7 @@
   function $(id) { return document.getElementById(id); }
 
   function initChatbot() {
+    // Public selectors: IDs are the contract for layout + logic (shared across static exports).
     const chatbot = $("eaw-chatbot");
     const toggleBtn = $("eaw-chat-toggle");
     const closeBtn = $("eaw-chat-close");
@@ -367,6 +368,7 @@
         toggleBtn.setAttribute("aria-hidden", shouldOpen ? "true" : "false");
         toggleBtn.tabIndex = shouldOpen ? -1 : 0;
         chatbot.setAttribute("aria-hidden", shouldOpen ? "false" : "true");
+        chatbot.setAttribute("aria-modal", shouldOpen ? "true" : "false");
 
         if (shouldOpen && messagesEl.childElementCount === 0) {
           showNode("start");
