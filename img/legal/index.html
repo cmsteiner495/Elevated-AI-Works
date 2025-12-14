@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HLV32W95T0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HLV32W95T0');
+</script>
+
+  <meta charset="UTF-8" />
+  <title>Legal Center | Elevated AI Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../js/bgdebug.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+
+<link rel="manifest" href="img/favicon/site.webmanifest">
+
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/favicon-180x180.png">
+<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+<link rel="manifest" href="img/favicon/site.webmanifest">
+
+  <!-- EAW Chatbot Styles -->
+  
+  <style>
+    /* Premium backdrop */
+    body {
+      position: relative;
+      min-height: 100vh;
+      background: #09090b;
+      color: #F9FAFB;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(5, 5, 7, 0.78), rgba(5, 5, 7, 0.88)),
+        radial-gradient(900px 360px at 16% 18%, rgba(255, 122, 61, 0.16), transparent 60%),
+        radial-gradient(760px 320px at 84% 16%, rgba(232, 75, 60, 0.14), transparent 62%),
+        url('../img/backgrounds/mountains-premium.png') center 140px / cover no-repeat;
+      background-attachment: fixed, fixed, fixed, fixed;
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    body.bgdebug::before {
+      filter: saturate(1.2) contrast(1.1) brightness(1.05);
+      background-position: center 100px;
+    }
+
+    a { transition: color 0.2s ease, opacity 0.2s ease; }
+
+    /* Chat toggle button */
+    #eaw-chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      font-size: 26px;
+      box-shadow: 0 18px 38px rgba(0,0,0,0.45);
+      background: linear-gradient(135deg, #ff7a3d, #e84b3c);
+      color: #0b0b0c;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      transition: transform 0.18s cubic-bezier(.22,.9,.22,1), box-shadow 0.2s ease;
+    }
+
+    #eaw-chat-toggle:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 24px 46px rgba(0,0,0,0.55); }
+    #eaw-chat-toggle:active { transform: scale(0.97); }
+
+    /* Chat window container */
+    #eaw-chatbot {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 340px;
+      max-height: 520px;
+      background: rgba(12,12,14,0.94);
+      color: #F9FAFB;
+      border-radius: 18px;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.55);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .eaw-chat-header {
+      padding: 12px 14px;
+      background: linear-gradient(120deg, rgba(255, 122, 61, 0.16), rgba(232, 75, 60, 0.12));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .eaw-chat-header span { display: inline-flex; align-items: center; gap: 6px; }
+    .eaw-chat-header span::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34,197,94,0.08);
+    }
+
+    .eaw-chat-header button {
+      background: transparent;
+      border: none;
+      color: #E5E7EB;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 8px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .eaw-chat-header button:hover { background: rgba(255,255,255,0.06); color: #fff; }
+
+    #eaw-chat-messages {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      max-height: 340px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 24%);
+    }
+
+    .eaw-msg { padding: 10px 12px; border-radius: 14px; font-size: 14px; line-height: 1.5; }
+    .eaw-msg.bot { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+    .eaw-msg.user { align-self: flex-end; background: linear-gradient(135deg, #ff7a3d, #e84b3c); color: #0b0b0c; }
+
+    #eaw-chat-options {
+      display: grid;
+      gap: 8px;
+      padding: 12px 14px 16px;
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #eaw-chat-options button {
+      width: 100%;
+      text-align: left;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      color: #F9FAFB;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: transform 0.12s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    #eaw-chat-options button:hover { transform: translateY(-1px); border-color: rgba(255,122,61,0.35); background: rgba(255,255,255,0.05); }
+
+    #eaw-chat-input-wrapper {
+      display: none;
+      gap: 8px;
+      padding: 12px 14px 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+    }
+
+    #eaw-chat-input {
+      flex: 1;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.03);
+      padding: 10px 12px;
+      color: #F9FAFB;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #eaw-chat-input:focus { border-color: rgba(255, 122, 61, 0.55); box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.25); }
+
+    #eaw-chat-input::placeholder { color: #94A3B8; }
+
+    #eaw-chat-send {
+      border-radius: 12px;
+      border: none;
+      padding: 10px 14px;
+      font-size: 13px;
+      background: linear-gradient(135deg, #ff7a3d, #e84b3c);
+      color: #0b0b0c;
+      cursor: pointer;
+      font-weight: 650;
+      transition: transform 0.12s ease, box-shadow 0.15s ease;
+    }
+
+    #eaw-chat-send:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.35); }
+    #eaw-chat-send:active { transform: scale(0.98); }
+
+    @media (max-width: 640px) {
+      #eaw-chatbot { width: calc(100% - 32px); right: 16px; bottom: 82px; }
+      #eaw-chat-toggle { bottom: 16px; right: 16px; }
+    }
+  </style>
+
+</head>
+<body class="bg-brandDark text-slate-100">
+  <!-- NAV -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <!-- Logo / brand -->
+      <a href="../index.html" class="flex items-center gap-3">
+        <img src="../img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-4 text-xs sm:text-sm">
+        <a href="../index.html" class="hover:text-brandRed">Home</a>
+        <a href="../services.html" class="hover:text-brandRed">Services</a>
+        <a href="../portfolio.html" class="hover:text-brandRed">Portfolio</a>
+        <a href="../about.html" class="hover:text-brandRed">About</a>
+        <a href="../contact.html" class="hover:text-brandRed">Contact</a>
+      </div>
+
+      <!-- Right: mobile hamburger + CTA -->
+      <div class="flex items-center gap-2">
+        <!-- Mobile hamburger -->
+        <button
+          id="mobileMenuBtn"
+          type="button"
+          class="md:hidden inline-flex items-center justify-center rounded-md border border-slate-700 px-2.5 py-1.5 text-xs text-slate-200 hover:border-brandRed hover:text-brandRed transition"
+          aria-label="Toggle navigation menu"
+        >
+          <span class="sr-only">Open menu</span>
+          <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M3 6h18M3 12h18M3 18h18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+
+        <!-- CTA -->
+        <a
+          href="../contact.html"
+          class="inline-flex px-3 md:px-4 py-1.5 md:py-2 rounded-md bg-brandRed text-xs sm:text-sm font-semibold hover:bg-red-600 transition"
+        >
+          Start a Project
+        </a>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden border-t border-slate-800 bg-brandDark/95 hidden">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="../index.html" class="py-1 hover:text-brandRed">Home</a>
+        <a href="../services.html" class="py-1 hover:text-brandRed">Services</a>
+        <a href="../portfolio.html" class="py-1 hover:text-brandRed">Portfolio</a>
+        <a href="../about.html" class="py-1 hover:text-brandRed">About</a>
+        <a href="../contact.html" class="py-1 hover:text-brandRed">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="max-w-6xl mx-auto px-4 py-10 space-y-8 text-sm md:text-base">
+    <header class="space-y-2">
+      <p class="text-xs tracking-[0.25em] uppercase text-slate-400">Legal</p>
+      <h1 class="text-3xl md:text-4xl font-bold">Legal Center</h1>
+      <p class="text-xs text-slate-500">
+        Last updated: November 2025
+      </p>
+      <p class="text-slate-300 max-w-2xl text-sm md:text-base mt-2">
+        This page contains the core legal documents that describe how Elevated AI Works operates, how projects are handled,
+        and how your information is treated. These summaries are for convenience only—please read the full documents
+        if you’re starting a project.
+      </p>
+    </header>
+
+    <section class="grid md:grid-cols-2 gap-5">
+      <!-- Terms of Service -->
+      <article class="bg-brandGray border border-slate-800 rounded-xl p-5 space-y-2">
+        <h2 class="text-lg font-semibold text-brandRed">Terms of Service</h2>
+        <p class="text-slate-300 text-sm">
+          Outlines how projects are scoped, approved, delivered, and paid for, plus what both sides can reasonably expect.
+        </p>
+        <a href="terms-of-service.html" class="inline-flex text-xs mt-1 text-brandRed hover:underline font-semibold">
+          View full Terms of Service →
+        </a>
+      </article>
+
+      <!-- Privacy Policy -->
+      <article class="bg-brandGray border border-slate-800 rounded-xl p-5 space-y-2">
+        <h2 class="text-lg font-semibold text-brandRed">Privacy Policy</h2>
+        <p class="text-slate-300 text-sm">
+          Explains what information may be collected, how it’s used, and your options regarding your data.
+        </p>
+        <a href="privacy-policy.html" class="inline-flex text-xs mt-1 text-brandRed hover:underline font-semibold">
+          View full Privacy Policy →
+        </a>
+      </article>
+
+      <!-- Refund & Revision Policy -->
+      <article class="bg-brandGray border border-slate-800 rounded-xl p-5 space-y-2">
+        <h2 class="text-lg font-semibold text-brandRed">Refund &amp; Revision Policy</h2>
+        <p class="text-slate-300 text-sm">
+          Covers deposits, revisions, cancellations, and how refund requests are handled for custom work.
+        </p>
+        <a href="refund-policy.html" class="inline-flex text-xs mt-1 text-brandRed hover:underline font-semibold">
+          View full Refund &amp; Revision Policy →
+        </a>
+      </article>
+
+      <!-- Disclaimer -->
+      <article class="bg-brandGray border border-slate-800 rounded-xl p-5 space-y-2">
+        <h2 class="text-lg font-semibold text-brandRed">Disclaimer</h2>
+        <p class="text-slate-300 text-sm">
+          Clarifies that information and tools are for general guidance and are not professional legal, financial,
+          or medical advice.
+        </p>
+        <a href="disclaimer.html" class="inline-flex text-xs mt-1 text-brandRed hover:underline font-semibold">
+          View full Disclaimer →
+        </a>
+      </article>
+    </section>
+
+    <section class="border-t border-slate-800 pt-6 text-xs text-slate-400 space-y-2">
+      <p>
+        The documents above are intended to keep expectations clear and transparent.
+        If anything is confusing or you have questions about how these apply to your situation,
+        please <a href="../contact.html" class="text-brandRed underline">reach out before starting a project</a>.
+      </p>
+      <p>
+        These documents may be updated over time. Material changes may be reflected by an updated “Last updated” date
+        and revised wording on this page and the linked policies.
+      </p>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function () {
+        menu.classList.toggle('hidden');
+      });
+    });
+  </script>
+
+  <!-- EAW Chatbot HTML -->
+  <div id="eaw-chatbot">
+    <div class="eaw-chat-header">
+      <span>Elevated AI Works Assistant</span>
+      <button id="eaw-chat-close" aria-label="Close chat">×</button>
+    </div>
+    <div id="eaw-chat-messages"></div>
+    <div id="eaw-chat-input-wrapper" style="display:none;">
+      <input id="eaw-chat-input" type="text" placeholder="Type your answer..." />
+      <button id="eaw-chat-send">Send</button>
+    </div>
+    <div id="eaw-chat-options"></div>
+  </div>
+
+  <button id="eaw-chat-toggle" aria-label="Open assistant">+</button>
+
+  <script src="../js/chatbot.js"></script>
+</body>
+</html>

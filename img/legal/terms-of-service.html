@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HLV32W95T0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HLV32W95T0');
+</script>
+
+  <meta charset="UTF-8" />
+  <title>Terms of Service | Elevated AI Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script src="../js/bgdebug.js" defer></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E63926',
+            brandDark: '#050816',
+            brandGray: '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+
+<link rel="manifest" href="img/favicon/site.webmanifest">
+
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/favicon-180x180.png">
+<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+<link rel="manifest" href="img/favicon/site.webmanifest">
+
+  <!-- EAW Chatbot Styles -->
+  
+  <style>
+    /* Premium backdrop */
+    body {
+      position: relative;
+      min-height: 100vh;
+      background: #09090b;
+      color: #F9FAFB;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(5, 5, 7, 0.78), rgba(5, 5, 7, 0.88)),
+        radial-gradient(900px 360px at 16% 18%, rgba(255, 122, 61, 0.16), transparent 60%),
+        radial-gradient(760px 320px at 84% 16%, rgba(232, 75, 60, 0.14), transparent 62%),
+        url('../img/backgrounds/mountains-premium.png') center 140px / cover no-repeat;
+      background-attachment: fixed, fixed, fixed, fixed;
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    body.bgdebug::before {
+      filter: saturate(1.2) contrast(1.1) brightness(1.05);
+      background-position: center 100px;
+    }
+
+    a { transition: color 0.2s ease, opacity 0.2s ease; }
+
+    /* Chat toggle button */
+    #eaw-chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      font-size: 26px;
+      box-shadow: 0 18px 38px rgba(0,0,0,0.45);
+      background: linear-gradient(135deg, #ff7a3d, #e84b3c);
+      color: #0b0b0c;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      transition: transform 0.18s cubic-bezier(.22,.9,.22,1), box-shadow 0.2s ease;
+    }
+
+    #eaw-chat-toggle:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 24px 46px rgba(0,0,0,0.55); }
+    #eaw-chat-toggle:active { transform: scale(0.97); }
+
+    /* Chat window container */
+    #eaw-chatbot {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 340px;
+      max-height: 520px;
+      background: rgba(12,12,14,0.94);
+      color: #F9FAFB;
+      border-radius: 18px;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.55);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .eaw-chat-header {
+      padding: 12px 14px;
+      background: linear-gradient(120deg, rgba(255, 122, 61, 0.16), rgba(232, 75, 60, 0.12));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .eaw-chat-header span { display: inline-flex; align-items: center; gap: 6px; }
+    .eaw-chat-header span::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34,197,94,0.08);
+    }
+
+    .eaw-chat-header button {
+      background: transparent;
+      border: none;
+      color: #E5E7EB;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 8px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .eaw-chat-header button:hover { background: rgba(255,255,255,0.06); color: #fff; }
+
+    #eaw-chat-messages {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      max-height: 340px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 24%);
+    }
+
+    .eaw-msg { padding: 10px 12px; border-radius: 14px; font-size: 14px; line-height: 1.5; }
+    .eaw-msg.bot { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+    .eaw-msg.user { align-self: flex-end; background: linear-gradient(135deg, #ff7a3d, #e84b3c); color: #0b0b0c; }
+
+    #eaw-chat-options {
+      display: grid;
+      gap: 8px;
+      padding: 12px 14px 16px;
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #eaw-chat-options button {
+      width: 100%;
+      text-align: left;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      color: #F9FAFB;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: transform 0.12s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    #eaw-chat-options button:hover { transform: translateY(-1px); border-color: rgba(255,122,61,0.35); background: rgba(255,255,255,0.05); }
+
+    #eaw-chat-input-wrapper {
+      display: none;
+      gap: 8px;
+      padding: 12px 14px 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+    }
+
+    #eaw-chat-input {
+      flex: 1;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.03);
+      padding: 10px 12px;
+      color: #F9FAFB;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #eaw-chat-input:focus { border-color: rgba(255, 122, 61, 0.55); box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.25); }
+
+    #eaw-chat-input::placeholder { color: #94A3B8; }
+
+    #eaw-chat-send {
+      border-radius: 12px;
+      border: none;
+      padding: 10px 14px;
+      font-size: 13px;
+      background: linear-gradient(135deg, #ff7a3d, #e84b3c);
+      color: #0b0b0c;
+      cursor: pointer;
+      font-weight: 650;
+      transition: transform 0.12s ease, box-shadow 0.15s ease;
+    }
+
+    #eaw-chat-send:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.35); }
+    #eaw-chat-send:active { transform: scale(0.98); }
+
+    @media (max-width: 640px) {
+      #eaw-chatbot { width: calc(100% - 32px); right: 16px; bottom: 82px; }
+      #eaw-chat-toggle { bottom: 16px; right: 16px; }
+    }
+  </style>
+
+</head>
+<body class="bg-brandDark text-slate-100">
+
+  <!-- NAV -->
+  <header class="border-b border-slate-800 bg-brandDark/90 sticky top-0 z-30 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <!-- Logo -->
+      <a href="../index.html" class="flex items-center gap-3">
+        <img src="../img/logo.png" alt="Elevated AI Works logo" class="w-10 h-10 object-contain" />
+        <div>
+          <p class="font-semibold tracking-wide">Elevated AI Works</p>
+          <p class="text-xs text-slate-400">Bringing Your Ideas to Altitude</p>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-4 text-xs sm:text-sm">
+        <a href="../index.html" class="hover:text-brandRed">Home</a>
+        <a href="../services.html" class="hover:text-brandRed">Services</a>
+        <a href="../portfolio.html" class="hover:text-brandRed">Portfolio</a>
+        <a href="../about.html" class="hover:text-brandRed">About</a>
+        <a href="../contact.html" class="hover:text-brandRed">Contact</a>
+      </div>
+
+      <!-- CTA + Hamburger -->
+      <div class="flex items-center gap-2">
+        <a href="../contact.html" class="hidden md:inline-flex px-4 py-2 rounded-md bg-brandRed text-sm font-semibold hover:bg-red-600 transition">
+          Start a Project
+        </a>
+
+        <!-- hamburger -->
+        <button id="mobileMenuToggle"
+          class="md:hidden inline-flex flex-col justify-center gap-1.5 p-2 rounded-md border border-slate-700"
+          aria-label="Toggle navigation menu">
+          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
+          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
+          <span class="block w-5 h-[2px] bg-slate-100 rounded"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- mobile nav -->
+    <div id="mobileMenu" class="md:hidden border-t border-slate-800 bg-brandDark hidden">
+      <nav class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="../index.html" class="py-1 hover:text-brandRed">Home</a>
+        <a href="../services.html" class="py-1 hover:text-brandRed">Services</a>
+        <a href="../portfolio.html" class="py-1 hover:text-brandRed">Portfolio</a>
+        <a href="../about.html" class="py-1 hover:text-brandRed">About</a>
+        <a href="../contact.html" class="py-1 hover:text-brandRed">Contact</a>
+
+        <a href="../contact.html"
+          class="mt-2 inline-flex justify-center px-4 py-2 rounded-md bg-brandRed font-semibold hover:bg-red-600 transition">
+          Start a Project
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="max-w-6xl mx-auto px-4 py-10 space-y-8 text-sm md:text-base">
+    <header class="space-y-2">
+      <p class="text-xs tracking-[0.25em] uppercase text-slate-400">Legal</p>
+      <h1 class="text-3xl md:text-4xl font-bold">Terms of Service</h1>
+      <p class="text-slate-300 max-w-3xl">
+        These Terms of Service outline how Elevated AI Works (“we”, “us”, or “our”) works with clients, how projects
+        are structured, and what both sides can reasonably expect.
+      </p>
+      <p class="text-xs text-slate-500">
+        Last Updated: January 2025
+      </p>
+    </header>
+
+    <!-- Scope -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">1. Scope of Work</h2>
+      <p class="text-slate-300">
+        Every project begins with a defined scope of work, usually in the form of a written proposal, estimate, or
+        project summary. This document will describe deliverables, timelines, and pricing to the best of our ability
+        based on the information available at the time.
+      </p>
+      <p class="text-slate-300">
+        The scope may include (for example): branding assets, website pages, AI workflows, automations, strategy
+        documents, or other creative and technical services.
+      </p>
+      <p class="text-slate-300">
+        If you ask for changes that go beyond the agreed scope, we may need to revise the timeline and pricing or
+        treat the new requests as a separate project.
+      </p>
+    </section>
+
+    <!-- Responsibilities -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">2. Client Responsibilities</h2>
+      <p class="text-slate-300">
+        To keep projects moving smoothly, we rely on you to:
+      </p>
+      <ul class="list-disc list-inside text-slate-300 space-y-1">
+        <li>Provide accurate and timely information about your business, goals, and preferences</li>
+        <li>Share any required assets (such as logos, brand guides, copy, or images) you already have</li>
+        <li>Review proofs and drafts within a reasonable time frame</li>
+        <li>Communicate changes clearly so revisions can be handled efficiently</li>
+      </ul>
+      <p class="text-slate-300">
+        Delays in providing content or feedback may impact the project timeline and completion date.
+      </p>
+    </section>
+
+    <!-- Payments -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">3. Payments &amp; Deposits</h2>
+      <p class="text-slate-300">
+        Unless otherwise stated, projects require a deposit before work begins. The remaining balance is due on
+        agreed milestones or when final deliverables are completed.
+      </p>
+      <p class="text-slate-300">
+        All invoices are payable in the currency and by the methods stated on the invoice. Late or missed payments
+        may pause project work until the account is current.
+      </p>
+      <p class="text-slate-300">
+        For details about deposits, cancellations, and refunds, please refer to the
+        <a href="refund-policy.html" class="text-brandRed hover:underline">Refund &amp; Revision Policy</a>.
+      </p>
+    </section>
+
+    <!-- Revisions -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">4. Revisions &amp; Changes</h2>
+      <p class="text-slate-300">
+        Most projects include a specific number of revision rounds, as stated in your proposal or scope.
+        Revisions are opportunities to refine designs, copy, or functionality based on your feedback.
+      </p>
+      <p class="text-slate-300">
+        Substantial changes in direction after a concept has been approved—or requests that add significant new
+        features—may be considered out of scope and subject to additional fees or timeline changes.
+      </p>
+    </section>
+
+    <!-- Intellectual property -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">5. Intellectual Property</h2>
+      <p class="text-slate-300">
+        Unless otherwise agreed in writing:
+      </p>
+      <ul class="list-disc list-inside text-slate-300 space-y-1">
+        <li>
+          Final deliverables that have been fully paid for are typically licensed or assigned to you for use in your
+          business.
+        </li>
+        <li>
+          Preliminary concepts, unused designs, internal tools, and working files remain the property of Elevated
+          AI Works.
+        </li>
+      </ul>
+      <p class="text-slate-300">
+        You are responsible for ensuring that any content, images, or materials you provide do not infringe upon the
+        rights of others. Elevated AI Works is not responsible for legal issues arising from materials you supply.
+      </p>
+    </section>
+
+    <!-- Use of AI tools -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">6. Use of AI Tools &amp; Automation</h2>
+      <p class="text-slate-300">
+        Elevated AI Works may use AI tools and automation as part of the creative or technical process—for example,
+        to generate drafts, explore variations, or assist with code and documentation.
+      </p>
+      <p class="text-slate-300">
+        All AI-assisted work is guided and reviewed by a human before delivery, but AI outputs may contain
+        limitations or inaccuracies. You agree to review deliverables carefully and use your own judgment when
+        applying them to your business.
+      </p>
+    </section>
+
+    <!-- Timelines -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">7. Timelines &amp; Delays</h2>
+      <p class="text-slate-300">
+        Project timelines are estimates based on the agreed scope and reasonable cooperation from both sides.
+        We will communicate if we foresee delays and appreciate the same from you.
+      </p>
+      <p class="text-slate-300">
+        Elevated AI Works is not responsible for delays caused by factors outside our control, including late
+        feedback, missing content, third-party outages, or major technical issues with external platforms.
+      </p>
+    </section>
+
+    <!-- Third-party services -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">8. Third-Party Services &amp; Integrations</h2>
+      <p class="text-slate-300">
+        Some projects may involve third-party tools or platforms (for example: hosting, domain registrars,
+        analytics, email services, or AI providers). Where possible, these accounts will be created in your name
+        so you can retain ownership and control.
+      </p>
+      <p class="text-slate-300">
+        Elevated AI Works is not responsible for changes made by third-party providers, such as pricing changes,
+        feature removals, outages, or policy updates. Your use of third-party services is subject to their
+        respective terms and privacy policies.
+      </p>
+    </section>
+
+    <!-- Limitation of liability -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">9. Limitation of Liability</h2>
+      <p class="text-slate-300">
+        To the fullest extent permitted by law, Elevated AI Works is not liable for any indirect, incidental,
+        special, or consequential damages, or for any loss of profits, revenue, data, or business opportunities
+        arising from your use of our services or deliverables.
+      </p>
+      <p class="text-slate-300">
+        In any case where liability is found, it will be limited to the total amount you have paid for the specific
+        project giving rise to the claim.
+      </p>
+    </section>
+
+    <!-- Termination -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">10. Termination</h2>
+      <p class="text-slate-300">
+        Either party may end a project if the other party materially breaches these terms and does not resolve
+        the issue within a reasonable time after being notified.
+      </p>
+      <p class="text-slate-300">
+        If a project is ended early, you will be responsible for paying for the portion of work completed up to
+        the termination date, as outlined in the Refund &amp; Revision Policy.
+      </p>
+    </section>
+
+    <!-- Changes to terms -->
+    <section class="bg-brandGray border border-slate-800 rounded-2xl p-6 space-y-3">
+      <h2 class="text-xl font-semibold">11. Changes to These Terms</h2>
+      <p class="text-slate-300">
+        These Terms of Service may be updated periodically to reflect changes in how Elevated AI Works operates,
+        changes in applicable law, or improvements to our policies.
+      </p>
+      <p class="text-slate-300">
+        When material changes are made, we may update the “Last Updated” date at the top of this page. Your
+        continued use of our services after changes are posted signifies your acceptance of the updated terms.
+      </p>
+    </section>
+
+    <!-- Questions -->
+    <section class="text-sm text-slate-400">
+      <p>
+        If you have questions about these Terms of Service or how they apply to your project, you can reach out
+        any time through the <a href="../contact.html" class="text-brandRed hover:underline">contact page</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© 2025 Elevated AI Works. All rights reserved.</p>
+      <p>elevatedaiworks.com • AI-Powered Creative & Digital Solutions</p>
+    </div>
+  </footer>
+
+  <!-- Mobile menu JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('mobileMenuToggle');
+      const menu   = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
+    });
+  </script>
+
+  <!-- EAW Chatbot HTML -->
+  <div id="eaw-chatbot">
+    <div class="eaw-chat-header">
+      <span>Elevated AI Works Assistant</span>
+      <button id="eaw-chat-close" aria-label="Close chat">×</button>
+    </div>
+    <div id="eaw-chat-messages"></div>
+    <div id="eaw-chat-input-wrapper" style="display:none;">
+      <input id="eaw-chat-input" type="text" placeholder="Type your answer..." />
+      <button id="eaw-chat-send">Send</button>
+    </div>
+    <div id="eaw-chat-options"></div>
+  </div>
+
+  <button id="eaw-chat-toggle" aria-label="Open assistant">+</button>
+
+  <script src="../js/chatbot.js"></script>
+</body>
+</html>
