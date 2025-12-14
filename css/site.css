@@ -38,7 +38,7 @@
   --eaw-layer-header: var(--z-header);
   --eaw-layer-overlay: var(--z-overlay);
   --eaw-layer-chat: var(--z-chat);
-  --eaw-layer-chat-toggle: var(--z-chat);
+  --eaw-layer-chat-toggle: calc(var(--z-chat) + 5);
 
   /* Chat-specific tokens */
   --eaw-chat-bg: rgba(10,10,12,0.78);
@@ -501,6 +501,7 @@ body::after{
   scrollbar-gutter: stable both-edges;
 }
 
+body.chat-open #eaw-chatbot,
 #eaw-chatbot.open{
   opacity: 1;
   visibility: visible;
@@ -713,11 +714,6 @@ body::after{
 #eaw-chat-toggle.is-open .icon{ transform: rotate(180deg); }
 #eaw-chat-toggle.is-open .icon::before{ transform: translate(-50%, -50%) rotate(45deg); }
 #eaw-chat-toggle.is-open .icon::after{ transform: translate(-50%, -50%) rotate(135deg); }
-
-#eaw-chat-toggle.is-shelved{
-  opacity: 0;
-  pointer-events: none; /* Hide launcher whenever the panel is open so it cannot cover the chat surface. */
-}
 
 #eaw-chat-toggle:hover{ transform: translateY(-2px) scale(1.02); box-shadow: 0 24px 46px rgba(0,0,0,0.48); border-color: rgba(255,255,255,0.26); }
 #eaw-chat-toggle:active{ transform: scale(0.97); }

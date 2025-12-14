@@ -360,12 +360,12 @@
         }
 
         chatbot.classList.toggle("open", shouldOpen);
+        document.body.classList.toggle("chat-open", shouldOpen);
         toggleBtn.classList.toggle("is-open", shouldOpen);
-        toggleBtn.classList.toggle("is-shelved", shouldOpen); // Keep launcher out of the way when the panel is open.
         toggleBtn.setAttribute("aria-expanded", String(shouldOpen));
         toggleBtn.setAttribute("aria-label", shouldOpen ? "Close assistant" : "Open assistant");
-        toggleBtn.setAttribute("aria-hidden", shouldOpen ? "true" : "false");
-        toggleBtn.tabIndex = shouldOpen ? -1 : 0; // keep launcher focusable when available
+        toggleBtn.setAttribute("aria-hidden", "false");
+        toggleBtn.tabIndex = 0; // launcher should remain reachable even when chat is open
         chatbot.setAttribute("aria-hidden", shouldOpen ? "false" : "true");
         chatbot.setAttribute("aria-modal", shouldOpen ? "true" : "false");
 
