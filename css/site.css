@@ -37,8 +37,8 @@
   --eaw-layer-base: var(--z-base);
   --eaw-layer-header: var(--z-header);
   --eaw-layer-overlay: var(--z-overlay);
-  --eaw-layer-chat: var(--z-chat);
-  --eaw-layer-chat-toggle: calc(var(--z-chat) + 5);
+  --eaw-layer-chat: calc(var(--z-chat) + 10);
+  --eaw-layer-chat-toggle: calc(var(--eaw-layer-chat) - 4);
 
   /* Chat-specific tokens */
   --eaw-chat-bg: rgba(10,10,12,0.78);
