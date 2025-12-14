@@ -362,6 +362,7 @@
 
         chatbot.classList.toggle("open", shouldOpen);
         toggleBtn.classList.toggle("is-open", shouldOpen);
+        toggleBtn.classList.toggle("is-shelved", shouldOpen); // Keep launcher out of the way when the panel is open.
         toggleBtn.setAttribute("aria-expanded", String(shouldOpen));
         toggleBtn.setAttribute("aria-label", shouldOpen ? "Close assistant" : "Open assistant");
         toggleBtn.setAttribute("aria-hidden", "false");

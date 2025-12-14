@@ -59,73 +59,17 @@
    -------------------------------------------------------------------------- */
 
 body{
+  /* Root cause: layered fixed pseudo-elements were drifting, creating a visible seam; consolidate to a single scroll-bound background. */
   background:
+    url("../img/backgrounds/mountains-premium.png") center 12% / cover no-repeat,
     radial-gradient(1200px 700px at 18% -10%, rgba(255,122,61,0.10), transparent 55%),
     radial-gradient(900px 650px at 88% 5%, rgba(232,75,60,0.08), transparent 60%),
+    linear-gradient(180deg, rgba(6,6,8,0.90), rgba(7,7,8,0.96)),
     linear-gradient(180deg, var(--eaw-bg-deep), var(--eaw-bg-deeper));
+  background-attachment: scroll;
   color: var(--eaw-text);
   overflow-x: hidden;
   font-weight: 500;
-}
-
-/* --------------------------------------------------------------------------
-   Environmental Backdrop (PREMIUM MOUNTAINS)
-   -------------------------------------------------------------------------- */
-
-.page{
-  position: relative;
-}
-
-.page::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-
-  background:
-    /* premium mountain image */
-    url("../img/backgrounds/mountains-premium.png") center 12% / cover no-repeat,
-
-    /* brand lighting */
-    radial-gradient(900px 320px at 18% 18%, var(--eaw-orange-soft), transparent 62%),
-    radial-gradient(760px 300px at 82% 20%, var(--eaw-red-soft), transparent 64%),
-
-    /* ultra-subtle grid texture */
-    linear-gradient(to right, rgba(255,255,255,0.010) 1px, transparent 1px) 0 0 / 120px 120px,
-    linear-gradient(to bottom, rgba(255,255,255,0.008) 1px, transparent 1px) 0 0 / 120px 120px,
-
-    linear-gradient(180deg, rgba(6,6,8,0.85), rgba(7,7,8,0.94)),
-    linear-gradient(180deg, var(--eaw-bg-deep), var(--eaw-bg-deeper));
-
-  background-attachment: fixed, fixed, fixed, fixed, fixed, fixed;
-  opacity: 0.97;
-  filter: saturate(1.05) contrast(1.04);
-}
-
-/* subtle grain */
-.page::after{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(5,5,6,0.18), rgba(5,5,6,0.32)),
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,0.012),
-      rgba(255,255,255,0.012) 1px,
-      transparent 2px,
-      transparent 4px
-    );
-  opacity: 0.18;
-  mix-blend-mode: overlay;
-}
-
-.page > *{
-  position: relative;
-  z-index: 1;
 }
 
 /* --------------------------------------------------------------------------
@@ -381,6 +325,10 @@ body{
   background: rgba(12,12,14,0.45);
   border: 1px solid var(--eaw-border-soft);
   transition: border-color .2s var(--eaw-ease), background .2s var(--eaw-ease);
+  text-align: center;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
 }
 
 .tile:hover{
@@ -425,11 +373,17 @@ body{
 .form-modern .input,
 .form-modern .textarea,
 .form-modern .select{
-  background: rgba(255,255,255,0.04);
+  background: rgba(10,10,12,0.82); /* Solid backdrop to keep dropdown legible over the hero image. */
   border-color: rgba(255,255,255,0.16);
   border-radius: 14px;
   padding: 14px 16px;
   transition: border-color .18s var(--eaw-ease), box-shadow .2s var(--eaw-ease), transform .12s var(--eaw-ease);
+}
+
+.form-modern .select,
+.form-modern .select option{
+  color: var(--eaw-text-strong);
+  background-color: rgba(10,10,12,0.94);
 }
 
 .form-modern .input:focus,
@@ -729,6 +683,11 @@ body{
 #eaw-chat-toggle.is-open .icon{ transform: rotate(180deg); }
 #eaw-chat-toggle.is-open .icon::before{ transform: translate(-50%, -50%) rotate(45deg); }
 #eaw-chat-toggle.is-open .icon::after{ transform: translate(-50%, -50%) rotate(135deg); }
+
+#eaw-chat-toggle.is-shelved{
+  opacity: 0;
+  pointer-events: none; /* Hide launcher whenever the panel is open so it cannot cover the chat surface. */
+}
 
 #eaw-chat-toggle:hover{ transform: translateY(-2px) scale(1.02); box-shadow: 0 24px 46px rgba(0,0,0,0.48); border-color: rgba(255,255,255,0.26); }
 #eaw-chat-toggle:active{ transform: scale(0.97); }
