@@ -17,12 +17,28 @@
     overlay.setAttribute('aria-hidden', 'true');
     header.appendChild(overlay);
 
+    // Root cause: dropdown felt detached because it was absolutely positioned to the viewport.
+    // Anchor it to the toggle button so it always opens from the same side.
+    const syncMenuPosition = () => {
+      const btnRect = btn.getBoundingClientRect();
+      const headerRect = header.getBoundingClientRect();
+      const left = btnRect.left - headerRect.left;
+      const top = btnRect.bottom - headerRect.top + 8;
+
+      menu.style.setProperty('--mobile-nav-left', `${left}px`);
+      menu.style.setProperty('--mobile-nav-right', 'auto');
+      menu.style.setProperty('--mobile-nav-top', `${top}px`);
+      menu.style.setProperty('--mobile-nav-min-width', `${Math.max(btnRect.width, 240)}px`);
+    };
+
     function setNavState(open) {
       navIsOpen = open;
       menu.classList.toggle('open', open);
       overlay.classList.toggle('is-visible', open);
       btn.setAttribute('aria-expanded', String(open));
       menu.setAttribute('aria-hidden', String(!open));
+
+      if (open) syncMenuPosition();
     }
 
     // Initialize in a known closed state for accessibility tools
@@ -33,12 +49,21 @@
     btn.addEventListener('click', () => toggleNav());
     overlay.addEventListener('click', () => setNavState(false));
 
+    document.addEventListener('pointerdown', (event) => {
+      if (!menu.classList.contains('open')) return;
+      const target = event.target;
+      if (menu.contains(target) || btn.contains(target)) return;
+      setNavState(false);
+    });
+
     menu.addEventListener('click', (e) => {
       const target = e.target;
       if (target && target.tagName === 'A') {
         setNavState(false);
       }
     });
+
+    window.addEventListener('resize', () => { if (menu.classList.contains('open')) syncMenuPosition(); }, { passive: true });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && menu.classList.contains('open')) {

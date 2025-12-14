@@ -182,9 +182,10 @@ main {
   .mobile-nav {
     display: block;
     position: absolute;
-    right: 0;
-    top: calc(100% + 8px);
-    width: min(92vw, 320px);
+    right: var(--mobile-nav-right, 0);
+    left: var(--mobile-nav-left, auto);
+    top: var(--mobile-nav-top, calc(100% + 8px));
+    width: min(92vw, max(320px, var(--mobile-nav-min-width, 0px)));
     background: rgba(10, 10, 12, 0.94);
     border: 1px solid var(--border);
     border-radius: 16px;
