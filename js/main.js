@@ -33,6 +33,7 @@
 
     function setNavState(open) {
       navIsOpen = open;
+      document.body.classList.toggle('nav-open', open);
       menu.classList.toggle('open', open);
       overlay.classList.toggle('is-visible', open);
       btn.setAttribute('aria-expanded', String(open));
@@ -44,13 +45,13 @@
     // Initialize in a known closed state for accessibility tools
     setNavState(false);
 
-    const toggleNav = () => setNavState(!menu.classList.contains('open'));
+    const toggleNav = () => setNavState(!document.body.classList.contains('nav-open'));
 
     btn.addEventListener('click', () => toggleNav());
     overlay.addEventListener('click', () => setNavState(false));
 
     document.addEventListener('pointerdown', (event) => {
-      if (!menu.classList.contains('open')) return;
+      if (!document.body.classList.contains('nav-open')) return;
       const target = event.target;
       if (menu.contains(target) || btn.contains(target)) return;
       setNavState(false);

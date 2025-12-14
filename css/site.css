@@ -59,18 +59,47 @@
    Base Environment
    -------------------------------------------------------------------------- */
 
+html,
 body{
-  /* Root cause: layered fixed pseudo-elements were drifting, creating a visible seam; consolidate to a single scroll-bound background. */
+  min-height: 100%;
+  background: var(--eaw-bg-deeper);
+}
+
+body{
+  position: relative;
+  color: var(--eaw-text);
+  overflow-x: hidden;
+  font-weight: 500;
+  z-index: 0;
+}
+
+/* Root cause: background layers were tied to document height, revealing the fallback color on long scrolls.
+   Solution: move the artwork and glow to fixed viewport layers so the backdrop never seams or ends. */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
   background:
-    url("../img/backgrounds/mountains-premium.png") center 12% / cover no-repeat,
+    url("../img/backgrounds/mountains-premium.png") center top / cover no-repeat,
     radial-gradient(1200px 700px at 18% -10%, rgba(255,122,61,0.10), transparent 55%),
     radial-gradient(900px 650px at 88% 5%, rgba(232,75,60,0.08), transparent 60%),
     linear-gradient(180deg, rgba(6,6,8,0.90), rgba(7,7,8,0.96)),
     linear-gradient(180deg, var(--eaw-bg-deep), var(--eaw-bg-deeper));
-  background-attachment: scroll;
-  color: var(--eaw-text);
-  overflow-x: hidden;
-  font-weight: 500;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Preserve the grain/overlay tint as a dedicated layer that also spans the viewport. */
+body::after{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,0.04), transparent 60%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* --------------------------------------------------------------------------
