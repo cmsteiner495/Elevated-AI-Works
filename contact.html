@@ -32,10 +32,12 @@
     <!-- ================= HEADER ================= -->
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html" data-nav-link>
-          <img src="img/logo.png" alt="Elevated AI Works logo" width="26" height="26">
+        <a class="brand" href="index.html" aria-label="Elevated AI Works Home" data-nav-link>
+          <span class="brand-mark" aria-hidden="true">
+            <img src="img/logo.png" alt="" width="26" height="26" />
+          </span>
           <span>
-            <strong class="brand-name">Elevated AI Works</strong><br>
+            <span class="brand-name">Elevated AI Works</span><br>
             <span class="muted" style="font-size:12px;">Bringing Your Ideas to Altitude</span>
           </span>
         </a>
@@ -132,7 +134,7 @@
                   Share a few details below. I’ll follow up with a recommendation and next steps.
                 </p>
 
-                <form id="contactForm" class="stack form-modern" style="margin-top: var(--space-5);">
+                <form id="contactForm" class="stack form-modern" style="margin-top: var(--space-5);" action="https://formspree.io/f/mldrqydw" method="POST">
 
                   <label class="field">
                     <span class="label">Name</span>
@@ -239,15 +241,42 @@
   <script src="js/chatbot.js"></script>
 
   <script>
-    // Temporary local handler (replace with Formspree / backend later)
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('contactForm');
       const status = document.getElementById('formStatus');
+      if (!form || !status) return;
 
-      form.addEventListener('submit', (e) => {
+      const endpoint = form.getAttribute('action');
+      const thankYouUrl = form.dataset.thankYou || 'thank-you.html';
+
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        status.textContent =
-          "Thanks — your message is captured locally. Hook this up to a backend when ready.";
+        status.textContent = '';
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const formData = new FormData(form);
+        status.textContent = 'Sending…';
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: formData
+          });
+
+          if (response.ok) {
+            window.location.href = thankYouUrl;
+            return;
+          }
+
+          status.textContent = 'Please try again or email contact@elevatedaiworks.com.';
+        } catch (error) {
+          status.textContent = 'Please try again or email contact@elevatedaiworks.com.';
+        }
       });
     });
   </script>
