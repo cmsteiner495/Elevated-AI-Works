@@ -114,5 +114,187 @@
   document.addEventListener('DOMContentLoaded', function () {
     const navStateGetter = initMobileNav();
     initHeaderState(navStateGetter);
+    initPortfolioCarousels();
   });
+
+  function initPortfolioCarousels() {
+    const portfolioCarousels = [
+      {
+        id: 'carousel-twh',
+        projectName: 'True West Handyman',
+        // Per brief mapping: img/portfolio/project2 contains the True West Handyman assets.
+        images: [
+          'img/portfolio/project2/placeholder6.png',
+          'img/portfolio/project2/placeholder7.png',
+          'img/portfolio/project2/placeholder8.png',
+          'img/portfolio/project2/placeholder9.png',
+          'img/portfolio/project2/placeholder10.png'
+        ]
+      },
+      {
+        id: 'carousel-pwc',
+        projectName: 'Paws & Whiskers Care',
+        // Per brief mapping: img/portfolio/project1 assets are for Paws & Whiskers Care.
+        images: [
+          'img/portfolio/project1/placeholder1.png',
+          'img/portfolio/project1/placeholder2.png',
+          'img/portfolio/project1/placeholder3.png',
+          'img/portfolio/project1/placeholder4.png',
+          'img/portfolio/project1/placeholder5.png'
+        ]
+      }
+    ];
+
+    portfolioCarousels.forEach((config) => setupCarousel(config));
+  }
+
+  function setupCarousel(config) {
+    const container = document.getElementById(config.id);
+    if (!container) return;
+
+    const stage = container.querySelector('[data-carousel-stage]');
+    if (!stage) return;
+
+    const dots = container.querySelector('[data-carousel-dots]');
+    const prev = container.querySelector('[data-carousel-prev]');
+    const next = container.querySelector('[data-carousel-next]');
+    const reduceMotion = prefersReduce.matches;
+    let timer = null;
+    let currentIndex = 0;
+
+    if (reduceMotion) container.classList.add('reduce-motion');
+
+    const slides = config.images.map((src, index) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `${config.projectName} website preview ${index + 1}`;
+      img.loading = 'lazy';
+      img.className = 'carousel-image';
+
+      img.addEventListener('error', () => {
+        img.dataset.failed = 'true';
+        img.classList.remove('is-active');
+        buildDots();
+        const available = getAvailableSlides();
+        if (available.length) showSlide(Math.min(currentIndex, available.length - 1));
+      });
+
+      stage.appendChild(img);
+      return img;
+    });
+
+    const getAvailableSlides = () => slides.filter((slide) => !slide.dataset.failed);
+
+    const buildDots = () => {
+      if (!dots) return;
+
+      const available = getAvailableSlides();
+      dots.innerHTML = '';
+
+      const showControls = available.length > 1;
+      dots.classList.toggle('is-hidden', !showControls);
+      if (prev) prev.hidden = !showControls;
+      if (next) next.hidden = !showControls;
+
+      if (!showControls) return;
+
+      available.forEach((slide, dotIndex) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `${config.projectName} slide ${dotIndex + 1}`);
+        dot.addEventListener('click', () => {
+          stopAutoplay();
+          showSlide(dotIndex);
+          startAutoplay();
+        });
+        dots.appendChild(dot);
+      });
+    };
+
+    const showSlide = (index) => {
+      const available = getAvailableSlides();
+      if (!available.length) return;
+
+      const safeIndex = ((index % available.length) + available.length) % available.length;
+
+      available.forEach((slide) => slide.classList.remove('is-active'));
+      const target = available[safeIndex];
+      target.classList.add('is-active');
+
+      if (dots && dots.children.length === available.length) {
+        Array.from(dots.children).forEach((dot, dotIndex) => {
+          const isActive = dotIndex === safeIndex;
+          dot.classList.toggle('is-active', isActive);
+          dot.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+      }
+
+      currentIndex = safeIndex;
+    };
+
+    const startAutoplay = () => {
+      if (reduceMotion) return;
+      const available = getAvailableSlides();
+      if (available.length <= 1) return;
+
+      stopAutoplay();
+      timer = window.setInterval(() => {
+        const activeSlides = getAvailableSlides();
+        if (activeSlides.length <= 1) return;
+        showSlide(currentIndex + 1);
+      }, 4200);
+    };
+
+    const stopAutoplay = () => {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    buildDots();
+    showSlide(0);
+    startAutoplay();
+
+    if (prev) {
+      prev.addEventListener('click', () => {
+        stopAutoplay();
+        showSlide(currentIndex - 1);
+        startAutoplay();
+      });
+    }
+
+    if (next) {
+      next.addEventListener('click', () => {
+        stopAutoplay();
+        showSlide(currentIndex + 1);
+        startAutoplay();
+      });
+    }
+
+    container.addEventListener('pointerenter', () => stopAutoplay());
+    container.addEventListener('pointerleave', () => startAutoplay());
+    container.addEventListener('focusin', () => stopAutoplay());
+    container.addEventListener('focusout', () => {
+      if (!container.contains(document.activeElement)) startAutoplay();
+    });
+
+    prefersReduce.addEventListener('change', (event) => {
+      const reduce = event.matches;
+      container.classList.toggle('reduce-motion', reduce);
+      if (reduce) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+
+    window.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+  }
 })();
