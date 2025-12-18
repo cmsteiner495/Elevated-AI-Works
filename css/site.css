@@ -372,6 +372,10 @@ body::after{
 
 .work-card{
   transition: transform .3s var(--eaw-ease), box-shadow .3s var(--eaw-ease), border-color .3s var(--eaw-ease);
+  padding: var(--space-5);
+  border-radius: 20px;
+  display: grid;
+  gap: var(--space-4);
 }
 
 .work-card:hover{
@@ -379,6 +383,99 @@ body::after{
   border-color: rgba(255,122,61,0.28);
   box-shadow: 0 26px 72px rgba(0,0,0,0.55);
 }
+
+.work-media{
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+}
+
+.portfolio-carousel{
+  position: relative;
+  border-radius: inherit;
+  isolation: isolate;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+}
+
+.carousel-viewport{
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.carousel-image{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .6s var(--eaw-ease);
+}
+
+.portfolio-carousel.reduce-motion .carousel-image{ transition: none; }
+
+.carousel-image.is-active{ opacity: 1; }
+
+.carousel-dots{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 10px 6px;
+}
+
+.carousel-dots.is-hidden{ display: none; }
+
+.carousel-dots button{
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.26);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 999px;
+  padding: 0;
+  cursor: pointer;
+  transition: transform .2s var(--eaw-ease), background .2s var(--eaw-ease), border-color .2s var(--eaw-ease);
+}
+
+.carousel-dots button.is-active{
+  background: linear-gradient(180deg, var(--eaw-orange), var(--eaw-red));
+  border-color: rgba(255,255,255,0.65);
+  transform: scale(1.08);
+}
+
+.carousel-nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(10,10,12,0.65);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--eaw-text);
+  font-size: 18px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  transition: transform .18s var(--eaw-ease), background .2s var(--eaw-ease), border-color .2s var(--eaw-ease), opacity .2s var(--eaw-ease);
+}
+
+.carousel-nav:hover{ background: rgba(12,12,14,0.82); border-color: rgba(255,255,255,0.32); }
+.carousel-nav:focus-visible{ outline: 2px solid rgba(255,122,61,0.8); outline-offset: 2px; }
+
+.carousel-nav[data-carousel-prev]{ left: 12px; }
+.carousel-nav[data-carousel-next]{ right: 12px; }
+
+.portfolio-carousel .carousel-nav[hidden]{ display: none; }
+
+.coming-soon-grid{ align-items: stretch; }
+.coming-soon-card{ height: 100%; }
 
 .work-link{ color: var(--eaw-text); font-weight: 650; text-decoration: underline; text-underline-offset: 4px; }
 
